@@ -105,13 +105,29 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);
 .choices{display:flex;gap:1vw;margin-top:1.6vh;flex:none;padding-right:14vw}
 .ch{font-size:1.5vw;font-weight:700;background:var(--card);border:1px solid var(--line);
   border-radius:5vw;padding:1vh 1.5vw;color:var(--tx2)}
-/* signal 하이라이트 */
-b.s{font-weight:600;color:inherit;border-radius:.3vw;transition:all .35s}
-.sigon b.s{font-weight:800;padding:0 .25vw;color:#0D1023}
-.sigon b.s.c{background:var(--pu)}
-.sigon b.s.d{background:var(--pk)}
-.sigon b.s.p{background:var(--gold)}
-.sigon b.s.k{background:var(--sky)}
+/* signal 하이라이트 — 단서는 탭할 때마다 하나씩 공개 */
+b.s{font-weight:600;color:inherit;border-radius:.3vw;transition:all .4s}
+.sigon b.s,.slide.c0 .givenbox b.s,.slide.c1 [data-ord="1"] b.s,
+.slide.c2 [data-ord="2"] b.s,.slide.c3 [data-ord="3"] b.s{font-weight:800;padding:0 .25vw;color:#0D1023}
+.sigon b.s.c,.slide.c0 .givenbox b.s.c,.slide.c1 [data-ord="1"] b.s.c,
+.slide.c2 [data-ord="2"] b.s.c,.slide.c3 [data-ord="3"] b.s.c{background:var(--pu)}
+.sigon b.s.d,.slide.c0 .givenbox b.s.d,.slide.c1 [data-ord="1"] b.s.d,
+.slide.c2 [data-ord="2"] b.s.d,.slide.c3 [data-ord="3"] b.s.d{background:var(--pk)}
+.sigon b.s.p,.slide.c0 .givenbox b.s.p,.slide.c1 [data-ord="1"] b.s.p,
+.slide.c2 [data-ord="2"] b.s.p,.slide.c3 [data-ord="3"] b.s.p{background:var(--gold)}
+.sigon b.s.k,.slide.c0 .givenbox b.s.k,.slide.c1 [data-ord="1"] b.s.k,
+.slide.c2 [data-ord="2"] b.s.k,.slide.c3 [data-ord="3"] b.s.k{background:var(--sky)}
+/* 단서 켜진 영역 강조 + 순서 배지 */
+.slide.c0 .givenbox{border-left-color:var(--sky);box-shadow:0 0 0 .12vw var(--sky) inset}
+.slide.c1 .pcol[data-ord="1"],.slide.c2 .pcol[data-ord="2"],.slide.c3 .pcol[data-ord="3"]{border-color:var(--sky)}
+.ob{display:none;margin-left:.7vw;font-size:1.35vw;font-weight:900;color:#0D1023;background:var(--sky);
+  border-radius:.5vw;padding:.25vh .8vw;vertical-align:middle;animation:obin .45s ease}
+@keyframes obin{from{opacity:0;transform:translateY(-1vh)}}
+.pcol[data-ord="1"] .ob::after{content:"① 첫번째"}
+.pcol[data-ord="2"] .ob::after{content:"② 두번째"}
+.pcol[data-ord="3"] .ob::after{content:"③ 세번째"}
+.slide.c1 .pcol[data-ord="1"] .ob,.slide.c2 .pcol[data-ord="2"] .ob,.slide.c3 .pcol[data-ord="3"] .ob{display:inline-block}
+.mk{position:absolute;width:0;height:0;overflow:hidden}
 .legend{display:none;gap:.9vw;align-items:center}
 .sigon .legend{display:flex}
 .legend i{font-style:normal;font-size:1.15vw;font-weight:800;color:#0D1023;padding:.25vh .7vw;border-radius:.4vw}
@@ -414,24 +430,26 @@ const anchor = document.getElementById('probAnchor');
 let html = "";
 P.forEach(q=>{
   const nn = String(q.no).padStart(2,'0');
+  const ord = {}; q.chain.forEach((c,i)=>ord[c[0]]=i+1); // 단락별 정답 순서
   html += `
 <section class="slide prob">
   <div class="top">
     <span class="chip no">문항 ${nn}</span><span class="chip src">${q.src}</span>
     <span class="chip">글의 순서</span>
     <button class="btn tm" data-tm>⏱ 60초</button>
-    <button class="btn sig" data-sig>🔍 Signal</button>
+    <button class="btn sig" data-sig>🔍 단서 전체</button>
     <span class="legend"><i class="d">지시어</i><i class="c">연결어</i><i class="p">대명사</i><i class="k">재진술</i></span>
     <span class="sp"></span>
   </div>
   <div class="givenbox rv">${q.given}</div>
   <div class="cols rv">
-    <div class="pcol"><span class="ph">(A)</span><p class="pt">${q.A}</p></div>
-    <div class="pcol"><span class="ph">(B)</span><p class="pt">${q.B}</p></div>
-    <div class="pcol"><span class="ph">(C)</span><p class="pt">${q.C}</p></div>
+    <div class="pcol" data-ord="${ord.A}"><span class="ph">(A)</span><span class="ob"></span><p class="pt">${q.A}</p></div>
+    <div class="pcol" data-ord="${ord.B}"><span class="ph">(B)</span><span class="ob"></span><p class="pt">${q.B}</p></div>
+    <div class="pcol" data-ord="${ord.C}"><span class="ph">(C)</span><span class="ob"></span><p class="pt">${q.C}</p></div>
   </div>
   ${q.note?`<p class="vnote">${q.note}</p>`:""}
   <div class="choices rv">${CHO.map((c,i)=>`<span class="ch">${CIRC[i]} ${c}</span>`).join("")}</div>
+  <i class="rv mk" data-clue="0"></i><i class="rv mk" data-clue="1"></i><i class="rv mk" data-clue="2"></i><i class="rv mk" data-clue="3"></i>
 </section>
 <section class="slide ansS">
   <div class="top">
@@ -460,22 +478,27 @@ function paint(){
   pnum.textContent=(cur+1)+' / '+slides.length;
 }
 function revs(s){return [...s.querySelectorAll('.rv')];}
+function syncClues(s){
+  s.querySelectorAll('.mk').forEach(m=>
+    s.classList.toggle('c'+m.dataset.clue, m.classList.contains('on')));
+}
 function show(i,fromBack){
   slides[cur].classList.remove('active');
   cur=Math.max(0,Math.min(slides.length-1,i));
   const s=slides[cur];
   s.classList.add('active');
   revs(s).forEach(r=>r.classList.toggle('on',!!fromBack));
+  syncClues(s);
   paint();
 }
 function next(){
   const s=slides[cur],rs=revs(s),hid=rs.find(r=>!r.classList.contains('on'));
-  if(hid){hid.classList.add('on');return;}
+  if(hid){hid.classList.add('on');syncClues(s);return;}
   if(cur<slides.length-1)show(cur+1,false);
 }
 function prev(){
   const s=slides[cur],rs=revs(s),on=[...rs].reverse().find(r=>r.classList.contains('on'));
-  if(on){on.classList.remove('on');return;}
+  if(on){on.classList.remove('on');syncClues(s);return;}
   if(cur>0)show(cur-1,true);
 }
 document.getElementById('zNext').addEventListener('click',next);
@@ -491,13 +514,15 @@ document.addEventListener('pointerdown',e=>{
   r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';
   document.body.appendChild(r);setTimeout(()=>r.remove(),600);
 });
-/* Signal 토글 */
+/* 단서 전체 켜기/끄기 (마스터) — 복습·되감기용, 평소엔 탭으로 하나씩 */
 document.querySelectorAll('[data-sig]').forEach(b=>{
   b.addEventListener('click',e=>{
     e.stopPropagation();
-    const s=b.closest('.slide');
-    s.classList.toggle('sigon');
-    b.classList.toggle('onn',s.classList.contains('sigon'));
+    const s=b.closest('.slide'),mks=[...s.querySelectorAll('.mk')];
+    const allOn=mks.every(m=>m.classList.contains('on'));
+    mks.forEach(m=>m.classList.toggle('on',!allOn));
+    syncClues(s);
+    b.classList.toggle('onn',!allOn);
   });
 });
 /* 타이머 */
