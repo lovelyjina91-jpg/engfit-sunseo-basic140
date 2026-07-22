@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>순서는 과학이다 Basic 140 · 1회차 — 순서의 과학 + 실전 1~14</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --navy:#1B2970; --gold:#F5A100;
+  --pu:#A78BFA; --pk:#F472B6; --sky:#7DD3FC;
+  --bg:#0D1023; --bg2:#141833; --card:#1A1F3F;
+  --tx:#F3F4FF; --tx2:#B9BEDF; --line:#2A3060;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);
+  font-family:'Pretendard',-apple-system,sans-serif;color:var(--tx);
+  user-select:none;-webkit-user-select:none}
+/* ---------- 슬라이드 공통 ---------- */
+.slide{position:absolute;inset:0;padding:3.2vh 3.4vw;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transition:opacity .55s ease;background:var(--bg)}
+.slide.active{opacity:1;visibility:visible;z-index:2}
+.rv{opacity:0;transform:translateY(2.2vh);transition:opacity .5s ease,transform .5s ease}
+.rv.on{opacity:1;transform:none}
+/* ---------- 상단 바 ---------- */
+.top{display:flex;align-items:center;gap:.9vw;margin-bottom:1.6vh;flex:none}
+.chip{font-size:1.35vw;font-weight:700;padding:.55vh 1vw;border-radius:.6vw;
+  background:var(--bg2);color:var(--tx2);border:1px solid var(--line)}
+.chip.no{background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff;border:none;font-size:1.5vw}
+.chip.src{color:var(--sky)}
+.top .sp{flex:1}
+/* 버튼(터치 타깃 크게) */
+.btn{font-family:inherit;font-size:1.35vw;font-weight:800;color:#fff;border:none;cursor:pointer;
+  padding:1vh 1.5vw;border-radius:.8vw;background:var(--bg2);border:1px solid var(--line);
+  min-height:5.2vh;position:relative;z-index:60}
+.btn.sig{border:1px solid var(--pu);color:var(--pu)}
+.btn.sig.onn{background:var(--pu);color:#0D1023}
+.btn.tm{border:1px solid var(--gold);color:var(--gold);min-width:8.5vw}
+.btn.tm.run{background:var(--gold);color:#0D1023}
+.btn.tm.zero{background:var(--pk);border-color:var(--pk);color:#fff;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.55}}
+/* ---------- 인트로 ---------- */
+.intro{justify-content:center;align-items:flex-start;
+  background:linear-gradient(135deg,#141a45 0%,#2a1e5c 45%,#4c1d5e 100%)}
+.intro .kick{font-size:1.9vw;font-weight:800;letter-spacing:.35em;color:var(--pk);margin-bottom:2.4vh}
+.intro h1{font-size:6.2vw;font-weight:900;line-height:1.14;letter-spacing:-.02em}
+.intro h1 .grad{background:linear-gradient(90deg,var(--pu),var(--pk));-webkit-background-clip:text;background-clip:text;color:transparent}
+.intro .sub{margin-top:2.8vh;font-size:2.3vw;font-weight:700;color:var(--tx2)}
+.intro .sub b{color:var(--gold)}
+.intro .logo{position:absolute;right:3.4vw;top:3.2vh;font-size:1.5vw;font-weight:900;color:#fff;
+  display:flex;align-items:center;gap:.6vw}
+.intro .logo i{width:2.2vw;height:2.2vw;border-radius:.55vw;background:linear-gradient(135deg,var(--gold),var(--pk));
+  display:inline-block;font-style:normal;color:#0D1023;font-weight:900;font-size:1.3vw;text-align:center;line-height:2.2vw}
+.intro .fsb{margin-top:5vh}
+/* ---------- 공통 헤더/타이틀 ---------- */
+.h-sec{font-size:3.6vw;font-weight:900;margin-bottom:3vh;letter-spacing:-.01em;flex:none}
+.h-sec .acc{color:var(--pu)}
+.h-sec .num{color:var(--pk);margin-right:.8vw}
+/* ---------- 목표/카드 ---------- */
+.goalwrap{display:flex;flex-direction:column;gap:2.6vh;max-width:74vw}
+.goal{display:flex;gap:1.6vw;align-items:center;background:var(--card);border:1px solid var(--line);
+  border-radius:1.2vw;padding:2.6vh 2vw}
+.goal .n{flex:none;width:4.6vw;height:4.6vw;border-radius:50%;font-size:2.2vw;font-weight:900;
+  display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff}
+.goal p{font-size:2.35vw;font-weight:700;line-height:1.4}
+.goal p b{color:var(--gold)}
+/* 임팩트 슬라이드 */
+.impact{justify-content:center;background:radial-gradient(ellipse at 30% 40%,#241b52 0%,var(--bg) 65%)}
+.impact .q{font-size:4.3vw;font-weight:900;line-height:1.45;max-width:80vw;letter-spacing:-.01em}
+.impact .q .hl{background:linear-gradient(transparent 55%,rgba(244,114,182,.45) 55%)}
+.impact .a{margin-top:4vh;font-size:2.6vw;font-weight:800;color:var(--pu)}
+.impact .src2{margin-top:2vh;font-size:1.5vw;color:var(--tx2)}
+/* 이론 카드 3열 */
+.cards{display:flex;gap:1.6vw;align-items:stretch}
+.tcard{flex:1;background:var(--card);border:1px solid var(--line);border-radius:1.3vw;padding:2.8vh 1.7vw;
+  border-top:.45vh solid var(--pu)}
+.tcard.pk{border-top-color:var(--pk)}.tcard.gd{border-top-color:var(--gold)}.tcard.sk{border-top-color:var(--sky)}
+.tcard h3{font-size:2.3vw;font-weight:900;margin-bottom:1.6vh}
+.tcard h3 .tag{display:inline-block;font-size:1.3vw;padding:.3vh .8vw;border-radius:.5vw;margin-right:.7vw;vertical-align:middle;color:#0D1023}
+.tcard.pu h3 .tag{background:var(--pu)}.tcard.pk h3 .tag{background:var(--pk)}
+.tcard.gd h3 .tag{background:var(--gold)}.tcard.sk h3 .tag{background:var(--sky)}
+.tcard .ex{font-size:1.9vw;font-weight:700;line-height:1.6;color:var(--tx2)}
+.tcard .ex b{color:var(--tx);font-weight:800}
+.tcard .desc{font-size:1.75vw;line-height:1.55;color:var(--tx2);margin-top:1.4vh}
+.tnote{margin-top:3vh;font-size:1.9vw;font-weight:700;color:var(--tx2)}
+.tnote b{color:var(--gold)}
+/* 3-Step 루틴 */
+.steps{display:flex;flex-direction:column;gap:2.4vh;max-width:78vw}
+.step{display:flex;align-items:center;gap:1.6vw;background:var(--card);border:1px solid var(--line);border-radius:1.2vw;padding:2.4vh 2vw}
+.step .sn{flex:none;font-size:2vw;font-weight:900;color:#0D1023;background:var(--gold);
+  padding:.7vh 1.2vw;border-radius:.7vw}
+.step p{font-size:2.25vw;font-weight:700;line-height:1.4}
+.step p b{color:var(--pk)}
+.step p .pu{color:var(--pu)}
+/* ---------- 문제 슬라이드 ---------- */
+.givenbox{background:var(--card);border-left:.5vw solid var(--pu);border-radius:.9vw;
+  padding:1.9vh 1.7vw;font-size:1.92vw;line-height:1.5;font-weight:500;flex:none}
+.cols{display:flex;gap:1.3vw;margin-top:1.7vh;flex:1;min-height:0;align-items:flex-start}
+.pcol{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:1vw;padding:1.6vh 1.3vw;height:100%;overflow:hidden}
+.pcol .ph{display:inline-block;font-size:1.5vw;font-weight:900;color:#fff;padding:.3vh 1vw;border-radius:.55vw;margin-bottom:1.2vh}
+.pcol:nth-child(1) .ph{background:#7C6AE8}.pcol:nth-child(2) .ph{background:#D6559C}.pcol:nth-child(3) .ph{background:#B8830B}
+.pcol .pt{font-size:1.5vw;line-height:1.45;font-weight:500;color:var(--tx)}
+.vnote{font-size:1.25vw;color:var(--tx2);margin-top:1vh}
+.choices{display:flex;gap:1vw;margin-top:1.6vh;flex:none;padding-right:14vw}
+.ch{font-size:1.5vw;font-weight:700;background:var(--card);border:1px solid var(--line);
+  border-radius:5vw;padding:1vh 1.5vw;color:var(--tx2)}
+/* signal 하이라이트 */
+b.s{font-weight:600;color:inherit;border-radius:.3vw;transition:all .35s}
+.sigon b.s{font-weight:800;padding:0 .25vw;color:#0D1023}
+.sigon b.s.c{background:var(--pu)}
+.sigon b.s.d{background:var(--pk)}
+.sigon b.s.p{background:var(--gold)}
+.sigon b.s.k{background:var(--sky)}
+.legend{display:none;gap:.9vw;align-items:center}
+.sigon .legend{display:flex}
+.legend i{font-style:normal;font-size:1.15vw;font-weight:800;color:#0D1023;padding:.25vh .7vw;border-radius:.4vw}
+.legend i.c{background:var(--pu)}.legend i.d{background:var(--pk)}.legend i.p{background:var(--gold)}.legend i.k{background:var(--sky)}
+/* ---------- 정답/근거 슬라이드 ---------- */
+.chain{display:flex;flex-direction:column;gap:1.9vh;max-width:80vw;margin-top:.6vh}
+.crow{display:flex;align-items:center;gap:1.4vw;background:var(--card);border:1px solid var(--line);
+  border-radius:1.1vw;padding:2vh 1.8vw}
+.crow .lab{flex:none;font-size:1.45vw;font-weight:800;color:var(--tx2);width:9.5vw}
+.crow .pill{flex:none;width:4.8vw;height:4.8vw;border-radius:1vw;display:flex;align-items:center;justify-content:center;
+  font-size:2.5vw;font-weight:900;color:#fff}
+.crow .pill.A{background:#7C6AE8}.crow .pill.B{background:#D6559C}.crow .pill.C{background:#B8830B}
+.crow .why{font-size:1.95vw;font-weight:700;line-height:1.45}
+.crow .why em{font-style:normal;color:var(--sky)}
+.crow.st0{border-left:.5vw solid var(--pu)}
+.crow.st0 .why{color:var(--tx2)}
+.ansrow{display:flex;align-items:center;gap:2vw;margin-top:3vh}
+.ansbadge{display:flex;align-items:center;gap:1.6vw;background:linear-gradient(135deg,var(--pu),var(--pk));
+  border-radius:1.4vw;padding:2.6vh 2.6vw}
+.ansbadge .t{font-size:2vw;font-weight:900;color:rgba(255,255,255,.85)}
+.ansbadge .o{font-size:3.6vw;font-weight:900;color:#fff;letter-spacing:.02em}
+/* ---------- 정리 ---------- */
+.sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.8vh 1.6vw;max-width:82vw}
+.sumcard{background:var(--card);border:1px solid var(--line);border-radius:1.2vw;padding:2.4vh 1.9vw;border-left:.45vw solid var(--gold)}
+.sumcard h4{font-size:2vw;font-weight:900;color:var(--gold);margin-bottom:1vh}
+.sumcard h4.pu{color:var(--pu)}.sumcard h4.pk{color:var(--pk)}.sumcard h4.sk{color:var(--sky)}
+.sumcard p{font-size:1.85vw;line-height:1.5;font-weight:600;color:var(--tx2)}
+.sumcard p b{color:var(--tx)}
+/* ---------- 아웃트로 ---------- */
+.outro{background:linear-gradient(135deg,#141a45 0%,#2a1e5c 50%,#4c1d5e 100%)}
+.hw{display:flex;flex-direction:column;gap:2vh;max-width:74vw}
+.hwrow{display:flex;gap:1.4vw;align-items:center;background:rgba(13,16,35,.55);border:1px solid var(--line);border-radius:1.1vw;padding:2.2vh 2vw}
+.hwrow .ic{flex:none;font-size:2.4vw}
+.hwrow p{font-size:2.15vw;font-weight:700;line-height:1.4}
+.hwrow p b{color:var(--gold)}
+.nextp{margin-top:3.4vh;font-size:2.1vw;font-weight:800;color:var(--pu)}
+/* ---------- 내비게이션/진행 ---------- */
+.zone{position:fixed;top:0;bottom:0;width:25vw;z-index:50}
+#zPrev{left:0}#zNext{right:0}
+#pbar{position:fixed;left:0;bottom:0;height:.55vh;background:linear-gradient(90deg,var(--pu),var(--pk));
+  width:0;z-index:70;transition:width .35s ease}
+#pnum{position:fixed;left:1vw;bottom:1.1vh;font-size:1.05vw;font-weight:700;color:var(--tx2);z-index:70;opacity:.8}
+.ripple{position:fixed;width:9vw;height:9vw;border-radius:50%;pointer-events:none;z-index:90;
+  background:radial-gradient(circle,rgba(244,114,182,.4) 0%,rgba(167,139,250,.15) 55%,transparent 70%);
+  transform:translate(-50%,-50%) scale(.3);animation:rip .55s ease-out forwards}
+@keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- 1. 인트로 -->
+<section class="slide intro active">
+  <div class="logo"><i>Y</i>영핏영어 · 지나티처</div>
+  <div class="kick">여름특강 · 모의고사 트랙 · 1회차</div>
+  <h1>순서는 <span class="grad">과학</span>이다<br>Basic 140</h1>
+  <p class="sub">1회차 — <b>순서의 과학</b> · 유형 이론 + 실전 <b>1~14번</b></p>
+  <button class="btn fsb" onclick="goFS(event)">⛶ &nbsp;전체화면으로 시작하기</button>
+</section>
+
+<!-- 2. 오늘의 목표 -->
+<section class="slide">
+  <h2 class="h-sec">오늘의 <span class="acc">목표</span></h2>
+  <div class="goalwrap">
+    <div class="goal rv"><div class="n">1</div><p>순서 <b>signal 3종</b> — 지시어 · 연결어 · 대명사 — 를 한눈에 알아본다</p></div>
+    <div class="goal rv"><div class="n">2</div><p><b>주어진 글 → 첫 단락</b>을 찾는 근거 체인(①→②→③)을 익힌다</p></div>
+    <div class="goal rv"><div class="n">3</div><p>고1 기출 <b>14문제</b>로 "근거 없는 정답은 없다"를 몸으로 확인한다</p></div>
+  </div>
+</section>
+
+<!-- 3. 임팩트 -->
+<section class="slide impact">
+  <p class="q rv">"<span class="hl">근거 없는 순서문제는<br>존재하지 않습니다.</span><br>눈에 보이지 않을 뿐입니다."</p>
+  <p class="a rv">→ 오늘부터 그 근거를 <b>눈에 보이게</b> 만듭니다.</p>
+  <p class="src2 rv">— 순서는 과학이다 Basic, 출제의 원리</p>
+</section>
+
+<!-- 4. 유형① signal 배치형 -->
+<section class="slide">
+  <h2 class="h-sec"><span class="num">유형 ①</span>연결고리 <span class="acc">signal</span> 배치형</h2>
+  <div class="cards">
+    <div class="tcard pk rv"><h3><span class="tag">지시어</span></h3>
+      <p class="ex"><b>this · that · it · such</b><br>those questions,<br>This kind of ~, 관사 the</p>
+      <p class="desc">앞에서 말한 것을 다시 가리킨다 → 가리킬 대상이 <b>먼저</b> 나와야 한다</p></div>
+    <div class="tcard pu rv"><h3><span class="tag">연결어</span></h3>
+      <p class="ex"><b>However · Similarly<br>For example · Moreover<br>Nevertheless · Instead</b></p>
+      <p class="desc">문장과 문장의 논리 관계를 알려주는 교통 표지판</p></div>
+    <div class="tcard gd rv"><h3><span class="tag">대명사</span></h3>
+      <p class="ex"><b>he · they · it · them<br>her · those</b></p>
+      <p class="desc">사람/사물이 처음 등장한 뒤에만 쓸 수 있다 → 등장 순서의 증거</p></div>
+  </div>
+  <p class="tnote rv">그 외에도 수많은 순서 signal이 있다 — <b>첫 문장부터 signal을 수집하는 습관</b>이 핵심.</p>
+</section>
+
+<!-- 5. 유형②③ -->
+<section class="slide">
+  <h2 class="h-sec"><span class="num">유형 ②·③</span>일관성형 <span class="acc">&</span> 문맥형</h2>
+  <div class="cards">
+    <div class="tcard pu rv"><h3><span class="tag" style="background:var(--pu)">②</span>일관성(consistency)형</h3>
+      <p class="desc" style="font-size:1.95vw">모든 글은 <b style="color:var(--tx)">일관성</b>을 가진다.<br>화제가 갑자기 튀지 않고 한 방향으로 흐른다.</p>
+      <p class="desc" style="font-size:1.95vw">단, 비교의 전개일 경우<br><b style="color:var(--pk)">X - Y - X - Y</b> 교차 전개도 가끔 등장!</p></div>
+    <div class="tcard sk rv"><h3><span class="tag">③</span>문맥(context)형</h3>
+      <p class="desc" style="font-size:1.95vw">순서문제 <b style="color:var(--tx)">출제의 원리</b>.<br>②와 연결되며 <b style="color:var(--tx)">요즘 가장 많이 나오는</b> 유형.</p>
+      <p class="desc" style="font-size:1.95vw">signal이 안 보여도 당황 금지 —<br>내용의 흐름 자체가 근거가 된다.</p></div>
+  </div>
+</section>
+
+<!-- 6. 유형⑤ 재진술 & G-S -->
+<section class="slide">
+  <h2 class="h-sec"><span class="num">유형 ⑤</span>재진술(restatement) <span class="acc">&</span> G-S</h2>
+  <div class="cards">
+    <div class="tcard sk rv"><h3><span class="tag">A</span>재진술 · 한단어 축약</h3>
+      <p class="desc" style="font-size:1.95vw">앞 문장 전체를 <b style="color:var(--tx)">말 바꾸기</b> 하거나<br><b style="color:var(--tx)">한 단어로 축약</b>해서 받는다.</p>
+      <p class="desc" style="font-size:1.9vw;color:var(--sky)">예) 오늘 14번 — 물물교환 조건 전체를<br>"<b>This</b> = the double coincidence of wants"로 축약</p></div>
+    <div class="tcard gd rv"><h3><span class="tag">B</span>G - S 진술 순서</h3>
+      <p class="desc" style="font-size:1.95vw"><b style="color:var(--gold)">General(일반)</b> 문장 →<br><b style="color:var(--gold)">Specific(구체)</b> 문장 순서로 흐른다.</p>
+      <p class="desc" style="font-size:1.95vw">⚠ 단, <b style="color:var(--pk)">일화(이야기)의 경우는 제외</b> —<br>이야기는 시간 순서를 따른다.</p></div>
+  </div>
+</section>
+
+<!-- 7. 풀이 루틴 -->
+<section class="slide">
+  <h2 class="h-sec">순서 풀이 <span class="acc">3 - STEP</span> <span style="font-size:2vw;color:var(--tx2)">(오늘 모든 문제에 그대로 적용)</span></h2>
+  <div class="steps">
+    <div class="step rv"><span class="sn">STEP 1</span><p><b>주어진 글의 끝</b>에 밑줄 — 마지막에 등장한 <span class="pu">명사·상황</span>이 다음 단락의 열쇠</p></div>
+    <div class="step rv"><span class="sn">STEP 2</span><p>(A)(B)(C) <b>첫 문장의 signal만</b> 수집 — 지시어 · 연결어 · 대명사 체크</p></div>
+    <div class="step rv"><span class="sn">STEP 3</span><p>근거 체인 연결: 주어진 글 → <span class="pu">①</span> → <span class="pu">②</span> → <span class="pu">③</span> — <b>연결 못 하면 답 아님</b></p></div>
+  </div>
+  <p class="tnote rv" style="margin-top:3.4vh">교재의 각주가 이 체인 그대로 되어 있다 → 오늘 정답 슬라이드도 <b>①→②→③ 체인</b>으로 확인!</p>
+</section>
+
+<!-- 문제 슬라이드 (JS 생성) -->
+<div id="probAnchor"></div>
+
+<!-- 정리 -->
+<section class="slide" id="sumSlide">
+  <h2 class="h-sec">오늘의 <span class="acc">정리</span></h2>
+  <div class="sumgrid">
+    <div class="sumcard rv"><h4 class="pk">① Signal 3종</h4><p><b>지시어 · 연결어 · 대명사</b> — 첫 문장에서 signal부터 수집하는 습관</p></div>
+    <div class="sumcard rv"><h4 class="pu">② 근거 체인</h4><p>주어진 글 → ① → ② → ③ — <b>연결 근거를 말로 설명 못 하면</b> 아직 정답 아님</p></div>
+    <div class="sumcard rv"><h4 class="sk">③ 재진술 & G-S</h4><p>signal이 없으면 <b>말 바꾸기·축약</b>을 찾아라. 글은 일반 → 구체로 흐른다 (일화 제외)</p></div>
+    <div class="sumcard rv"><h4>④ 오늘의 한 문장</h4><p><b>근거 없는 순서문제는 없다.</b> 눈에 보이지 않을 뿐 — 이제 너는 보인다.</p></div>
+  </div>
+</section>
+
+<!-- 아웃트로 -->
+<section class="slide outro">
+  <h2 class="h-sec">숙제 <span class="acc">&</span> 다음 시간</h2>
+  <div class="hw">
+    <div class="hwrow rv"><span class="ic">✍️</span><p>오늘 다룬 <b>1~14번</b> — 각 문제의 근거 체인(①→②→③)을 <b>노트에 직접</b> 다시 쓰기</p></div>
+    <div class="hwrow rv"><span class="ic">🔍</span><p>지문에서 <b>signal 단어에 형광펜</b> — 지시어/연결어/대명사 색을 다르게</p></div>
+    <div class="hwrow rv"><span class="ic">📱</span><p>수업에서 빠르게 넘어간 문항은 <b>보충 영상</b>으로 복습 (카톡 전송)</p></div>
+  </div>
+  <p class="nextp rv">다음 2회차 ▶ 일관성형 집중 — 순서 15~28번</p>
+</section>
+
+</div>
+
+<div class="zone" id="zPrev"></div>
+<div class="zone" id="zNext"></div>
+<div id="pbar"></div>
+<div id="pnum"></div>
+
+<script>
+/* ================= 문제 데이터 (교재 원문 + 각주 근거 그대로) ================= */
+/* s c=연결어(퍼플) d=지시어(핑크) p=대명사(골드) k=재진술·키워드(하늘) */
+const P = [
+{no:1,src:"2017 고1 3월",ans:4,order:"C - A - B",
+given:`In negotiation, there often will be issues that you do not care about — but that the other side cares about very much! It is important to identify <b class="s d">these issues</b>.`,
+A:`Now you are in a position to give <b class="s p">her</b> something that <b class="s k">she values</b> (at no cost to you) and get something of value in return. For example, you might start a month earlier and receive a larger bonus for doing so.`,
+B:`<b class="s c">Similarly</b>, when purchasing my home, I discovered that the seller was very interested in closing the deal as soon as possible. So I agreed to close one month earlier than originally offered, and the seller agreed to a lower price.`,
+C:`<b class="s c">For example</b>, you may not care about whether you start your new job in June or July. But if <b class="s k">your potential boss</b> strongly prefers that you start as soon as possible, that's a valuable piece of information.`,
+note:"",start:"상대만 중요하게 여기는 issues를 찾아라",
+chain:[["C",`<em>For example</em> — 예시의 시작 (일반 → 구체)`],
+["A",`C) your potential boss → A) <em>her, ~ she values</em> — 같은 인물을 대명사로 이어받음`],
+["B",`<em>Similarly</em> — 주제 유지, 소재 전환 (취업 협상 → 집 구매)`]]},
+{no:2,src:"2017 고1 3월",ans:3,order:"B - C - A",
+given:`Andrew Carnegie, the great early-twentieth-century businessman, once heard his sister complain about <b class="s k">her two sons</b>.`,
+A:`Within days <b class="s p">he</b> received warm grateful letters from both boys, who noted at the letters' end that he had unfortunately <b class="s k">forgotten to include the check</b>. If the check had been enclosed, would they have responded so quickly?`,
+B:`<b class="s p">They</b> were away at college and rarely responded to <b class="s p">her</b> letters. Carnegie told her that if <b class="s k">he wrote them</b> he would get an immediate response.`,
+C:`<b class="s p">He</b> <b class="s k">sent off two warm letters</b> to the boys, and told them that he was happy to send each of them a check for a hundred dollars (a large sum in those days). Then he mailed the letters, but <b class="s k">didn't enclose the checks</b>.`,
+note:"* enclose: 동봉하다",start:"her two sons — 두 아들 이야기의 시작",
+chain:[["B",`주어진 글 two sons → B) <em>They, her letters</em> — 대명사가 받아줌`],
+["C",`B) if he wrote them → C) <em>sent off two warm letters</em> — 말한 것을 실행`],
+["A",`C) didn't enclose the checks → A) <em>he received ~ forgotten to include the check</em>`]]},
+{no:3,src:"2017 고1 6월",ans:2,order:"B - A - C",
+given:`In early 19th century London, a young man named Charles Dickens had a strong desire to be a writer. But <b class="s k">everything seemed to be against him</b>.`,
+A:`<b class="s c">Moreover</b>, he had so <b class="s k">little confidence</b> in his ability to write that he mailed his writings secretly at night to editors so that nobody would laugh at him. Story after story was refused.`,
+B:`<b class="s p">He</b> had <b class="s k">never been able to attend school</b> for more than four years. His father had been in jail because he couldn't pay his debts, and this young man often knew the pain of hunger.`,
+C:`<b class="s c">But</b> one day, one editor <b class="s k">recognized and praised him</b>. The praise that he received from getting one story in print changed his whole life. His works have been widely read and still enjoy great popularity.`,
+note:"",start:"against him — 그에게 불리했던 '모든 것'이 무엇인지",
+chain:[["B",`주) against him → B) <em>never ~ attend school</em> — 불리한 상황의 구체화`],
+["A",`<em>Moreover, little confidence</em> — 악조건 하나 더 추가`],
+["C",`<em>But</em> ~ recognized and praised him — 반전, 성공 이야기로 전환`]]},
+{no:4,src:"2017 고1 6월",ans:3,order:"B - C - A",
+given:`One of the most essential decisions any of us can make is <b class="s k">how we invest our time</b>.`,
+A:`<b class="s d">During this period</b>, people worked for more than eighty hours a week in factories. But there were some who spent their few precious free hours reading books or getting involved in politics instead of following the majority into the pubs.`,
+B:`Of course, <b class="s k">how we invest time</b> is not our decision alone to make. Many factors determine what we should do either because we are members of the human race, or because we belong to a certain culture and society.`,
+C:`<b class="s c">Nevertheless</b>, there is room for personal choice, and control over time is to a certain extent in our hands. Even in the most oppressive decades of <b class="s k">the Industrial Revolution</b>, people didn't give up their free will when it came to time.`,
+note:"* oppressive: 억압적인",start:"how we invest our time — 핵심 어구를 기억",
+chain:[["B",`주어진 글의 핵심 어구를 B) <em>how we invest time ~</em> 으로 그대로 재진술`],
+["C",`<em>Nevertheless</em> — '그럼에도' 개인 선택의 여지가 있다`],
+["A",`C) the Industrial Revolution → A) <em>During this period</em> — 그 시기를 지시어로 받음`]]},
+{no:5,src:"2017 고1 9월",ans:5,order:"C - B - A",
+given:`<b class="s k">Use a plastic pen and rub it on your hair</b> about ten times and then hold the pen close to small pieces of tissue paper or chalk dust.`,
+A:`<b class="s k">During a thunderstorm</b>, clouds may become charged as they rub against each other. The lightning that we often see during a storm is caused by a large flow of electrical charges between charged clouds and the earth.`,
+B:`<b class="s d">This kind of electricity</b> is produced by friction, and the pen becomes electrically charged. Static electricity is <b class="s k">also found in the atmosphere</b>.`,
+C:`<b class="s k">You will find</b> that the bits of paper or chalk dust cling to the pen. What you have done there is to create <b class="s k">a form of electricity called static electricity</b>.`,
+note:"",start:"펜을 문지르는 '행동' — 다음엔 그 결과가 와야 자연스럽다",
+chain:[["C",`<em>You will find that ~</em> — 행동의 결과가 바로 이어짐`],
+["B",`C) a form of electricity → B) <em>This kind of electricity is ~</em> — 지시어 연결`],
+["A",`B) also found in the atmosphere → A) <em>During a thunderstorm ~</em> (대기 속 예시)`]]},
+{no:6,src:"2017 고1 9월",ans:2,order:"B - A - C",
+given:`From a <b class="s k">correlational observation</b>, we conclude that one variable is related to a second variable. But neither behavior could be directly causing the other even though there is a relationship.`,
+A:`<b class="s p">They</b> found the best predictor to be <b class="s k">the number of tattoos</b> the rider had. It would be a ridiculous error to conclude that tattoos cause motorcycle accidents or that motorcycle accidents cause tattoos.`,
+B:`<b class="s k">The following example</b> will illustrate why it is difficult to make causal statements on the basis of correlational observation. <b class="s k">The researchers</b> at the U.S. Army conducted a study of motorcycle accidents, attempting to correlate the number of accidents with other variables such as socioeconomic level and age.`,
+C:`<b class="s c">Obviously</b>, <b class="s k">a third variable</b> is related to both — perhaps preference for risk. A person who is willing to take risks likes <b class="s k">to be tattooed</b> and also takes more chances on a motorcycle.`,
+note:"* variable: 변인",start:"상관관계 ≠ 인과관계 — 이제 예시가 나올 차례",
+chain:[["B",`<em>The following example ~</em> — 예시 예고 (G → S)`],
+["A",`B) The researchers → A) <em>They found ~</em> — 대명사가 연구자들을 받음`],
+["C",`A) the number of tattoos → C) <em>a third variable, to be tattooed ~</em> — 결론 제시`]]},
+{no:7,src:"2017 고1 11월",ans:2,order:"B - A - C",
+given:`Memory has two types — implicit and explicit memory. When you learn things without really thinking about it, it's implicit memory or body memory. <b class="s k">Knowing how to breathe</b> when you were born is an implicit memory.`,
+A:`<b class="s k">Explicit memories</b>, <b class="s c">on the other hand</b>, are the memories or the specific things that you consciously try to recall. <b class="s k">You use explicit memory every day</b> on a conscious level.`,
+B:`<b class="s d">No one taught this to you.</b> Some of the things you've learned since childhood also become <b class="s k">implicit memories</b>. Implicit memories are imprinted in the brain's autonomic portion; that is why even after years of not riding a bike you still know how to ride.`,
+C:`<b class="s k">Trying to find the keys</b>, trying to remember when an event is supposed to take place, where it's going to be held, and with whom you are going. Explicit memories are the tasks you have written down on your calendar or planner.`,
+note:"",start:"호흡 = implicit memory의 예 — 이 '호흡'을 받을 말은?",
+chain:[["B",`<em>No one taught this to you.</em> — this = 호흡하는 법 (지시어)`],
+["A",`B) Implicit memories → A) <em>Explicit memories, on the other hand</em> — 대조 전환`],
+["C",`A) You use explicit memory ~ → C) <em>Trying to find the keys ~</em> (매일 쓰는 예)`]]},
+{no:8,src:"2017 고1 11월",ans:4,order:"C - A - B",
+given:`For its time, ancient Greek civilization was remarkably advanced. The Greeks figured out <b class="s k">mathematics, geometry, and calculus</b> long before calculators were available. Centuries before telescopes were invented, they proposed that the earth might rotate on an axis or revolve around the sun.`,
+A:`<b class="s c">But</b> <b class="s p">they</b> were still a primitive people. There were many aspects of the world around them that they didn't understand very well. They had <b class="s k">big questions</b>, like Why are we here? and Why is smoke coming out of that nearby volcano?`,
+B:`Myths provided <b class="s k">answers</b> to <b class="s d">those questions</b>. They were educational tools, passing knowledge from one generation to the next. They also taught morality and conveyed truth about the complexity of life. In this way, the Greeks were able to understand right and wrong in their lives.`,
+C:`Along with <b class="s d">these mathematical, scientific advances</b>, <b class="s k">the Greeks</b> produced some of the early dramatic plays and poetry. In a world ruled by powerful kings and bloodthirsty warriors, the Greeks even developed the idea of democracy.`,
+note:"* geometry: 기하학",start:"그리스의 수학·과학적 성취 나열 — 이걸 받을 지시어는?",
+chain:[["C",`<em>these mathematical, scientific advances</em> — 주어진 글 내용을 지시어로 축약`],
+["A",`C) the Greeks의 성취 → A) <em>But they were still ~</em> — 역접으로 한계 제시`],
+["B",`A) big questions → B) <em>answers to those questions</em> — 질문에 대한 답 = 신화`]]},
+{no:9,src:"2018 고1 3월",ans:3,order:"B - C - A",
+given:`Suppose that you are busy working on a project one day and you have no time to buy lunch. All of a sudden <b class="s k">your best friend shows up</b> with your favorite sandwich.`,
+A:`The key difference between <b class="s d">these two cases</b> is the level of trust. You trust your best friend so much that you won't worry about him knowing you too well, but you certainly would not give the same level of trust to a stranger.`,
+B:`<b class="s p">He</b> tells you that he knows you are busy and he wants to help you out by buying you the sandwich. In this case, you are very likely to appreciate your friend's help.`,
+C:`<b class="s c">However</b>, if <b class="s k">a stranger</b> shows up with the same sandwich and offers it to you, you won't appreciate it. Instead, you would be confused. You would likely think "Who are you, and how do you know what kind of sandwich I like to eat?"`,
+note:"",start:"best friend 등장 — 이 친구를 대명사로 받을 단락은?",
+chain:[["B",`<em>He tells you that ~</em> — He = your best friend (대명사)`],
+["C",`<em>However, a stranger ~</em> — 친구와 대조되는 두 번째 사례 등장`],
+["A",`두 사례가 다 나온 뒤 → A) <em>between these two cases</em> 비교 가능`]]},
+{no:10,src:"2018 고1 3월",ans:2,order:"B - A - C",
+given:`If you start collecting and analyzing data <b class="s k">without first clarifying the question</b> you are trying to answer, you're probably doing yourself more harm than good.`,
+A:`<b class="s d">In the design plan</b>, you clarify the issues you are trying to solve, state your hypotheses, and list what is required to prove those hypotheses. Developing this plan before you start researching will greatly <b class="s k">increase your problem-solving productivity</b>.`,
+B:`You'll <b class="s k">end up drowning in a flood of information</b> and realize only later that most of that research was a waste of time. To avoid this problem, you should develop <b class="s k">a problem-solving design plan</b> before you start collecting information.`,
+C:`<b class="s c">In addition</b>, putting your plan down on paper will not only clarify your thoughts. If you're working in a group, this plan will also help your team focus on what to do and provide the starting point for your group brainstorming.`,
+note:"* hypothesis: 가설",start:"질문 정리 없이 데이터부터 모으면? → 그 결과가 이어져야",
+chain:[["B",`<em>end up drowning</em> (그 행동의 결과) + 해결책 design plan 제시`],
+["A",`B) a problem-solving design plan → A) <em>In the design plan</em> — 관사 the로 재언급`],
+["C",`A) 마지막에 장점 → C) <em>In addition</em> — 장점 하나 더 추가`]]},
+{no:11,src:"2018 고1 6월",ans:5,order:"C - B - A",
+given:`Interpersonal messages combine <b class="s k">content and relationship dimensions</b>. That is, they refer to the real world, to something external to both speaker and listener; at the same time they also refer to the relationship between parties.`,
+A:`You can appreciate this most clearly if you visualize <b class="s k">the same command</b> being made <b class="s k">by the trainee to the supervisor</b>. It appears awkward and out of place, because it violates the normal relationship between supervisor and trainee.`,
+B:`It <b class="s c">also</b> contains <b class="s k">a relationship message</b> that says something about the connection between the supervisor and the trainee. Even the use of the simple command shows there is a status difference that allows the supervisor to command the trainee.`,
+C:`<b class="s c">For example</b>, a supervisor may say to a trainee, "See me after the meeting." This simple message has <b class="s k">a content message</b> that tells the trainee to see the supervisor after the meeting.`,
+note:"",start:"메시지 = content + relationship 두 차원 — 예시가 올 차례",
+chain:[["C",`<em>For example</em> — 예시의 시작 (content message 먼저)`],
+["B",`C) content message → B) <em>also ~ a relationship message</em> — 두 번째 차원 추가`],
+["A",`B) relationship 설명 → A) <em>the same command ~ by the trainee</em> — 뒤집어 추가 설명`]]},
+{no:12,src:"2018 고1 6월",ans:3,order:"B - C - A",
+given:`The scientific study of the physical characteristics of colors can be traced back to <b class="s k">Isaac Newton</b>.`,
+A:`It was only when Newton placed <b class="s k">a second prism</b> in the path of the spectrum that he found something new. The composite colors produced a white beam. Thus he concluded that white light can be produced by combining the spectral colors.`,
+B:`<b class="s c">One day</b>, <b class="s p">he</b> spotted a set of prisms at a big county fair. He took them home and began to experiment with them. In a darkened room he allowed <b class="s k">a thin ray of sunlight</b> to fall on a triangular glass prism.`,
+C:`As soon as <b class="s k">the white ray</b> hit the prism, it separated into the familiar colors of the rainbow. This finding was not new, as humans had observed the rainbow since the beginning of time.`,
+note:"* composite: 합성의",start:"Newton 등장 — 일화(이야기)의 시작을 찾아라",
+chain:[["B",`<em>One day, he spotted ~</em> — 일화의 시작 + he = Newton (대명사)`],
+["C",`B) a thin ray of sunlight → C) <em>the white ray</em> — 관사 the로 재언급`],
+["A",`첫 실험 결과 확인 후 → A) <em>a second prism</em> — '두 번째' 프리즘 실험`]]},
+{no:13,src:"2018 고1 9월",ans:5,order:"C - B - A",
+given:`No one likes to think they're <b class="s k">average</b>, least of all <b class="s k">below average</b>.`,
+A:`Over the days and weeks from our resolution to change, we start to <b class="s k">notice it popping up again and again</b>. The old habit's well-practiced performance is beating our conscious desire for change into submission.`,
+B:`<b class="s d">This over-confidence in self-control</b> can lead people to assume they'll be able to control themselves in situations in which, it turns out, they can't. This is why <b class="s k">trying to stop an unwanted habit</b> can be an extremely frustrating task.`,
+C:`When asked by psychologists, most people <b class="s k">rate themselves above average</b> on all manner of measures including intelligence, looks, health, and so on. Self-control is no different: people consistently <b class="s k">overestimate their ability to control themselves</b>.`,
+note:"",start:"'평균 이하'라 생각하기 싫어함 — 이 심리의 구체화는?",
+chain:[["C",`주어진 글 average → C) <em>rate themselves above average</em> — 재진술·구체화`],
+["B",`C) overestimate ~ control themselves → B) <em>This over-confidence in self-control</em>`],
+["A",`B) 습관 중단의 어려움 → A) <em>notice it popping up again and again</em> — 실제 경험`]]},
+{no:14,src:"2018 고1 9월",ans:2,order:"B - A - C",
+given:`Trade will not occur unless <b class="s k">both parties want what the other party has to offer</b>.`,
+A:`<b class="s c">However</b>, if the farmer is enterprising and utilizes his network of village friends, he might discover that the baker is in need of some new cast-iron trivets for cooling his bread, and it just so happens that the blacksmith needs <b class="s k">a new lamb's wool sweater</b>.`,
+B:`<b class="s d">This</b> is referred to as <b class="s k">the double coincidence of wants</b>. Suppose a farmer wants to trade eggs with a baker for a loaf of bread. If the baker has no need or desire for eggs, then the farmer is out of luck and does not get any bread.`,
+C:`Upon further investigation, the farmer discovers that <b class="s k">the weaver</b> has been wanting an omelet for the past week. The farmer will then trade the eggs for the sweater, the sweater for the trivets, and the trivets for his fresh-baked loaf of bread.`,
+note:"* trivet: 삼각 거치대",start:"거래의 조건 — 이 조건 전체를 한 단어로 받으면?",
+chain:[["B",`<em>This</em> = 주어진 글 전체 → <em>the double coincidence of wants</em>로 한단어 축약`],
+["A",`<em>However</em> — 농부가 막힌 상황의 반전 해법 등장`],
+["C",`A) a lamb's wool sweater → C) <em>the weaver</em> — 연쇄 교환의 완성`]]}
+];
+const CHO = ["(A) - (C) - (B)","(B) - (A) - (C)","(B) - (C) - (A)","(C) - (A) - (B)","(C) - (B) - (A)"];
+const CIRC = ["①","②","③","④","⑤"];
+
+/* ================= 문제/정답 슬라이드 생성 ================= */
+const anchor = document.getElementById('probAnchor');
+let html = "";
+P.forEach(q=>{
+  const nn = String(q.no).padStart(2,'0');
+  html += `
+<section class="slide prob">
+  <div class="top">
+    <span class="chip no">문항 ${nn}</span><span class="chip src">${q.src}</span>
+    <span class="chip">글의 순서</span>
+    <button class="btn tm" data-tm>⏱ 60초</button>
+    <button class="btn sig" data-sig>🔍 Signal</button>
+    <span class="legend"><i class="d">지시어</i><i class="c">연결어</i><i class="p">대명사</i><i class="k">재진술</i></span>
+    <span class="sp"></span>
+  </div>
+  <div class="givenbox rv">${q.given}</div>
+  <div class="cols rv">
+    <div class="pcol"><span class="ph">(A)</span><p class="pt">${q.A}</p></div>
+    <div class="pcol"><span class="ph">(B)</span><p class="pt">${q.B}</p></div>
+    <div class="pcol"><span class="ph">(C)</span><p class="pt">${q.C}</p></div>
+  </div>
+  ${q.note?`<p class="vnote">${q.note}</p>`:""}
+  <div class="choices rv">${CHO.map((c,i)=>`<span class="ch">${CIRC[i]} ${c}</span>`).join("")}</div>
+</section>
+<section class="slide ansS">
+  <div class="top">
+    <span class="chip no">문항 ${nn}</span><span class="chip src">${q.src}</span>
+    <span class="chip" style="color:var(--pk)">정답 & 근거 체인</span><span class="sp"></span>
+  </div>
+  <div class="chain">
+    <div class="crow st0"><span class="lab">주어진 글</span><p class="why">${q.start}</p></div>
+    ${q.chain.map((c,i)=>`
+    <div class="crow rv"><span class="lab">${CIRC[i]}번째 단락</span><span class="pill ${c[0]}">${c[0]}</span><p class="why">${c[1]}</p></div>`).join("")}
+  </div>
+  <div class="ansrow rv">
+    <div class="ansbadge"><span class="t">정답</span><span class="o">${CIRC[q.ans-1]}&ensp;${q.order}</span></div>
+  </div>
+</section>`;
+});
+anchor.outerHTML = html;
+
+/* ================= 내비게이션 ================= */
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+const pbar=document.getElementById('pbar'),pnum=document.getElementById('pnum');
+
+function paint(){
+  pbar.style.width=((cur+1)/slides.length*100)+'%';
+  pnum.textContent=(cur+1)+' / '+slides.length;
+}
+function revs(s){return [...s.querySelectorAll('.rv')];}
+function show(i,fromBack){
+  slides[cur].classList.remove('active');
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  const s=slides[cur];
+  s.classList.add('active');
+  revs(s).forEach(r=>r.classList.toggle('on',!!fromBack));
+  paint();
+}
+function next(){
+  const s=slides[cur],rs=revs(s),hid=rs.find(r=>!r.classList.contains('on'));
+  if(hid){hid.classList.add('on');return;}
+  if(cur<slides.length-1)show(cur+1,false);
+}
+function prev(){
+  const s=slides[cur],rs=revs(s),on=[...rs].reverse().find(r=>r.classList.contains('on'));
+  if(on){on.classList.remove('on');return;}
+  if(cur>0)show(cur-1,true);
+}
+document.getElementById('zNext').addEventListener('click',next);
+document.getElementById('zPrev').addEventListener('click',prev);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next();}
+  else if(e.key==='ArrowLeft'){e.preventDefault();prev();}
+  else if(e.key==='f'||e.key==='F'){toggleFS();}
+});
+/* 리플 */
+document.addEventListener('pointerdown',e=>{
+  const r=document.createElement('div');r.className='ripple';
+  r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';
+  document.body.appendChild(r);setTimeout(()=>r.remove(),600);
+});
+/* Signal 토글 */
+document.querySelectorAll('[data-sig]').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.stopPropagation();
+    const s=b.closest('.slide');
+    s.classList.toggle('sigon');
+    b.classList.toggle('onn',s.classList.contains('sigon'));
+  });
+});
+/* 타이머 */
+document.querySelectorAll('[data-tm]').forEach(b=>{
+  let t=null,left=60;
+  const draw=()=>b.textContent='⏱ '+left+'초';
+  b.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(t){clearInterval(t);t=null;left=60;b.classList.remove('run','zero');b.textContent='⏱ 60초';return;}
+    left=60;b.classList.add('run');b.classList.remove('zero');draw();
+    t=setInterval(()=>{
+      left--;draw();
+      if(left<=0){clearInterval(t);t=null;b.classList.remove('run');b.classList.add('zero');b.textContent='⏱ 종료!';}
+    },1000);
+  });
+});
+/* 전체화면 */
+function toggleFS(){
+  if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
+}
+function goFS(e){e.stopPropagation();toggleFS();}
+window.goFS=goFS;
+/* 문단 넘침 자동 축소 */
+function fit(){
+  const s=slides[cur];
+  s.querySelectorAll('.pcol').forEach(col=>{
+    const p=col.querySelector('.pt');if(!p)return;
+    p.style.fontSize='';let f=100,guard=0;
+    while(col.scrollHeight>col.clientHeight+2&&f>68&&guard<20){
+      f-=4;p.style.fontSize=(1.5*f/100)+'vw';guard++;
+    }
+  });
+}
+const obs=new MutationObserver(()=>fit());
+slides.forEach(s=>obs.observe(s,{attributes:true,attributeFilter:['class']}));
+window.addEventListener('resize',fit);
+paint();fit();
+</script>
+</body>
+</html>
