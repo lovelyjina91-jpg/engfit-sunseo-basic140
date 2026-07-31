@@ -133,22 +133,26 @@ b.s{font-weight:600;color:inherit;border-radius:.3vw;transition:all .4s}
 .legend i{font-style:normal;font-size:1.15vw;font-weight:800;color:#0D1023;padding:.25vh .7vw;border-radius:.4vw}
 .legend i.c{background:var(--pu)}.legend i.d{background:var(--pk)}.legend i.p{background:var(--gold)}.legend i.k{background:var(--sky)}
 /* ---------- 정답/근거 슬라이드 ---------- */
-.chain{display:flex;flex-direction:column;gap:1.9vh;max-width:80vw;margin-top:.6vh}
+.chain{display:flex;flex-direction:column;gap:1.5vh;max-width:80vw;margin-top:.6vh}
 .crow{display:flex;align-items:center;gap:1.4vw;background:var(--card);border:1px solid var(--line);
-  border-radius:1.1vw;padding:2vh 1.8vw}
+  border-radius:1.1vw;padding:1.6vh 1.8vw}
 .crow .lab{flex:none;font-size:1.45vw;font-weight:800;color:var(--tx2);width:9.5vw}
 .crow .pill{flex:none;width:4.8vw;height:4.8vw;border-radius:1vw;display:flex;align-items:center;justify-content:center;
   font-size:2.5vw;font-weight:900;color:#fff}
 .crow .pill.A{background:#7C6AE8}.crow .pill.B{background:#D6559C}.crow .pill.C{background:#B8830B}
-.crow .why{font-size:1.95vw;font-weight:700;line-height:1.45}
+.crow .why{font-size:1.78vw;font-weight:700;line-height:1.45}
 .crow .why em{font-style:normal;color:var(--sky)}
 .crow.st0{border-left:.5vw solid var(--pu)}
 .crow.st0 .why{color:var(--tx2)}
-.ansrow{display:flex;align-items:center;gap:2vw;margin-top:3vh}
+.ansrow{display:flex;align-items:center;gap:2vw;margin-top:2vh}
 .ansbadge{display:flex;align-items:center;gap:1.6vw;background:linear-gradient(135deg,var(--pu),var(--pk));
   border-radius:1.4vw;padding:2.6vh 2.6vw}
 .ansbadge .t{font-size:2vw;font-weight:900;color:rgba(255,255,255,.85)}
 .ansbadge .o{font-size:3.6vw;font-weight:900;color:#fff;letter-spacing:.02em}
+.wnote{margin-top:2.2vh;font-size:1.9vw;font-weight:700;color:var(--tx2);
+  background:var(--card);border:1px dashed var(--gold);border-radius:.9vw;
+  padding:1.6vh 1.8vw;max-width:64vw}
+.wnote b{color:var(--gold)}
 /* ---------- 정리 ---------- */
 .sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.8vh 1.6vw;max-width:82vw}
 .sumcard{background:var(--card);border:1px solid var(--line);border-radius:1.2vw;padding:2.4vh 1.9vw;border-left:.45vw solid var(--gold)}
@@ -301,126 +305,126 @@ A:`Now you are in a position to give <b class="s p">her</b> something that <b cl
 B:`<b class="s c">Similarly</b>, when purchasing my home, I discovered that the seller was very interested in closing the deal as soon as possible. So I agreed to close one month earlier than originally offered, and the seller agreed to a lower price.`,
 C:`<b class="s c">For example</b>, you may not care about whether you start your new job in June or July. But if <b class="s k">your potential boss</b> strongly prefers that you start as soon as possible, that's a valuable piece of information.`,
 note:"",start:"상대만 중요하게 여기는 issues를 찾아라",
-chain:[["C",`<em>For example</em> — 예시의 시작 (일반 → 구체)`],
-["A",`C) your potential boss → A) <em>her, ~ she values</em> — 같은 인물을 대명사로 이어받음`],
-["B",`<em>Similarly</em> — 주제 유지, 소재 전환 (취업 협상 → 집 구매)`]]},
+chain:[["C",`주어진 글의 <em>these issues</em>의 예시로 (C) <em>For example</em>이 시작된다`],
+["A",`(C)의 <em>your potential boss</em>를 (A)가 <em>her, ~ she values</em>로 이어받는다`],
+["B",`(B) <em>Similarly</em>로 같은 주제(협상의 이득)를 집 구매 사례로 전환한다`]]},
 {no:2,src:"2017 고1 3월",ans:3,order:"B - C - A",
 given:`Andrew Carnegie, the great early-twentieth-century businessman, once heard his sister complain about <b class="s k">her two sons</b>.`,
 A:`Within days <b class="s p">he</b> received warm grateful letters from both boys, who noted at the letters' end that he had unfortunately <b class="s k">forgotten to include the check</b>. If the check had been enclosed, would they have responded so quickly?`,
 B:`<b class="s p">They</b> were away at college and rarely responded to <b class="s p">her</b> letters. Carnegie told her that if <b class="s k">he wrote them</b> he would get an immediate response.`,
 C:`<b class="s p">He</b> <b class="s k">sent off two warm letters</b> to the boys, and told them that he was happy to send each of them a check for a hundred dollars (a large sum in those days). Then he mailed the letters, but <b class="s k">didn't enclose the checks</b>.`,
 note:"* enclose: 동봉하다",start:"her two sons — 두 아들 이야기의 시작",
-chain:[["B",`주어진 글 two sons → B) <em>They, her letters</em> — 대명사가 받아줌`],
-["C",`B) if he wrote them → C) <em>sent off two warm letters</em> — 말한 것을 실행`],
-["A",`C) didn't enclose the checks → A) <em>he received ~ forgotten to include the check</em>`]]},
+chain:[["B",`주어진 글의 <em>her two sons</em>를 (B)가 <em>They</em>로 받는다`],
+["C",`(B)의 <em>if he wrote them</em>(말)을 (C)가 <em>sent off two warm letters</em>(실행)로 잇는다`],
+["A",`(C)의 <em>didn't enclose the checks</em> 때문에 (A)의 <em>forgotten to include the check</em> 답장이 온다`]]},
 {no:3,src:"2017 고1 6월",ans:2,order:"B - A - C",
 given:`In early 19th century London, a young man named Charles Dickens had a strong desire to be a writer. But <b class="s k">everything seemed to be against him</b>.`,
 A:`<b class="s c">Moreover</b>, he had so <b class="s k">little confidence</b> in his ability to write that he mailed his writings secretly at night to editors so that nobody would laugh at him. Story after story was refused.`,
 B:`<b class="s p">He</b> had <b class="s k">never been able to attend school</b> for more than four years. His father had been in jail because he couldn't pay his debts, and this young man often knew the pain of hunger.`,
 C:`<b class="s c">But</b> one day, one editor <b class="s k">recognized and praised him</b>. The praise that he received from getting one story in print changed his whole life. His works have been widely read and still enjoy great popularity.`,
 note:"",start:"against him — 그에게 불리했던 '모든 것'이 무엇인지",
-chain:[["B",`주) against him → B) <em>never ~ attend school</em> — 불리한 상황의 구체화`],
-["A",`<em>Moreover, little confidence</em> — 악조건 하나 더 추가`],
-["C",`<em>But</em> ~ recognized and praised him — 반전, 성공 이야기로 전환`]]},
+chain:[["B",`주어진 글의 <em>everything ~ against him</em>을 (B)가 '학교 4년도 못 다님'으로 구체화한다`],
+["A",`(A) <em>Moreover</em>로 악조건(<em>little confidence</em>)을 하나 더 추가한다`],
+["C",`(C) <em>But</em>으로 반전 — 편집자가 <em>recognized and praised him</em>, 성공으로 전환`]]},
 {no:4,src:"2017 고1 6월",ans:3,order:"B - C - A",
 given:`One of the most essential decisions any of us can make is <b class="s k">how we invest our time</b>.`,
 A:`<b class="s d">During this period</b>, people worked for more than eighty hours a week in factories. But there were some who spent their few precious free hours reading books or getting involved in politics instead of following the majority into the pubs.`,
 B:`Of course, <b class="s k">how we invest time</b> is not our decision alone to make. Many factors determine what we should do either because we are members of the human race, or because we belong to a certain culture and society.`,
 C:`<b class="s c">Nevertheless</b>, there is room for personal choice, and control over time is to a certain extent in our hands. Even in the most oppressive decades of <b class="s k">the Industrial Revolution</b>, people didn't give up their free will when it came to time.`,
 note:"* oppressive: 억압적인",start:"how we invest our time — 핵심 어구를 기억",
-chain:[["B",`주어진 글의 핵심 어구를 B) <em>how we invest time ~</em> 으로 그대로 재진술`],
-["C",`<em>Nevertheless</em> — '그럼에도' 개인 선택의 여지가 있다`],
-["A",`C) the Industrial Revolution → A) <em>During this period</em> — 그 시기를 지시어로 받음`]]},
+chain:[["B",`주어진 글의 <em>how we invest our time</em>을 (B)가 그대로 재진술하며 이어간다`],
+["C",`(C) <em>Nevertheless</em> — 그럼에도 개인 선택의 여지가 있다고 반박한다`],
+["A",`(C)의 <em>the Industrial Revolution</em>을 (A)가 <em>During this period</em>로 받는다`]]},
 {no:5,src:"2017 고1 9월",ans:5,order:"C - B - A",
 given:`<b class="s k">Use a plastic pen and rub it on your hair</b> about ten times and then hold the pen close to small pieces of tissue paper or chalk dust.`,
 A:`<b class="s k">During a thunderstorm</b>, clouds may become charged as they rub against each other. The lightning that we often see during a storm is caused by a large flow of electrical charges between charged clouds and the earth.`,
 B:`<b class="s d">This kind of electricity</b> is produced by friction, and the pen becomes electrically charged. Static electricity is <b class="s k">also found in the atmosphere</b>.`,
 C:`<b class="s k">You will find</b> that the bits of paper or chalk dust cling to the pen. What you have done there is to create <b class="s k">a form of electricity called static electricity</b>.`,
 note:"",start:"펜을 문지르는 '행동' — 다음엔 그 결과가 와야 자연스럽다",
-chain:[["C",`<em>You will find that ~</em> — 행동의 결과가 바로 이어짐`],
-["B",`C) a form of electricity → B) <em>This kind of electricity is ~</em> — 지시어 연결`],
-["A",`B) also found in the atmosphere → A) <em>During a thunderstorm ~</em> (대기 속 예시)`]]},
+chain:[["C",`주어진 글의 실험 행동의 결과를 (C) <em>You will find that</em>으로 보여준다`],
+["B",`(C)의 <em>a form of electricity</em>를 (B)가 <em>This kind of electricity</em>로 받는다`],
+["A",`(B)의 <em>also found in the atmosphere</em>의 예로 (A) <em>During a thunderstorm</em>이 이어진다`]]},
 {no:6,src:"2017 고1 9월",ans:2,order:"B - A - C",
 given:`From a <b class="s k">correlational observation</b>, we conclude that one variable is related to a second variable. But neither behavior could be directly causing the other even though there is a relationship.`,
 A:`<b class="s p">They</b> found the best predictor to be <b class="s k">the number of tattoos</b> the rider had. It would be a ridiculous error to conclude that tattoos cause motorcycle accidents or that motorcycle accidents cause tattoos.`,
 B:`<b class="s k">The following example</b> will illustrate why it is difficult to make causal statements on the basis of correlational observation. <b class="s k">The researchers</b> at the U.S. Army conducted a study of motorcycle accidents, attempting to correlate the number of accidents with other variables such as socioeconomic level and age.`,
 C:`<b class="s c">Obviously</b>, <b class="s k">a third variable</b> is related to both — perhaps preference for risk. A person who is willing to take risks likes <b class="s k">to be tattooed</b> and also takes more chances on a motorcycle.`,
 note:"* variable: 변인",start:"상관관계 ≠ 인과관계 — 이제 예시가 나올 차례",
-chain:[["B",`<em>The following example ~</em> — 예시 예고 (G → S)`],
-["A",`B) The researchers → A) <em>They found ~</em> — 대명사가 연구자들을 받음`],
-["C",`A) the number of tattoos → C) <em>a third variable, to be tattooed ~</em> — 결론 제시`]]},
+chain:[["B",`주어진 글의 상관관계 논의를 (B) <em>The following example</em>로 예시 시작한다`],
+["A",`(B)의 <em>The researchers</em>를 (A)가 <em>They</em>로 받아 연구 결과를 말한다`],
+["C",`(A)의 문신 착각을 (C) <em>Obviously, a third variable</em>로 결론짓는다`]]},
 {no:7,src:"2017 고1 11월",ans:2,order:"B - A - C",
 given:`Memory has two types — implicit and explicit memory. When you learn things without really thinking about it, it's implicit memory or body memory. <b class="s k">Knowing how to breathe</b> when you were born is an implicit memory.`,
 A:`<b class="s k">Explicit memories</b>, <b class="s c">on the other hand</b>, are the memories or the specific things that you consciously try to recall. <b class="s k">You use explicit memory every day</b> on a conscious level.`,
 B:`<b class="s d">No one taught this to you.</b> Some of the things you've learned since childhood also become <b class="s k">implicit memories</b>. Implicit memories are imprinted in the brain's autonomic portion; that is why even after years of not riding a bike you still know how to ride.`,
 C:`<b class="s k">Trying to find the keys</b>, trying to remember when an event is supposed to take place, where it's going to be held, and with whom you are going. Explicit memories are the tasks you have written down on your calendar or planner.`,
 note:"",start:"호흡 = implicit memory의 예 — 이 '호흡'을 받을 말은?",
-chain:[["B",`<em>No one taught this to you.</em> — this = 호흡하는 법 (지시어)`],
-["A",`B) Implicit memories → A) <em>Explicit memories, on the other hand</em> — 대조 전환`],
-["C",`A) You use explicit memory ~ → C) <em>Trying to find the keys ~</em> (매일 쓰는 예)`]]},
+chain:[["B",`주어진 글의 '호흡'을 (B)가 <em>No one taught this to you</em>의 <em>this</em>로 받는다`],
+["A",`(B)의 implicit 설명 뒤 (A) <em>Explicit memories, on the other hand</em>로 대조 전환한다`],
+["C",`(A)의 <em>You use explicit memory every day</em>의 예로 (C) <em>Trying to find the keys</em>가 이어진다`]]},
 {no:8,src:"2017 고1 11월",ans:4,order:"C - A - B",
 given:`For its time, ancient Greek civilization was remarkably advanced. The Greeks figured out <b class="s k">mathematics, geometry, and calculus</b> long before calculators were available. Centuries before telescopes were invented, they proposed that the earth might rotate on an axis or revolve around the sun.`,
 A:`<b class="s c">But</b> <b class="s p">they</b> were still a primitive people. There were many aspects of the world around them that they didn't understand very well. They had <b class="s k">big questions</b>, like Why are we here? and Why is smoke coming out of that nearby volcano?`,
 B:`Myths provided <b class="s k">answers</b> to <b class="s d">those questions</b>. They were educational tools, passing knowledge from one generation to the next. They also taught morality and conveyed truth about the complexity of life. In this way, the Greeks were able to understand right and wrong in their lives.`,
 C:`Along with <b class="s d">these mathematical, scientific advances</b>, <b class="s k">the Greeks</b> produced some of the early dramatic plays and poetry. In a world ruled by powerful kings and bloodthirsty warriors, the Greeks even developed the idea of democracy.`,
 note:"* geometry: 기하학",start:"그리스의 수학·과학적 성취 나열 — 이걸 받을 지시어는?",
-chain:[["C",`<em>these mathematical, scientific advances</em> — 주어진 글 내용을 지시어로 축약`],
-["A",`C) the Greeks의 성취 → A) <em>But they were still ~</em> — 역접으로 한계 제시`],
-["B",`A) big questions → B) <em>answers to those questions</em> — 질문에 대한 답 = 신화`]]},
+chain:[["C",`주어진 글의 수학·과학 성취를 (C)가 <em>these mathematical, scientific advances</em>로 받는다`],
+["A",`(A) <em>But they were still ~</em> 역접으로 그리스인의 한계(<em>big questions</em>)를 제시한다`],
+["B",`(A)의 <em>big questions</em>에 (B)가 <em>answers to those questions</em>(신화)로 답한다`]]},
 {no:9,src:"2018 고1 3월",ans:3,order:"B - C - A",
 given:`Suppose that you are busy working on a project one day and you have no time to buy lunch. All of a sudden <b class="s k">your best friend shows up</b> with your favorite sandwich.`,
 A:`The key difference between <b class="s d">these two cases</b> is the level of trust. You trust your best friend so much that you won't worry about him knowing you too well, but you certainly would not give the same level of trust to a stranger.`,
 B:`<b class="s p">He</b> tells you that he knows you are busy and he wants to help you out by buying you the sandwich. In this case, you are very likely to appreciate your friend's help.`,
 C:`<b class="s c">However</b>, if <b class="s k">a stranger</b> shows up with the same sandwich and offers it to you, you won't appreciate it. Instead, you would be confused. You would likely think "Who are you, and how do you know what kind of sandwich I like to eat?"`,
 note:"",start:"best friend 등장 — 이 친구를 대명사로 받을 단락은?",
-chain:[["B",`<em>He tells you that ~</em> — He = your best friend (대명사)`],
-["C",`<em>However, a stranger ~</em> — 친구와 대조되는 두 번째 사례 등장`],
-["A",`두 사례가 다 나온 뒤 → A) <em>between these two cases</em> 비교 가능`]]},
+chain:[["B",`주어진 글의 <em>best friend</em>를 (B)가 <em>He</em>로 받는다`],
+["C",`(C) <em>However, a stranger</em> — 대조되는 두 번째 사례가 등장한다`],
+["A",`두 사례가 모두 나온 뒤에야 (A) <em>between these two cases</em> 비교가 가능하다`]]},
 {no:10,src:"2018 고1 3월",ans:2,order:"B - A - C",
 given:`If you start collecting and analyzing data <b class="s k">without first clarifying the question</b> you are trying to answer, you're probably doing yourself more harm than good.`,
 A:`<b class="s d">In the design plan</b>, you clarify the issues you are trying to solve, state your hypotheses, and list what is required to prove those hypotheses. Developing this plan before you start researching will greatly <b class="s k">increase your problem-solving productivity</b>.`,
 B:`You'll <b class="s k">end up drowning in a flood of information</b> and realize only later that most of that research was a waste of time. To avoid this problem, you should develop <b class="s k">a problem-solving design plan</b> before you start collecting information.`,
 C:`<b class="s c">In addition</b>, putting your plan down on paper will not only clarify your thoughts. If you're working in a group, this plan will also help your team focus on what to do and provide the starting point for your group brainstorming.`,
 note:"* hypothesis: 가설",start:"질문 정리 없이 데이터부터 모으면? → 그 결과가 이어져야",
-chain:[["B",`<em>end up drowning</em> (그 행동의 결과) + 해결책 design plan 제시`],
-["A",`B) a problem-solving design plan → A) <em>In the design plan</em> — 관사 the로 재언급`],
-["C",`A) 마지막에 장점 → C) <em>In addition</em> — 장점 하나 더 추가`]]},
+chain:[["B",`주어진 글 행동의 결과를 (B) <em>end up drowning</em>으로 잇고 <em>design plan</em>을 제안한다`],
+["A",`(B)의 <em>a ~ design plan</em>을 (A)가 <em>In the design plan</em>(관사 the)으로 받는다`],
+["C",`(A)의 장점에 (C) <em>In addition</em>으로 장점을 하나 더 추가한다`]]},
 {no:11,src:"2018 고1 6월",ans:5,order:"C - B - A",
 given:`Interpersonal messages combine <b class="s k">content and relationship dimensions</b>. That is, they refer to the real world, to something external to both speaker and listener; at the same time they also refer to the relationship between parties.`,
 A:`You can appreciate this most clearly if you visualize <b class="s k">the same command</b> being made <b class="s k">by the trainee to the supervisor</b>. It appears awkward and out of place, because it violates the normal relationship between supervisor and trainee.`,
 B:`It <b class="s c">also</b> contains <b class="s k">a relationship message</b> that says something about the connection between the supervisor and the trainee. Even the use of the simple command shows there is a status difference that allows the supervisor to command the trainee.`,
 C:`<b class="s c">For example</b>, a supervisor may say to a trainee, "See me after the meeting." This simple message has <b class="s k">a content message</b> that tells the trainee to see the supervisor after the meeting.`,
 note:"",start:"메시지 = content + relationship 두 차원 — 예시가 올 차례",
-chain:[["C",`<em>For example</em> — 예시의 시작 (content message 먼저)`],
-["B",`C) content message → B) <em>also ~ a relationship message</em> — 두 번째 차원 추가`],
-["A",`B) relationship 설명 → A) <em>the same command ~ by the trainee</em> — 뒤집어 추가 설명`]]},
+chain:[["C",`주어진 글의 두 차원의 예시로 (C) <em>For example</em>이 시작된다 (content 먼저)`],
+["B",`(C)의 <em>content message</em>에 (B)가 <em>also ~ relationship message</em>를 추가한다`],
+["A",`(B)의 관계 설명을 (A)가 <em>the same command</em>를 뒤집는 상황으로 보충한다`]]},
 {no:12,src:"2018 고1 6월",ans:3,order:"B - C - A",
 given:`The scientific study of the physical characteristics of colors can be traced back to <b class="s k">Isaac Newton</b>.`,
 A:`It was only when Newton placed <b class="s k">a second prism</b> in the path of the spectrum that he found something new. The composite colors produced a white beam. Thus he concluded that white light can be produced by combining the spectral colors.`,
 B:`<b class="s c">One day</b>, <b class="s p">he</b> spotted a set of prisms at a big county fair. He took them home and began to experiment with them. In a darkened room he allowed <b class="s k">a thin ray of sunlight</b> to fall on a triangular glass prism.`,
 C:`As soon as <b class="s k">the white ray</b> hit the prism, it separated into the familiar colors of the rainbow. This finding was not new, as humans had observed the rainbow since the beginning of time.`,
 note:"* composite: 합성의",start:"Newton 등장 — 일화(이야기)의 시작을 찾아라",
-chain:[["B",`<em>One day, he spotted ~</em> — 일화의 시작 + he = Newton (대명사)`],
-["C",`B) a thin ray of sunlight → C) <em>the white ray</em> — 관사 the로 재언급`],
-["A",`첫 실험 결과 확인 후 → A) <em>a second prism</em> — '두 번째' 프리즘 실험`]]},
+chain:[["B",`주어진 글의 <em>Newton</em>을 (B)가 <em>One day, he</em>로 받아 일화를 시작한다`],
+["C",`(B)의 <em>a thin ray of sunlight</em>를 (C)가 <em>the white ray</em>(관사 the)로 받는다`],
+["A",`첫 실험 결과 확인 뒤 (A) <em>a second prism</em>으로 새 실험이 이어진다`]]},
 {no:13,src:"2018 고1 9월",ans:5,order:"C - B - A",
 given:`No one likes to think they're <b class="s k">average</b>, least of all <b class="s k">below average</b>.`,
 A:`Over the days and weeks from our resolution to change, we start to <b class="s k">notice it popping up again and again</b>. The old habit's well-practiced performance is beating our conscious desire for change into submission.`,
 B:`<b class="s d">This over-confidence in self-control</b> can lead people to assume they'll be able to control themselves in situations in which, it turns out, they can't. This is why <b class="s k">trying to stop an unwanted habit</b> can be an extremely frustrating task.`,
 C:`When asked by psychologists, most people <b class="s k">rate themselves above average</b> on all manner of measures including intelligence, looks, health, and so on. Self-control is no different: people consistently <b class="s k">overestimate their ability to control themselves</b>.`,
 note:"",start:"'평균 이하'라 생각하기 싫어함 — 이 심리의 구체화는?",
-chain:[["C",`주어진 글 average → C) <em>rate themselves above average</em> — 재진술·구체화`],
-["B",`C) overestimate ~ control themselves → B) <em>This over-confidence in self-control</em>`],
-["A",`B) 습관 중단의 어려움 → A) <em>notice it popping up again and again</em> — 실제 경험`]]},
+chain:[["C",`주어진 글의 <em>average</em> 심리를 (C) <em>rate themselves above average</em>로 구체화한다`],
+["B",`(C)의 <em>overestimate ~ control</em>을 (B)가 <em>This over-confidence</em>로 축약해 받는다`],
+["A",`(B)의 습관 중단 실패를 (A) <em>notice it popping up</em> 경험으로 보여준다`]]},
 {no:14,src:"2018 고1 9월",ans:2,order:"B - A - C",
 given:`Trade will not occur unless <b class="s k">both parties want what the other party has to offer</b>.`,
 A:`<b class="s c">However</b>, if the farmer is enterprising and utilizes his network of village friends, he might discover that the baker is in need of some new cast-iron trivets for cooling his bread, and it just so happens that the blacksmith needs <b class="s k">a new lamb's wool sweater</b>.`,
 B:`<b class="s d">This</b> is referred to as <b class="s k">the double coincidence of wants</b>. Suppose a farmer wants to trade eggs with a baker for a loaf of bread. If the baker has no need or desire for eggs, then the farmer is out of luck and does not get any bread.`,
 C:`Upon further investigation, the farmer discovers that <b class="s k">the weaver</b> has been wanting an omelet for the past week. The farmer will then trade the eggs for the sweater, the sweater for the trivets, and the trivets for his fresh-baked loaf of bread.`,
 note:"* trivet: 삼각 거치대",start:"거래의 조건 — 이 조건 전체를 한 단어로 받으면?",
-chain:[["B",`<em>This</em> = 주어진 글 전체 → <em>the double coincidence of wants</em>로 한단어 축약`],
-["A",`<em>However</em> — 농부가 막힌 상황의 반전 해법 등장`],
-["C",`A) a lamb's wool sweater → C) <em>the weaver</em> — 연쇄 교환의 완성`]]}
+chain:[["B",`주어진 글의 거래 조건 전체를 (B)가 <em>This</em>(= <em>the double coincidence of wants</em>)로 축약한다`],
+["A",`(A) <em>However</em> — 막힌 농부의 반전 해법(친구 네트워크)이 등장한다`],
+["C",`(A)의 <em>lamb's wool sweater</em>를 (C)의 <em>the weaver</em>가 받아 연쇄 교환이 완성된다`]]}
 ];
 const CHO = ["(A) - (C) - (B)","(B) - (A) - (C)","(B) - (C) - (A)","(C) - (A) - (B)","(C) - (B) - (A)"];
 const CIRC = ["①","②","③","④","⑤"];
@@ -464,6 +468,7 @@ P.forEach(q=>{
   <div class="ansrow rv">
     <div class="ansbadge"><span class="t">정답</span><span class="o">${CIRC[q.ans-1]}&ensp;${q.order}</span></div>
   </div>
+  <div class="wnote rv">✍️ <b>필기 타임</b> — 위 ①②③ 근거 문장을 교재 ${nn}번 옆 여백에 그대로 옮겨 적기</div>
 </section>`;
 });
 anchor.outerHTML = html;
