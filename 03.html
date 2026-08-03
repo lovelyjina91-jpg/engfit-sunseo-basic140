@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>순서는 과학이다 Basic 140 · 3회차 — 문맥의 과학 + 실전 29~42</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --navy:#1B2970; --gold:#9C6200; --goldbg:#F5A100;
+  --pu:#5B3FA8; --pk:#C22870; --sky:#1B7099;
+  --bg:#F7F8FA; --bg2:#FFFFFF; --card:#FFFFFF;
+  --tx:#1A2035; --tx2:#565D74; --line:#D9DCE6;
+  --pu-t:#EDE7FF; --pk-t:#FDEAF4; --gd-t:#FFF4DD; --sk-t:#DBF0FB;
+  --sh:0 .35vh 1.4vh rgba(27,32,53,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);
+  font-family:'Pretendard',-apple-system,sans-serif;color:var(--tx);
+  word-break:keep-all;overflow-wrap:break-word;
+  user-select:none;-webkit-user-select:none}
+/* ---------- 슬라이드 공통 ---------- */
+.slide{position:absolute;inset:0;padding:3.2vh 3.4vw;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transition:opacity .55s ease;background:var(--bg)}
+.slide.active{opacity:1;visibility:visible;z-index:2}
+.rv{opacity:0;transform:translateY(2.2vh);transition:opacity .5s ease,transform .5s ease}
+.rv.on{opacity:1;transform:none}
+/* ---------- 상단 바 ---------- */
+.top{display:flex;align-items:center;gap:.9vw;margin-bottom:1.6vh;flex:none}
+.chip{font-size:1.35vw;font-weight:700;padding:.55vh 1vw;border-radius:.6vw;
+  background:var(--bg2);color:var(--tx2);border:1px solid var(--line)}
+.chip.no{background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff;border:none;font-size:1.5vw}
+.chip.src{color:var(--sky)}
+.top .sp{flex:1}
+/* 버튼(터치 타깃 크게) */
+.btn{font-family:inherit;font-size:1.35vw;font-weight:800;color:var(--tx);border:none;cursor:pointer;
+  padding:1vh 1.5vw;border-radius:.8vw;background:var(--bg2);border:1px solid var(--line);
+  box-shadow:var(--sh);min-height:5.2vh;position:relative;z-index:60}
+.btn.sig{border:1px solid var(--pu);color:var(--pu)}
+.btn.sig.onn{background:var(--pu);color:#fff}
+.btn.tm{border:1px solid var(--gold);color:var(--gold);min-width:8.5vw}
+.btn.tm.run{background:var(--goldbg);border-color:var(--goldbg);color:#1A2035}
+.btn.tm.zero{background:var(--pk);border-color:var(--pk);color:#fff;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.55}}
+/* ---------- 인트로 ---------- */
+.intro{justify-content:center;align-items:flex-start;
+  background:linear-gradient(135deg,#EEF1FB 0%,#F1EBFA 45%,#FAEAF3 100%)}
+.intro .kick{font-size:1.9vw;font-weight:800;letter-spacing:.35em;color:var(--pk);margin-bottom:2.4vh}
+.intro h1{font-size:6.2vw;font-weight:900;line-height:1.14;letter-spacing:-.02em;color:var(--tx)}
+.intro h1 .grad{background:linear-gradient(90deg,var(--pu),var(--pk));-webkit-background-clip:text;background-clip:text;color:transparent}
+.intro .sub{margin-top:2.8vh;font-size:2.3vw;font-weight:700;color:var(--tx2)}
+.intro .sub b{color:var(--gold)}
+.intro .logo{position:absolute;right:3.4vw;top:3.2vh;font-size:1.5vw;font-weight:900;color:var(--navy);
+  display:flex;align-items:center;gap:.6vw}
+.intro .logo i{width:2.2vw;height:2.2vw;border-radius:.55vw;background:linear-gradient(135deg,var(--goldbg),var(--pk));
+  display:inline-block;font-style:normal;color:#fff;font-weight:900;font-size:1.3vw;text-align:center;line-height:2.2vw}
+.intro .fsb{margin-top:5vh}
+/* ---------- 공통 헤더/타이틀 ---------- */
+.h-sec{font-size:3.6vw;font-weight:900;margin-bottom:3vh;letter-spacing:-.01em;flex:none}
+.h-sec .acc{color:var(--pu)}
+.h-sec .num{color:var(--pk);margin-right:.8vw}
+/* ---------- 목표/카드 ---------- */
+.goalwrap{display:flex;flex-direction:column;gap:2.6vh;max-width:74vw}
+.goal{display:flex;gap:1.6vw;align-items:center;background:var(--card);border:1px solid var(--line);
+  border-radius:1.2vw;padding:2.6vh 2vw;box-shadow:var(--sh)}
+.goal .n{flex:none;width:4.6vw;height:4.6vw;border-radius:50%;font-size:2.2vw;font-weight:900;
+  display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff}
+.goal p{font-size:2.35vw;font-weight:700;line-height:1.4}
+.goal p b{color:var(--gold)}
+/* 임팩트 슬라이드 */
+.impact{justify-content:center;background:radial-gradient(ellipse at 30% 40%,#EFEAFA 0%,var(--bg) 65%)}
+.impact .q{font-size:4.3vw;font-weight:900;line-height:1.45;max-width:80vw;letter-spacing:-.01em}
+.impact .q .hl{background:linear-gradient(transparent 55%,rgba(244,114,182,.4) 55%)}
+.impact .a{margin-top:4vh;font-size:2.6vw;font-weight:800;color:var(--pu)}
+.impact .src2{margin-top:2vh;font-size:1.5vw;color:var(--tx2)}
+/* 이론 카드 3열 */
+.cards{display:flex;gap:1.6vw;align-items:stretch}
+.tcard{flex:1;background:var(--card);border:1px solid var(--line);border-radius:1.3vw;padding:2.8vh 1.7vw;
+  box-shadow:var(--sh);border-top:.45vh solid var(--pu)}
+.tcard.pk{border-top-color:var(--pk)}.tcard.gd{border-top-color:var(--goldbg)}.tcard.sk{border-top-color:var(--sky)}
+.tcard h3{font-size:2.3vw;font-weight:900;margin-bottom:1.6vh}
+.tcard h3 .tag{display:inline-block;font-size:1.3vw;padding:.3vh .8vw;border-radius:.5vw;margin-right:.7vw;vertical-align:middle;color:#fff}
+.tcard.pu h3 .tag{background:var(--pu)}.tcard.pk h3 .tag{background:var(--pk)}
+.tcard.gd h3 .tag{background:var(--goldbg);color:#1A2035}.tcard.sk h3 .tag{background:var(--sky)}
+.tcard .ex{font-size:1.9vw;font-weight:700;line-height:1.6;color:var(--tx2)}
+.tcard .ex b{color:var(--tx);font-weight:800}
+.tcard .desc{font-size:1.75vw;line-height:1.55;color:var(--tx2);margin-top:1.4vh}
+.tnote{margin-top:3vh;font-size:1.9vw;font-weight:700;color:var(--tx2)}
+.tnote b{color:var(--gold)}
+/* 3-Step 루틴 */
+.steps{display:flex;flex-direction:column;gap:2.4vh;max-width:78vw}
+.step{display:flex;align-items:center;gap:1.6vw;background:var(--card);border:1px solid var(--line);
+  border-radius:1.2vw;padding:2.4vh 2vw;box-shadow:var(--sh)}
+.step .sn{flex:none;font-size:2vw;font-weight:900;color:#1A2035;background:var(--goldbg);
+  padding:.7vh 1.2vw;border-radius:.7vw}
+.step p{font-size:2.25vw;font-weight:700;line-height:1.4}
+.step p b{color:var(--pk)}
+.step p .pu{color:var(--pu)}
+/* ---------- 문제 슬라이드 ---------- */
+.givenbox{background:var(--card);border:1px solid var(--line);border-left:.5vw solid var(--pu);border-radius:.9vw;
+  box-shadow:var(--sh);padding:1.9vh 1.7vw;font-size:1.92vw;line-height:1.5;font-weight:500;flex:none}
+.cols{display:flex;gap:1.3vw;margin-top:1.7vh;flex:1;min-height:0;align-items:flex-start}
+.pcol{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:1vw;
+  box-shadow:var(--sh);padding:1.6vh 1.3vw;height:100%;overflow:hidden;transition:border-color .4s,box-shadow .4s}
+.pcol .ph{display:inline-block;font-size:1.5vw;font-weight:900;color:#fff;padding:.3vh 1vw;border-radius:.55vw;margin-bottom:1.2vh}
+.pcol:nth-child(1) .ph{background:#6250C9}.pcol:nth-child(2) .ph{background:#B93D79}.pcol:nth-child(3) .ph{background:#8A6503}
+.pcol .pt{font-size:1.5vw;line-height:1.45;font-weight:500;color:var(--tx)}
+.vnote{font-size:1.25vw;color:var(--tx2);margin-top:1vh}
+.choices{display:flex;gap:1vw;margin-top:1.6vh;flex:none;padding-right:14vw}
+.ch{font-size:1.5vw;font-weight:700;background:var(--card);border:1px solid var(--line);
+  border-radius:5vw;padding:1vh 1.5vw;color:var(--tx2)}
+/* signal 하이라이트 — 형광펜 칩 스타일, 탭할 때마다 하나씩 공개 */
+b.s{font-weight:600;color:inherit;border-radius:.35vw;transition:all .4s}
+.sigon b.s,.slide.c0 .givenbox b.s,.slide.c1 [data-ord="1"] b.s,
+.slide.c2 [data-ord="2"] b.s,.slide.c3 [data-ord="3"] b.s{font-weight:800;padding:0 .3vw}
+.sigon b.s.c,.slide.c0 .givenbox b.s.c,.slide.c1 [data-ord="1"] b.s.c,
+.slide.c2 [data-ord="2"] b.s.c,.slide.c3 [data-ord="3"] b.s.c{background:var(--pu-t);color:var(--pu)}
+.sigon b.s.d,.slide.c0 .givenbox b.s.d,.slide.c1 [data-ord="1"] b.s.d,
+.slide.c2 [data-ord="2"] b.s.d,.slide.c3 [data-ord="3"] b.s.d{background:var(--pk-t);color:var(--pk)}
+.sigon b.s.p,.slide.c0 .givenbox b.s.p,.slide.c1 [data-ord="1"] b.s.p,
+.slide.c2 [data-ord="2"] b.s.p,.slide.c3 [data-ord="3"] b.s.p{background:var(--gd-t);color:var(--gold)}
+.sigon b.s.k,.slide.c0 .givenbox b.s.k,.slide.c1 [data-ord="1"] b.s.k,
+.slide.c2 [data-ord="2"] b.s.k,.slide.c3 [data-ord="3"] b.s.k{background:var(--sk-t);color:var(--sky)}
+/* 단서 켜진 영역 강조 + 순서 배지 */
+.slide.c0 .givenbox{border-left-color:var(--sky);box-shadow:0 0 0 .12vw var(--sky) inset,var(--sh)}
+.slide.c1 .pcol[data-ord="1"],.slide.c2 .pcol[data-ord="2"],.slide.c3 .pcol[data-ord="3"]{
+  border-color:var(--sky);box-shadow:0 0 0 .1vw var(--sky) inset,var(--sh)}
+.ob{display:none;margin-left:.7vw;font-size:1.35vw;font-weight:900;color:#fff;background:var(--sky);
+  border-radius:.5vw;padding:.25vh .8vw;vertical-align:middle;animation:obin .45s ease}
+@keyframes obin{from{opacity:0;transform:translateY(-1vh)}}
+.pcol[data-ord="1"] .ob::after{content:"① 첫번째"}
+.pcol[data-ord="2"] .ob::after{content:"② 두번째"}
+.pcol[data-ord="3"] .ob::after{content:"③ 세번째"}
+.slide.c1 .pcol[data-ord="1"] .ob,.slide.c2 .pcol[data-ord="2"] .ob,.slide.c3 .pcol[data-ord="3"] .ob{display:inline-block}
+.mk{position:absolute;width:0;height:0;overflow:hidden}
+.legend{display:none;gap:.9vw;align-items:center}
+.sigon .legend{display:flex}
+.legend i{font-style:normal;font-size:1.15vw;font-weight:800;padding:.25vh .7vw;border-radius:.4vw}
+.legend i.c{background:var(--pu-t);color:var(--pu)}.legend i.d{background:var(--pk-t);color:var(--pk)}
+.legend i.p{background:var(--gd-t);color:var(--gold)}.legend i.k{background:var(--sk-t);color:var(--sky)}
+/* ---------- 정답/근거 슬라이드 ---------- */
+.chain{display:flex;flex-direction:column;gap:1.5vh;max-width:80vw;margin-top:.6vh}
+.crow{display:flex;align-items:center;gap:1.4vw;background:var(--card);border:1px solid var(--line);
+  border-radius:1.1vw;box-shadow:var(--sh);padding:1.6vh 1.8vw}
+.crow .lab{flex:none;font-size:1.45vw;font-weight:800;color:var(--tx2);width:9.5vw}
+.crow .pill{flex:none;width:4.8vw;height:4.8vw;border-radius:1vw;display:flex;align-items:center;justify-content:center;
+  font-size:2.5vw;font-weight:900;color:#fff}
+.crow .pill.A{background:#6250C9}.crow .pill.B{background:#B93D79}.crow .pill.C{background:#8A6503}
+.crow .why{font-size:1.78vw;font-weight:700;line-height:1.45}
+.crow .why em{font-style:normal;color:var(--sky);font-weight:800}
+.crow.st0{border-left:.5vw solid var(--pu)}
+.crow.st0 .why{color:var(--tx2)}
+.ansrow{display:flex;align-items:center;gap:2vw;margin-top:2vh}
+.ansbadge{display:flex;align-items:center;gap:1.6vw;background:linear-gradient(135deg,var(--pu),var(--pk));
+  border-radius:1.4vw;padding:2.6vh 2.6vw;box-shadow:0 .6vh 2vh rgba(91,63,168,.28)}
+.ansbadge .t{font-size:2vw;font-weight:900;color:rgba(255,255,255,.85)}
+.ansbadge .o{font-size:3.6vw;font-weight:900;color:#fff;letter-spacing:.02em}
+.wnote{margin-top:2.2vh;font-size:1.9vw;font-weight:700;color:var(--tx2);
+  background:var(--card);border:1px dashed var(--goldbg);border-radius:.9vw;
+  box-shadow:var(--sh);padding:1.6vh 1.8vw;max-width:64vw}
+.wnote b{color:var(--gold)}
+/* ---------- 정리 ---------- */
+.sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.8vh 1.6vw;max-width:82vw}
+.sumcard{background:var(--card);border:1px solid var(--line);border-radius:1.2vw;
+  box-shadow:var(--sh);padding:2.4vh 1.9vw;border-left:.45vw solid var(--goldbg)}
+.sumcard h4{font-size:2vw;font-weight:900;color:var(--gold);margin-bottom:1vh}
+.sumcard h4.pu{color:var(--pu)}.sumcard h4.pk{color:var(--pk)}.sumcard h4.sk{color:var(--sky)}
+.sumcard p{font-size:1.85vw;line-height:1.5;font-weight:600;color:var(--tx2)}
+.sumcard p b{color:var(--tx)}
+/* ---------- 아웃트로 ---------- */
+.outro{background:linear-gradient(135deg,#EEF1FB 0%,#F1EBFA 50%,#FAEAF3 100%)}
+.hw{display:flex;flex-direction:column;gap:2vh;max-width:74vw}
+.hwrow{display:flex;gap:1.4vw;align-items:center;background:var(--card);border:1px solid var(--line);
+  border-radius:1.1vw;box-shadow:var(--sh);padding:2.2vh 2vw}
+.hwrow .ic{flex:none;font-size:2.4vw}
+.hwrow p{font-size:2.15vw;font-weight:700;line-height:1.4}
+.hwrow p b{color:var(--gold)}
+.nextp{margin-top:3.4vh;font-size:2.1vw;font-weight:800;color:var(--pu)}
+/* ---------- 내비게이션/진행 ---------- */
+.zone{position:fixed;top:0;bottom:0;width:25vw;z-index:50}
+#zPrev{left:0}#zNext{right:0}
+#pbar{position:fixed;left:0;bottom:0;height:.55vh;background:linear-gradient(90deg,var(--pu),var(--pk));
+  width:0;z-index:70;transition:width .35s ease}
+#pnum{position:fixed;left:1vw;bottom:1.1vh;font-size:1.05vw;font-weight:700;color:var(--tx2);z-index:70;opacity:.9}
+.ripple{position:fixed;width:9vw;height:9vw;border-radius:50%;pointer-events:none;z-index:90;
+  background:radial-gradient(circle,rgba(194,40,112,.28) 0%,rgba(91,63,168,.14) 55%,transparent 70%);
+  transform:translate(-50%,-50%) scale(.3);animation:rip .55s ease-out forwards}
+@keyframes rip{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- 1. 인트로 -->
+<section class="slide intro active">
+  <div class="logo"><i>Y</i>영핏영어 · 지나티처</div>
+  <div class="kick">영핏 특강 · 모의고사 트랙 · 3회차</div>
+  <h1>순서는 <span class="grad">과학</span>이다<br>Basic 140</h1>
+  <p class="sub">3회차 — <b>문맥의 과학</b> · 문제→해결 · 질문→답 + 실전 <b>29~42번</b></p>
+  <button class="btn fsb" onclick="goFS(event)">⛶ &nbsp;전체화면으로 시작하기</button>
+</section>
+
+<!-- 2. 오늘의 목표 -->
+<section class="slide">
+  <h2 class="h-sec">오늘의 <span class="acc">목표</span></h2>
+  <div class="goalwrap">
+    <div class="goal rv"><div class="n">1</div><p>signal이 안 보여도 <b>내용의 흐름</b>만으로 순서를 잡는다</p></div>
+    <div class="goal rv"><div class="n">2</div><p>문맥의 3대 패턴 — <b>질문→답 · 문제→해결 · 절차의 순서</b>를 익힌다</p></div>
+    <div class="goal rv"><div class="n">3</div><p>고1 기출 <b>29~42번</b>으로 근거 체인(①→②→③)을 완성한다</p></div>
+  </div>
+</section>
+
+<!-- 3. 임팩트 -->
+<section class="slide impact">
+  <p class="q rv">"<span class="hl">근거 없는 순서 문제는<br>존재하지 않는다.</span><br>signal이 없다면,<br>내용 자체가 근거다."</p>
+  <p class="a rv">→ 오늘은 '감'을 버리고 '문맥'으로 풉니다.</p>
+  <p class="src2 rv">— 순서는 과학이다 Basic, 유형 ③ 문맥형</p>
+</section>
+
+<!-- 4. 복습 30초 -->
+<section class="slide">
+  <h2 class="h-sec"><span class="num">복습 30초</span>지금까지의 <span class="acc">무기</span></h2>
+  <div class="cards">
+    <div class="tcard pk rv"><h3><span class="tag">1회차</span>signal 3종</h3>
+      <p class="ex"><b>지시어 · 연결어 · 대명사</b></p>
+      <p class="desc">가리킬 대상이 앞에 있어야 한다</p></div>
+    <div class="tcard sk rv"><h3><span class="tag">2회차</span>관사 &amp; 대조</h3>
+      <p class="ex"><b>a → the</b> / <b>X ↔ Y</b></p>
+      <p class="desc">처음 나온 곳이 앞, 반대편은 뒤</p></div>
+    <div class="tcard pu rv"><h3><span class="tag">3회차</span>문맥</h3>
+      <p class="ex"><b>내용의 인과 · 순서</b></p>
+      <p class="desc">단어가 아니라 <b>이야기의 논리</b>로 잇는다</p></div>
+  </div>
+  <p class="tnote rv">signal은 <b>빠른 길</b>, 문맥은 <b>확실한 길</b> — 오늘은 둘 다 쓴다 ▶</p>
+</section>
+
+<!-- 5. 핵심① 문맥 3대 패턴 -->
+<section class="slide">
+  <h2 class="h-sec"><span class="num">핵심 ①</span>문맥의 <span class="acc">3대 패턴</span></h2>
+  <div class="cards">
+    <div class="tcard pu rv"><h3><span class="tag">패턴 1</span>질문 → 답</h3>
+      <p class="desc" style="font-size:1.85vw">단락 끝의 <b style="color:var(--tx)">But why? / How could that be?</b><br>= 바로 다음 단락이 <b style="color:var(--pu)">그 답</b>이다.</p>
+      <p class="desc" style="font-size:1.7vw;color:var(--pu);font-weight:800">35번 · 36번에서 그대로 등장</p></div>
+    <div class="tcard pk rv"><h3><span class="tag">패턴 2</span>문제 → 해결</h3>
+      <p class="desc" style="font-size:1.85vw">문제 상황이 먼저, <b style="color:var(--tx)">해결·결과</b>가 뒤.<br>순서를 뒤집으면 말이 안 된다.</p>
+      <p class="desc" style="font-size:1.7vw;color:var(--pk);font-weight:800">29번(지구는 평평 → 둥글다) · 31번(적목 현상)</p></div>
+    <div class="tcard gd rv"><h3><span class="tag" style="color:#1A2035">패턴 3</span>절차의 순서</h3>
+      <p class="desc" style="font-size:1.85vw">방법을 설명할 땐 <b style="color:var(--tx)">준비 → 실행 → 마무리</b>.<br>실험·제작·역사는 시간이 곧 정답.</p>
+      <p class="desc" style="font-size:1.7vw;color:var(--gold);font-weight:800">30번(거울 편지) · 39번(온라인 서점의 성장)</p></div>
+  </div>
+</section>
+
+<!-- 6. 핵심② 일반→구체 -->
+<section class="slide">
+  <h2 class="h-sec"><span class="num">핵심 ②</span>주장은 <span class="acc">넓게 → 좁게</span> (G → S)</h2>
+  <div class="steps">
+    <div class="step rv"><span class="sn">넓게</span><p>주어진 글 = <b>일반적 주장</b> ("두 변인이 관련돼 보여도 인과는 아니다")</p></div>
+    <div class="step rv"><span class="sn">좁게</span><p>다음 단락 = <b>용어 설명 · 사례</b> ("발 크기와 독해력" 같은 classic example)</p></div>
+    <div class="step rv"><span class="sn">닫기</span><p>마지막 단락 = <b>Hence / Thus 결론</b> — 다시 넓어지며 마무리</p></div>
+  </div>
+  <p class="tnote rv" style="margin-top:3vh">32번·33번이 이 구조 그대로다. <b>사례가 주장보다 앞에 오는 일은 없다.</b></p>
+</section>
+
+<!-- 7. 풀이 루틴 -->
+<section class="slide">
+  <h2 class="h-sec">순서 풀이 <span class="acc">3 - STEP</span> <span style="font-size:2vw;color:var(--tx2)">(매 회차 동일 루틴)</span></h2>
+  <div class="steps">
+    <div class="step rv"><span class="sn">STEP 1</span><p><b>주어진 글의 끝</b>에 밑줄 — 마지막 <span class="pu">명사·상황</span>이 다음 단락의 열쇠</p></div>
+    <div class="step rv"><span class="sn">STEP 2</span><p>signal이 안 보이면 <b>각 단락의 첫 문장을 한글로 요약</b> — 문제인가 해결인가, 질문인가 답인가</p></div>
+    <div class="step rv"><span class="sn">STEP 3</span><p>근거 체인 연결: 주어진 글 → <span class="pu">①</span> → <span class="pu">②</span> → <span class="pu">③</span> — <b>연결 못 하면 답 아님</b></p></div>
+  </div>
+  <p class="tnote rv" style="margin-top:3.4vh">정답 확인 후에는 늘 하던 대로 <b>✍️ 필기 타임</b> — 근거 3줄을 교재 여백에!</p>
+</section>
+
+<!-- 문제 슬라이드 (JS 생성) -->
+<div id="probAnchor"></div>
+
+<!-- 정리 -->
+<section class="slide" id="sumSlide">
+  <h2 class="h-sec">오늘의 <span class="acc">정리</span></h2>
+  <div class="sumgrid">
+    <div class="sumcard rv"><h4 class="pu">① 질문 → 답</h4><p>단락 끝의 <b>But why?</b>는 "다음 단락이 답이다"라는 표지판</p></div>
+    <div class="sumcard rv"><h4 class="pk">② 문제 → 해결</h4><p>상황이 꼬이는 단락이 먼저, <b>풀리는 단락</b>이 뒤. 뒤집으면 말이 안 된다</p></div>
+    <div class="sumcard rv"><h4>③ 절차·시간의 순서</h4><p>방법·역사·실험은 <b>준비 → 실행 → 결과</b>. 시계 방향으로만 흐른다</p></div>
+    <div class="sumcard rv"><h4 class="sk">④ 오늘의 한 문장</h4><p><b>근거 없는 순서 문제는 존재하지 않는다.</b> signal이 없으면 내용이 근거다</p></div>
+  </div>
+</section>
+
+<!-- 아웃트로 -->
+<section class="slide outro">
+  <h2 class="h-sec">숙제 <span class="acc">&amp;</span> 다음 시간</h2>
+  <div class="hw">
+    <div class="hwrow rv"><span class="ic">✍️</span><p>오늘 다룬 <b>29~42번</b> — 근거 체인(①→②→③)을 <b>노트에 직접</b> 다시 쓰기</p></div>
+    <div class="hwrow rv"><span class="ic">🔍</span><p>각 단락 첫 문장을 <b>한글 한 줄로 요약</b>해보기 — 문맥형은 요약이 곧 근거</p></div>
+    <div class="hwrow rv"><span class="ic">📱</span><p>수업에서 빠르게 넘어간 문항은 <b>보충 영상</b>으로 복습 (카톡 전송)</p></div>
+  </div>
+  <p class="nextp rv">다음 4회차 ▶ 재진술 &amp; G-S + 순서 총정리 — 43~56번</p>
+</section>
+
+</div>
+
+
+
+<div class="zone" id="zPrev"></div>
+<div class="zone" id="zNext"></div>
+<div id="pbar"></div>
+<div id="pnum"></div>
+
+<script>
+/* ================= 문제 데이터 (교재 원문 + 각주 근거 그대로) ================= */
+/* s c=연결어(퍼플) d=지시어(핑크) p=대명사(골드) k=재진술·키워드(하늘) */
+const P = [
+{no:29,src:"2020 고1 9월",ans:2,order:"B - A - C",
+given:`We make decisions based on what we think we know. It wasn't too long ago that the majority of people believed <b class="s k">the world was flat</b>.`,
+A:`It wasn't until that minor detail was revealed — <b class="s k">the world is round</b> — that behaviors changed on a massive scale. Upon this discovery, <b class="s k">societies began to travel</b> across the planet. Trade routes were established; spices were traded.`,
+B:`<b class="s d">This perceived truth</b> impacted behavior. <b class="s d">During this period</b>, there was <b class="s k">very little exploration</b>. People feared that if they traveled too far they might fall off the edge of the earth. So for the most part they didn't dare to travel.`,
+C:`New ideas, like mathematics, were <b class="s k">shared between societies</b> which allowed for all kinds of innovations and advancements. The correction of a simple false assumption moved the human race forward.`,
+note:"",start:"한때 사람들은 지구가 평평하다고 믿었다",
+chain:[["B",`주어진 글의 평평한 지구 믿음을 (B) <em>This perceived truth</em>가 받아 그 결과(탐험이 없었음)를 말한다 — 문제 상황`],
+["A",`(B)의 탐험 없던 시대를 (A) <em>the world is round</em>가 뒤집는다 — 문제의 해결`],
+["C",`(A)의 <em>societies began to travel</em>을 (C) <em>shared between societies</em>가 이어받아 결과를 확장한다`]]},
+{no:30,src:"2020 고1 9월",ans:5,order:"C - B - A",
+given:`Mirrors and other smooth, shiny surfaces reflect light. We see reflections from such surfaces because the rays of light form <b class="s k">an image</b> on the retina of our eyes.`,
+A:`<b class="s k">Keep your eyes on the reflected image while you are writing</b> and not on your paper. After a little practice, it will be easier to write "backwards." When your friend receives such a message he will be able to read it by holding the paper up to a mirror.`,
+B:`<b class="s k">Stand a mirror upright</b> on the table, so that a piece of paper on the table can be clearly seen in the mirror. <b class="s k">Now write a message</b> that looks right when you look in the mirror.`,
+C:`<b class="s d">Such images</b> are always reversed. Look at yourself in a mirror, wink your right eye and your left eye seems to wink back at you. You can use a mirror to send <b class="s k">a coded message</b> to a friend.`,
+note:"* retina: (눈의) 망막",start:"거울은 빛을 반사해 망막에 상(an image)을 만든다",
+chain:[["C",`주어진 글의 <em>an image</em>를 (C) <em>Such images</em>가 지시어로 받고, 암호 편지라는 소재를 던진다`],
+["B",`(C)의 <em>a coded message</em>를 만드는 <b>첫 단계</b>가 (B) <em>Stand a mirror upright</em> — 절차의 시작`],
+["A",`(B) <em>Now write a message</em>에 이어 (A) <em>Keep your eyes ~ while you are writing</em> — 쓰는 동안의 요령`]]},
+{no:31,src:"2020 고1 11월",ans:2,order:"B - A - C",
+given:`Imagine yourself at a party. <b class="s k">It is dark</b> and a group of friends ask you to take a picture of them. You grab your camera, point, and shoot your friends.`,
+A:`<b class="s d">This</b> is a common problem called <b class="s k">the red-eye effect</b>. It is caused because the light from the flash penetrates the eyes through the pupils, and then gets reflected to the camera from the back of the eyes where <b class="s k">a large amount of blood</b> is present.`,
+B:`The camera automatically turns on the flash as <b class="s k">there is not enough light</b> available to produce a correct exposure. The result is half of your friends appear in the picture with <b class="s k">two bright red circles</b> instead of their eyes.`,
+C:`<b class="s d">This blood</b> is the reason why the eyes look red in the photograph. This effect is more noticeable when there is not much light in the environment. This is because pupils dilate when it is dark, allowing more light to get inside the eye and producing a larger red-eye effect.`,
+note:"* penetrate: 통과하다 ** pupil: 동공 *** dilate: 확장하다",start:"어두운 파티에서 친구들 사진을 찍는다",
+chain:[["B",`주어진 글의 <em>It is dark</em>를 (B) <em>there is not enough light</em>가 받아 플래시가 켜지고 빨간 눈이 생긴다`],
+["A",`(B)의 빨간 원 현상을 (A) <em>This is a common problem called the red-eye effect</em>가 이름 붙이고 원인을 설명한다`],
+["C",`(A)의 <em>a large amount of blood</em>를 (C) <em>This blood</em>가 지시어로 받아 마무리한다`]]},
+{no:32,src:"2020 고1 11월",ans:4,order:"C - A - B",
+given:`Even though <b class="s k">two variables</b> seem to be related, there may not be a causal relationship.`,
+A:`<b class="s d">Does this mean</b> that the size of one's feet (independent variable) causes an improvement in reading skills (dependent variable)? Certainly not. <b class="s k">This false relationship</b> is caused by a third factor, age, that is related to shoe size as well as reading ability.`,
+B:`<b class="s c">Hence</b>, when researchers attempt to make causal claims about the relationship between an independent and a dependent variable, they must control for — or rule out — other variables that may be creating a spurious relationship.`,
+C:`<b class="s c">In fact</b>, <b class="s k">the two variables</b> may merely seem to be associated with each other due to the effect of some third variable. Sociologists call such misleading relationships spurious. <b class="s k">A classic example</b> is the apparent association between children's shoe size and reading ability. It seems that as shoe size increases, reading ability improves.`,
+note:"* variable: 변인 ** spurious: 허위의",start:"두 변인이 관련돼 보여도 인과관계는 아닐 수 있다",
+chain:[["C",`주어진 글의 <em>two variables</em>를 (C) <em>the two variables</em>가 관사로 받고, 사례(신발 크기와 독해력)를 든다 — G→S`],
+["A",`(C)의 사례를 (A) <em>Does this mean ~?</em>가 질문으로 받아 "제3의 요인(나이)"이라 답한다`],
+["B",`(B) <em>Hence</em> — 사례에서 얻은 교훈을 연구자의 원칙으로 결론짓는다`]]},
+{no:33,src:"2021 고1 3월",ans:2,order:"B - A - C",
+given:`Almost all major sporting activities are played with <b class="s k">a ball</b>.`,
+A:`A ball might have the correct <b class="s k">size and weight</b> but if it is made as a hollow ball of steel it will be <b class="s k">too stiff</b> and if it is made from light foam rubber with a heavy center it will be too soft.`,
+B:`The rules of the game always include <b class="s k">rules about the type of ball</b> that is allowed, starting with the <b class="s k">size and weight</b> of the ball. The ball must also have a certain <b class="s k">stiffness</b>.`,
+C:`<b class="s c">Similarly</b>, <b class="s k">along with stiffness</b>, a ball needs to bounce properly. A solid rubber ball would be too bouncy for most sports, and a solid ball made of clay would not bounce at all.`,
+note:"* stiffness: 단단함",start:"거의 모든 주요 스포츠는 공으로 한다",
+chain:[["B",`주어진 글의 공을 (B)가 <em>rules about the type of ball</em>로 좁힌다 — 크기·무게, 그리고 단단함 예고`],
+["A",`(B)의 <em>size and weight ~ also stiffness</em>를 (A)가 이어받아 단단함이 왜 중요한지 예시로 보여준다`],
+["C",`(C) <em>Similarly, along with stiffness</em> — 단단함에 이어 탄성이라는 새 조건을 같은 방식으로 추가한다`]]},
+{no:34,src:"2021 고1 3월",ans:3,order:"B - C - A",
+given:`If you had to write a math equation, you probably wouldn't write, <b class="s k">"Twenty-eight plus fourteen equals forty-two."</b> It would take too long to write and it would be hard to read quickly.`,
+A:`<b class="s c">For example</b>, <b class="s k">the chemical formula for water is H2O</b>. That tells us that a water molecule is made up of two hydrogen ("H" and "2") atoms and one oxygen ("O") atom.`,
+B:`You would write, <b class="s k">"28 + 14 = 42."</b> <b class="s k">Chemistry is the same way</b>. Chemists have to write chemical equations all the time, and it would take too long to write and read if they had to spell everything out.`,
+C:`<b class="s c">So</b> <b class="s k">chemists use symbols</b>, just like we do in math. A chemical formula lists all the elements that form each molecule and uses a small number to the bottom right of an element's symbol to stand for the number of atoms of that element.`,
+note:"* chemical formula: 화학식 ** molecule: 분자",start:"수식을 글자로 다 쓰면 너무 길다",
+chain:[["B",`주어진 글의 말로 쓴 수식을 (B) <em>"28 + 14 = 42."</em>가 곧바로 받고, <em>Chemistry is the same way</em>로 소재를 전환한다`],
+["C",`(B)의 화학 전환을 (C) <em>So chemists use symbols</em>가 이어받아 화학식 표기법을 설명한다`],
+["A",`(C)의 표기법을 (A) <em>For example, ~ H2O</em>가 구체적 예로 보여준다`]]},
+{no:35,src:"2021 고1 6월",ans:5,order:"C - B - A",
+given:`Starting from birth, babies are immediately attracted to faces. Scientists were able to show this by <b class="s k">having babies look at two simple images</b>, one that looks more like a face than the other.`,
+A:`<b class="s d">These changes</b> help the organisms to survive, making them alert to enemies. By being able to recognize faces from afar or in the dark, humans were able to know someone was coming and protect themselves from possible danger.`,
+B:`<b class="s k">One reason</b> babies might like faces is because of something called evolution. Evolution involves <b class="s k">changes</b> to the structures of an organism (such as the brain) that occur over many generations.`,
+C:`<b class="s k">By measuring where the babies looked</b>, scientists found that the babies looked at the face-like image more than they looked at the non-face image. Even though babies have poor eyesight, they prefer to look at faces. <b class="s k">But why?</b>`,
+note:"",start:"아기는 태어날 때부터 얼굴에 끌린다 — 실험 소개",
+chain:[["C",`주어진 글의 실험을 (C) <em>By measuring where the babies looked</em>가 이어받아 결과를 말하고 <em>But why?</em>로 질문을 던진다`],
+["B",`(C)의 질문에 (B) <em>One reason ~ evolution</em>이 답한다 — 질문 → 답 패턴`],
+["A",`(B)의 <em>changes</em>를 (A) <em>These changes</em>가 지시어로 받아 생존 이점을 설명한다`]]},
+{no:36,src:"2021 고1 6월",ans:2,order:"B - A - C",
+given:`People spend much of their time interacting with media, but that does not mean that people <b class="s k">have the critical skills</b> to analyze and understand it.`,
+A:`Research from New York University found that <b class="s k">people over 65</b> shared seven times as much misinformation as their younger counterparts. All of this raises a question: <b class="s k">What's the solution to the misinformation problem?</b>`,
+B:`One well-known study from Stanford University in 2016 demonstrated that <b class="s k">youth are easily fooled</b> by misinformation, especially when it comes through social media channels. <b class="s k">This weakness is not found only in youth</b>, <b class="s c">however</b>.`,
+C:`Governments and tech platforms certainly have a role to play in blocking misinformation. <b class="s c">However</b>, <b class="s k">every individual needs to take responsibility</b> for combating this threat by becoming more information literate.`,
+note:"* counterpart: 상대방",start:"미디어를 많이 쓴다고 비판적으로 분석할 줄 아는 건 아니다",
+chain:[["B",`주어진 글의 주장을 (B)가 스탠퍼드 연구(청년들이 쉽게 속는다)로 뒷받침한다`],
+["A",`(B)의 <em>not found only in youth</em>를 (A) <em>people over 65</em>가 이어받고, 끝에서 해결책을 묻는다`],
+["C",`(A)의 질문 <em>What's the solution?</em>에 (C)가 답한다 — 질문 → 답 패턴`]]},
+{no:37,src:"2021 고1 9월",ans:5,order:"C - B - A",
+given:`Understanding how to develop respect for and a knowledge of other cultures begins with reexamining <b class="s k">the golden rule</b>: "I treat others in the way I want to be treated."`,
+A:`It <b class="s c">can also</b> create <b class="s k">a frustrating situation</b> where we believe we are doing what is right, but what we are doing is not being interpreted in the way in which it was meant. This miscommunication can lead to problems.`,
+B:`In a <b class="s k">multicultural setting</b>, <b class="s c">however</b>, where words, gestures, beliefs, and views may have different meanings, this rule has an <b class="s k">unintended result</b>; it can send a message that my culture is better than yours.`,
+C:`<b class="s d">This rule</b> makes sense on some level; if we treat others as well as we want to be treated, we will be treated well in return. This rule works well in a <b class="s k">monocultural setting</b>, where everyone is working within the same cultural framework.`,
+note:"",start:"황금률 — '내가 대접받고 싶은 대로 남을 대하라'",
+chain:[["C",`주어진 글의 <em>the golden rule</em>을 (C) <em>This rule</em>이 지시어로 받고, 단일 문화에서는 잘 통한다고 말한다`],
+["B",`(C)의 <em>monocultural</em>에 (B) <em>multicultural, however</em>가 대조로 맞선다 — 의도치 않은 결과`],
+["A",`(B)의 첫 번째 부작용에 (A) <em>It can also create</em>가 두 번째 부작용을 추가한다`]]},
+{no:38,src:"2021 고1 9월",ans:4,order:"C - A - B",
+given:`In a study, a researcher pretending to be a volunteer surveyed a California neighborhood, asking residents if they would allow <b class="s k">a large sign</b> reading "Drive Carefully" to be displayed on their front lawns.`,
+A:`<b class="s k">The reason that they agreed</b> was this: two weeks earlier, these residents had been asked by another volunteer to make a small commitment to display <b class="s k">a tiny sign</b> that read "Be a Safe Driver" in their windows.`,
+B:`Since it was <b class="s d">such a small and simple request</b>, nearly all of them agreed. The astonishing result was that the initial small commitment deeply influenced their willingness to accept the much larger request two weeks later.`,
+C:`To help them understand what it would look like, the volunteer showed his participants a picture of <b class="s k">the large sign</b> blocking the view of a beautiful house. Naturally, most people refused, but in one particular group, <b class="s k">an incredible 76 percent actually approved</b>.`,
+note:"",start:"큰 표지판(a large sign)을 마당에 세워달라는 요청",
+chain:[["C",`주어진 글의 <em>a large sign</em>을 (C) <em>the large sign</em>이 관사로 받고, 76%가 수락했다는 놀라운 결과를 던진다`],
+["A",`(C)의 결과를 (A) <em>The reason that they agreed</em>가 설명한다 — 2주 전의 작은 표지판`],
+["B",`(A)의 <em>a tiny sign</em>을 (B) <em>such a small and simple request</em>가 지시어로 받아 결론을 맺는다`]]},
+{no:39,src:"2021 고1 11월",ans:3,order:"B - C - A",
+given:`Roughly twenty years ago, brick-and-mortar stores began to give way to electronic commerce. For good or bad, <b class="s k">the shift</b> fundamentally changed consumers' perception of the shopping experience.`,
+A:`<b class="s c">Before long</b>, the e-commerce book market naturally <b class="s k">expanded to include additional categories</b>, like CDs and DVDs. E-commerce soon snowballed into the enormous industry it is today, where you can buy everything from toilet paper to cars online.`,
+B:`Nowhere was <b class="s k">the shift</b> more obvious than with <b class="s k">book sales</b>, which is how online bookstores got their start. Physical bookstores simply <b class="s k">could not stock as many titles</b> as a virtual bookstore could. There is only so much space available on a shelf.`,
+C:`<b class="s c">In addition to</b> <b class="s k">greater variety</b>, online bookstores were also able to offer aggressive discounts thanks to their lower operating costs. The combination of lower prices and greater selection led to the <b class="s k">slow, steady rise of online bookstores</b>.`,
+note:"* brick-and-mortar: 오프라인 거래의",start:"20년 전, 오프라인 매장이 전자상거래에 자리를 내주기 시작했다",
+chain:[["B",`주어진 글의 <em>the shift</em>를 (B)가 그대로 받아 책 판매라는 구체적 소재로 좁힌다 (G→S)`],
+["C",`(B)의 <em>더 많은 종류를 갖출 수 있다</em>를 (C) <em>In addition to greater variety</em>가 이어받아 가격 이점을 추가한다`],
+["A",`(C)의 온라인 서점 성장 뒤 (A) <em>Before long</em> — 시간이 흘러 다른 품목으로 확장된다`]]},
+{no:40,src:"2021 고1 11월",ans:5,order:"C - B - A",
+given:`Literary works, by their nature, suggest rather than explain; they <b class="s k">imply rather than state their claims boldly and directly</b>.`,
+A:`<b class="s k">What a text implies</b> is often of great interest to us. And our work of figuring out a text's implications tests our analytical powers. In considering what a text suggests, we gain practice in making sense of texts.`,
+B:`<b class="s c">But</b> whatever <b class="s k">the proportion</b> of a work's showing to telling, there is always something for readers to interpret. Thus we ask the question "What does the text suggest?" as a way to <b class="s k">begin thinking about a text's implications</b>.`,
+C:`<b class="s d">This broad generalization</b>, <b class="s c">however</b>, does not mean that works of literature do not include direct statements. Depending on when they were written and by whom, literary works may contain <b class="s k">large amounts of direct telling and lesser amounts of suggestion</b>.`,
+note:"",start:"문학 작품은 설명보다 암시한다 — 일반적 주장",
+chain:[["C",`주어진 글의 주장을 (C) <em>This broad generalization, however</em>가 지시어로 받아 예외가 있다고 단서를 단다`],
+["B",`(C)의 <em>직접 서술과 암시의 비율</em>을 (B) <em>But whatever the proportion</em>이 받아 결국 해석할 거리는 늘 있다고 정리한다`],
+["A",`(B)의 <em>a text's implications</em>를 (A) <em>What a text implies</em>가 이어받아 그 가치를 설명한다`]]},
+{no:41,src:"2022 고1 3월",ans:3,order:"B - C - A",
+given:`Toward the end of the 19th century, a new architectural attitude emerged. Industrial architecture, the argument went, was ugly and inhuman; <b class="s k">past styles had more to do with pretension</b> than what people needed in their homes.`,
+A:`<b class="s c">But</b> <b class="s p">they</b> supplied people's needs perfectly and, at their best, had a beauty that came from the craftsman's skill and the rootedness of the house in its locality.`,
+B:`<b class="s d">Instead of these approaches</b>, why not look at the way <b class="s k">ordinary country builders</b> worked in the past? They developed their craft skills over generations, demonstrating <b class="s k">mastery of both tools and materials</b>.`,
+C:`<b class="s d">Those materials</b> were local, and used with simplicity — <b class="s k">houses built this way had plain wooden floors and whitewashed walls</b> inside.`,
+note:"* pretension: 허세, 가식",start:"19세기 말, 산업 건축과 과거 양식 모두를 비판하는 새 태도",
+chain:[["B",`주어진 글이 비판한 두 방식을 (B) <em>Instead of these approaches</em>가 지시어로 받고 시골 장인을 대안으로 제시한다`],
+["C",`(B)의 <em>mastery of both tools and materials</em>를 (C) <em>Those materials</em>가 지시어로 받는다`],
+["A",`(C)의 소박한 집을 (A) <em>But they supplied people's needs perfectly</em>가 대명사로 받아 그 가치를 평가한다`]]},
+{no:42,src:"2022 고1 3월",ans:2,order:"B - A - C",
+given:`Robert Schumann once said, "The laws of morals are those of art." What the great man is saying here is that there is <b class="s k">good music and bad music</b>.`,
+A:`<b class="s k">It's the same with performances</b>: a bad performance isn't necessarily the result of incompetence. Some of the worst performances occur when <b class="s k">the performers</b>, no matter how accomplished, are thinking more of themselves than of the music they're playing.`,
+B:`<b class="s k">The greatest music</b>, even if it's tragic in nature, takes us to a world higher than ours; somehow the beauty uplifts us. <b class="s k">Bad music</b>, <b class="s c">on the other hand</b>, degrades us.`,
+C:`<b class="s d">These doubtful characters</b> aren't really listening to what the composer is saying — they're just showing off, hoping that they'll have a great 'success' with the public. The performer's basic task is to try to understand the meaning of the music, and then to communicate it honestly to others.`,
+note:"* incompetence: 무능 ** degrade: 격하시키다",start:"좋은 음악과 나쁜 음악이 있다 — 슈만의 말",
+chain:[["B",`주어진 글의 <em>good music and bad music</em>을 (B)가 그대로 나누어 부연한다`],
+["A",`(B)의 음악 이야기를 (A) <em>It's the same with performances</em>가 연주로 전환한다 (B 뒤에 C는 올 수 없다!)`],
+["C",`(A)의 <em>the performers</em>(자기 자랑에 빠진 연주자)를 (C) <em>These doubtful characters</em>가 지시어로 받는다`]]}
+];
+const CHO = ["(A) - (C) - (B)","(B) - (A) - (C)","(B) - (C) - (A)","(C) - (A) - (B)","(C) - (B) - (A)"];
+const CIRC = ["①","②","③","④","⑤"];
+
+/* ================= 문제/정답 슬라이드 생성 ================= */
+const anchor = document.getElementById('probAnchor');
+let html = "";
+P.forEach(q=>{
+  const nn = String(q.no).padStart(2,'0');
+  const ord = {}; q.chain.forEach((c,i)=>ord[c[0]]=i+1); // 단락별 정답 순서
+  html += `
+<section class="slide prob">
+  <div class="top">
+    <span class="chip no">문항 ${nn}</span><span class="chip src">${q.src}</span>
+    <span class="chip">글의 순서</span>
+    <button class="btn tm" data-tm>⏱ 60초</button>
+    <button class="btn sig" data-sig>🔍 단서 전체</button>
+    <span class="legend"><i class="d">지시어</i><i class="c">연결어</i><i class="p">대명사</i><i class="k">재진술</i></span>
+    <span class="sp"></span>
+  </div>
+  <div class="givenbox rv">${q.given}</div>
+  <div class="cols rv">
+    <div class="pcol" data-ord="${ord.A}"><span class="ph">(A)</span><span class="ob"></span><p class="pt">${q.A}</p></div>
+    <div class="pcol" data-ord="${ord.B}"><span class="ph">(B)</span><span class="ob"></span><p class="pt">${q.B}</p></div>
+    <div class="pcol" data-ord="${ord.C}"><span class="ph">(C)</span><span class="ob"></span><p class="pt">${q.C}</p></div>
+  </div>
+  ${q.note?`<p class="vnote">${q.note}</p>`:""}
+  <div class="choices rv">${CHO.map((c,i)=>`<span class="ch">${CIRC[i]} ${c}</span>`).join("")}</div>
+  <i class="rv mk" data-clue="0"></i><i class="rv mk" data-clue="1"></i><i class="rv mk" data-clue="2"></i><i class="rv mk" data-clue="3"></i>
+</section>
+<section class="slide ansS">
+  <div class="top">
+    <span class="chip no">문항 ${nn}</span><span class="chip src">${q.src}</span>
+    <span class="chip" style="color:var(--pk)">정답 & 근거 체인</span><span class="sp"></span>
+  </div>
+  <div class="chain">
+    <div class="crow st0"><span class="lab">주어진 글</span><p class="why">${q.start}</p></div>
+    ${q.chain.map((c,i)=>`
+    <div class="crow rv"><span class="lab">${CIRC[i]}번째 단락</span><span class="pill ${c[0]}">${c[0]}</span><p class="why">${c[1]}</p></div>`).join("")}
+  </div>
+  <div class="ansrow rv">
+    <div class="ansbadge"><span class="t">정답</span><span class="o">${CIRC[q.ans-1]}&ensp;${q.order}</span></div>
+  </div>
+  <div class="wnote rv">✍️ <b>필기 타임</b> — 위 ①②③ 근거 문장을 교재 ${nn}번 옆 여백에 그대로 옮겨 적기</div>
+</section>`;
+});
+anchor.outerHTML = html;
+
+/* ================= 내비게이션 ================= */
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+const pbar=document.getElementById('pbar'),pnum=document.getElementById('pnum');
+
+function paint(){
+  pbar.style.width=((cur+1)/slides.length*100)+'%';
+  pnum.textContent=(cur+1)+' / '+slides.length;
+}
+function revs(s){return [...s.querySelectorAll('.rv')];}
+function syncClues(s){
+  s.querySelectorAll('.mk').forEach(m=>
+    s.classList.toggle('c'+m.dataset.clue, m.classList.contains('on')));
+}
+function show(i,fromBack){
+  slides[cur].classList.remove('active');
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  const s=slides[cur];
+  s.classList.add('active');
+  revs(s).forEach(r=>r.classList.toggle('on',!!fromBack));
+  syncClues(s);
+  paint();
+}
+function next(){
+  const s=slides[cur],rs=revs(s),hid=rs.find(r=>!r.classList.contains('on'));
+  if(hid){hid.classList.add('on');syncClues(s);return;}
+  if(cur<slides.length-1)show(cur+1,false);
+}
+function prev(){
+  const s=slides[cur],rs=revs(s),on=[...rs].reverse().find(r=>r.classList.contains('on'));
+  if(on){on.classList.remove('on');syncClues(s);return;}
+  if(cur>0)show(cur-1,true);
+}
+document.getElementById('zNext').addEventListener('click',next);
+document.getElementById('zPrev').addEventListener('click',prev);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next();}
+  else if(e.key==='ArrowLeft'){e.preventDefault();prev();}
+  else if(e.key==='f'||e.key==='F'){toggleFS();}
+});
+/* 리플 */
+document.addEventListener('pointerdown',e=>{
+  const r=document.createElement('div');r.className='ripple';
+  r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';
+  document.body.appendChild(r);setTimeout(()=>r.remove(),600);
+});
+/* 단서 전체 켜기/끄기 (마스터) — 복습·되감기용, 평소엔 탭으로 하나씩 */
+document.querySelectorAll('[data-sig]').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.stopPropagation();
+    const s=b.closest('.slide'),mks=[...s.querySelectorAll('.mk')];
+    const allOn=mks.every(m=>m.classList.contains('on'));
+    mks.forEach(m=>m.classList.toggle('on',!allOn));
+    syncClues(s);
+    b.classList.toggle('onn',!allOn);
+  });
+});
+/* 타이머 */
+document.querySelectorAll('[data-tm]').forEach(b=>{
+  let t=null,left=60;
+  const draw=()=>b.textContent='⏱ '+left+'초';
+  b.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(t){clearInterval(t);t=null;left=60;b.classList.remove('run','zero');b.textContent='⏱ 60초';return;}
+    left=60;b.classList.add('run');b.classList.remove('zero');draw();
+    t=setInterval(()=>{
+      left--;draw();
+      if(left<=0){clearInterval(t);t=null;b.classList.remove('run');b.classList.add('zero');b.textContent='⏱ 종료!';}
+    },1000);
+  });
+});
+/* 전체화면 */
+function toggleFS(){
+  if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
+}
+function goFS(e){e.stopPropagation();toggleFS();}
+window.goFS=goFS;
+/* 문단 넘침 자동 축소 */
+function fit(){
+  const s=slides[cur];
+  s.querySelectorAll('.pcol').forEach(col=>{
+    const p=col.querySelector('.pt');if(!p)return;
+    p.style.fontSize='';let f=100,guard=0;
+    while(col.scrollHeight>col.clientHeight+2&&f>68&&guard<20){
+      f-=4;p.style.fontSize=(1.5*f/100)+'vw';guard++;
+    }
+  });
+}
+const obs=new MutationObserver(()=>fit());
+slides.forEach(s=>obs.observe(s,{attributes:true,attributeFilter:['class']}));
+window.addEventListener('resize',fit);
+paint();fit();
+</script>
+</body>
+</html>
