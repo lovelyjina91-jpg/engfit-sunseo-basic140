@@ -177,6 +177,42 @@ b.s{font-weight:600;color:inherit;border-radius:.35vw;transition:all .4s}
 .hwrow p{font-size:2.15vw;font-weight:700;line-height:1.4}
 .hwrow p b{color:var(--gold)}
 .nextp{margin-top:3.4vh;font-size:2.1vw;font-weight:800;color:var(--pu)}
+
+/* ========== 개념 확장 슬라이드 ========== */
+.cpt .top .chip.cx{background:var(--sky);color:#fff;border:none;font-weight:800}
+.cpt h2.ch{font-size:3.1vw;font-weight:900;margin:.4vh 0 2vh;letter-spacing:-.01em}
+.cpt h2.ch .acc{color:var(--sky)}
+.cpt h2.ch small{font-size:1.6vw;font-weight:700;color:var(--tx2);margin-left:1vw}
+.cbody{display:flex;gap:1.8vw;flex:1;min-height:0;align-items:stretch}
+.cleft{flex:1.05;display:flex;flex-direction:column;gap:1.4vh;min-width:0;overflow:hidden;font-size:1.06vw}
+.cright{flex:1;display:flex;align-items:center;justify-content:center;min-width:0}
+.cright svg{width:100%;height:auto;max-height:56vh}
+.cleft{overflow:visible}
+.cdef{background:var(--card);border:1px solid var(--line);border-radius:1vw;
+  box-shadow:var(--sh);padding:1.6vh 1.5vw;border-left:.45vw solid var(--sky)}
+.cdef.pk{border-left-color:var(--pk)}.cdef.gd{border-left-color:var(--goldbg)}
+.cdef.pu{border-left-color:var(--pu)}
+.cdef h4{font-size:1.9em;font-weight:900;color:var(--sky);margin-bottom:.7vh}
+.cdef.pk h4{color:var(--pk)}.cdef.gd h4{color:var(--gold)}.cdef.pu h4{color:var(--pu)}
+.cdef h4 em{font-style:normal;font-size:1.4vw;color:var(--tx2);margin-left:.6vw;font-weight:700}
+.cdef p{font-size:1.62em;font-weight:600;line-height:1.5;color:var(--tx2)}
+.cdef p b{color:var(--tx);font-weight:800}
+.cex{background:var(--sk-t);border:1px dashed var(--sky);border-radius:.9vw;
+  padding:1.5vh 1.5vw}
+.cex .q{font-size:1.62em;font-weight:800;color:var(--sky);margin-bottom:1vh}
+.cex ul{list-style:none;display:flex;flex-direction:column;gap:.7vh}
+.cex li{font-size:1.5em;font-weight:700;color:var(--tx);display:flex;gap:.7vw;align-items:baseline}
+.cex li i{font-style:normal;font-size:1.25vw;font-weight:900;color:#fff;background:var(--sky);
+  border-radius:.4vw;padding:.15vh .6vw;flex:none}
+.cex li i.pk{background:var(--pk)}.cex li i.gd{background:var(--goldbg);color:#1A2035}
+.ctie{margin-top:1.4vh;font-size:1.68em;font-weight:800;color:var(--tx2);
+  background:var(--card);border:1px solid var(--line);border-left:.45vw solid var(--goldbg);
+  border-radius:.9vw;box-shadow:var(--sh);padding:1.4vh 1.5vw}
+.ctie b{color:var(--gold)}
+.ctie .np{color:var(--pk)}
+/* SVG 공통 텍스트 */
+.sv-t{font-family:'Pretendard',sans-serif;font-weight:800}
+
 /* ---------- 내비게이션/진행 ---------- */
 .zone{position:fixed;top:0;bottom:0;width:25vw;z-index:50}
 #zPrev{left:0}#zNext{right:0}
@@ -441,12 +477,278 @@ chain:[["B",`주어진 글의 <em>good music and bad music</em>을 (B)가 그대
 const CHO = ["(A) - (C) - (B)","(B) - (A) - (C)","(B) - (C) - (A)","(C) - (A) - (B)","(C) - (B) - (A)"];
 const CIRC = ["①","②","③","④","⑤"];
 
+const CPT = {
+32: [`
+  <h2 class="ch">개념 먼저 — <span class="acc">독립변수 · 종속변수</span><small>32번을 읽기 전에</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="cdef pk rv"><h4>독립변수 <em>independent variable</em></h4>
+        <p><b>내가 일부러 바꾸는 것</b> = 원인.<br>누구 눈치도 안 보고 내 맘대로 정할 수 있어서 <b>'독립'</b>이다.</p></div>
+      <div class="cdef rv"><h4>종속변수 <em>dependent variable</em></h4>
+        <p><b>그 결과로 따라서 변하는 것</b> = 결과.<br><b>'종속'</b>이라는 말이 힌트 — 독립변수에 <b>의존해서</b> 값이 정해지니까.</p></div>
+      <div class="cex rv">
+        <p class="q">예시 — "수면 시간이 시험 점수에 영향을 주는가?"</p>
+        <ul>
+          <li><i class="pk">독립</i>수면 시간 &nbsp;— 내가 조절하는 것</li>
+          <li><i>종속</i>시험 점수 &nbsp;— 그 결과로 나오는 값</li>
+          <li><i class="gd">통제</i>문제 난이도 · 시험 시간 &nbsp;— 똑같이 맞춰야 할 나머지</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cright rv">
+      <svg viewBox="0 0 420 330" xmlns="http://www.w3.org/2000/svg">
+        <!-- 독립변수 다이얼 -->
+        <text x="88" y="26" text-anchor="middle" class="sv-t" font-size="17" fill="#C22870">독립변수</text>
+        <text x="88" y="46" text-anchor="middle" class="sv-t" font-size="13" fill="#565D74">내가 돌린다</text>
+        <circle cx="88" cy="112" r="46" fill="#FDEAF4" stroke="#C22870" stroke-width="3"/>
+        <circle cx="88" cy="112" r="7" fill="#C22870"/>
+        <line x1="88" y1="112" x2="118" y2="80" stroke="#C22870" stroke-width="6" stroke-linecap="round"/>
+        <path d="M52 140 A46 46 0 0 1 52 84" fill="none" stroke="#C22870" stroke-width="2.5" stroke-dasharray="4 5"/>
+        <text x="88" y="180" text-anchor="middle" class="sv-t" font-size="14" fill="#1A2035">수면 시간</text>
+        <!-- 화살표 -->
+        <line x1="146" y1="112" x2="238" y2="112" stroke="#5B3FA8" stroke-width="4"/>
+        <polygon points="252,112 236,104 236,120" fill="#5B3FA8"/>
+        <text x="196" y="100" text-anchor="middle" class="sv-t" font-size="14" fill="#5B3FA8">영향</text>
+        <!-- 종속변수 게이지 -->
+        <text x="330" y="26" text-anchor="middle" class="sv-t" font-size="17" fill="#1B7099">종속변수</text>
+        <text x="330" y="46" text-anchor="middle" class="sv-t" font-size="13" fill="#565D74">따라서 변한다</text>
+        <rect x="272" y="66" width="116" height="92" rx="9" fill="#DBF0FB" stroke="#1B7099" stroke-width="3"/>
+        <rect x="286" y="126" width="18" height="22" rx="3" fill="#1B7099"/>
+        <rect x="312" y="106" width="18" height="42" rx="3" fill="#1B7099"/>
+        <rect x="338" y="84" width="18" height="64" rx="3" fill="#1B7099"/>
+        <text x="330" y="180" text-anchor="middle" class="sv-t" font-size="14" fill="#1A2035">시험 점수</text>
+        <!-- 통제변수 받침 -->
+        <rect x="40" y="216" width="340" height="70" rx="11" fill="#FFF4DD" stroke="#9C6200" stroke-width="2.5" stroke-dasharray="7 5"/>
+        <text x="210" y="245" text-anchor="middle" class="sv-t" font-size="15" fill="#9C6200">통제변수 — 똑같이 고정</text>
+        <text x="210" y="270" text-anchor="middle" class="sv-t" font-size="14" fill="#1A2035">문제 난이도 · 시험 시간 · 시험 장소</text>
+        <line x1="88" y1="192" x2="88" y2="214" stroke="#9C6200" stroke-width="2.5" stroke-dasharray="4 4"/>
+        <line x1="330" y1="192" x2="330" y2="214" stroke="#9C6200" stroke-width="2.5" stroke-dasharray="4 4"/>
+        <text x="210" y="316" text-anchor="middle" class="sv-t" font-size="14" fill="#565D74">나머지를 고정해야 원인을 말할 수 있다</text>
+      </svg>
+    </div>
+  </div>`, `
+  <h2 class="ch">개념 먼저 — <span class="acc">허위 관계</span> <small>spurious relationship · 32번 지문의 핵심</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="cdef pu rv"><h4>보이는 관계</h4>
+        <p>신발이 커질수록 독해력이 올라간다.<br>실제로 <b>두 수치는 나란히 움직인다.</b></p></div>
+      <div class="cdef pk rv"><h4>그런데 인과일까?</h4>
+        <p>발이 커져서 글을 잘 읽게 되는 건 아니다.<br>발을 늘려도 독해력은 그대로다.</p></div>
+      <div class="cdef gd rv"><h4>진짜 원인 — 제3의 변수</h4>
+        <p><b>나이</b>가 신발 크기도 키우고 독해력도 키운다.<br>둘은 <b>같은 원인의 두 결과</b>일 뿐 — 이것이 <b>허위 관계</b>다.</p></div>
+      <div class="ctie rv">그래서 연구자는 <b>다른 변수를 통제(rule out)</b>해야만 인과를 주장할 수 있다 —
+        <span class="np">이 결론이 (B)의 Hence 문장</span>이다.</div>
+    </div>
+    <div class="cright rv">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- 나이 -->
+        <ellipse cx="200" cy="52" rx="74" ry="34" fill="#FFF4DD" stroke="#9C6200" stroke-width="3"/>
+        <text x="200" y="48" text-anchor="middle" class="sv-t" font-size="19" fill="#9C6200">나이</text>
+        <text x="200" y="68" text-anchor="middle" class="sv-t" font-size="12" fill="#565D74">숨은 제3의 변수</text>
+        <!-- 실제 인과 화살표 -->
+        <line x1="150" y1="80" x2="92" y2="140" stroke="#9C6200" stroke-width="4"/>
+        <polygon points="82,150 96,132 100,146" fill="#9C6200"/>
+        <line x1="250" y1="80" x2="308" y2="140" stroke="#9C6200" stroke-width="4"/>
+        <polygon points="318,150 300,146 304,132" fill="#9C6200"/>
+        <text x="96" y="112" text-anchor="middle" class="sv-t" font-size="13" fill="#9C6200">진짜 원인</text>
+        <text x="306" y="112" text-anchor="middle" class="sv-t" font-size="13" fill="#9C6200">진짜 원인</text>
+        <!-- 두 결과 -->
+        <rect x="14" y="152" width="140" height="62" rx="10" fill="#EDE7FF" stroke="#5B3FA8" stroke-width="3"/>
+        <text x="84" y="180" text-anchor="middle" class="sv-t" font-size="16" fill="#5B3FA8">신발 크기</text>
+        <text x="84" y="200" text-anchor="middle" class="sv-t" font-size="12" fill="#565D74">독립변수처럼 보임</text>
+        <rect x="246" y="152" width="140" height="62" rx="10" fill="#DBF0FB" stroke="#1B7099" stroke-width="3"/>
+        <text x="316" y="180" text-anchor="middle" class="sv-t" font-size="16" fill="#1B7099">독해력</text>
+        <text x="316" y="200" text-anchor="middle" class="sv-t" font-size="12" fill="#565D74">종속변수처럼 보임</text>
+        <!-- 허위 관계 (끊긴 화살표) -->
+        <line x1="158" y1="183" x2="188" y2="183" stroke="#C22870" stroke-width="4"/>
+        <line x1="212" y1="183" x2="242" y2="183" stroke="#C22870" stroke-width="4"/>
+        <line x1="186" y1="167" x2="214" y2="199" stroke="#C22870" stroke-width="5" stroke-linecap="round"/>
+        <line x1="214" y1="167" x2="186" y2="199" stroke="#C22870" stroke-width="5" stroke-linecap="round"/>
+        <text x="200" y="238" text-anchor="middle" class="sv-t" font-size="15" fill="#C22870">인과관계 아님</text>
+        <!-- 결론 -->
+        <rect x="30" y="264" width="340" height="56" rx="10" fill="#FFFFFF" stroke="#D9DCE6" stroke-width="2"/>
+        <text x="200" y="288" text-anchor="middle" class="sv-t" font-size="15" fill="#1A2035">둘은 원인과 결과가 아니라</text>
+        <text x="200" y="309" text-anchor="middle" class="sv-t" font-size="15" fill="#9C6200">같은 원인이 만든 두 개의 결과</text>
+      </svg>
+    </div>
+  </div>`],
+40: [`
+  <h2 class="ch">개념 먼저 — <span class="acc">Telling vs Showing</span><small>40번 문학 지문의 전제</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="cdef pu rv"><h4>Telling <em>직접 말하기</em></h4>
+        <p>영화에서 배우가 대사로 <b>"나 슬퍼"</b>라고 말해 버리는 것.<br>친절하지만 상상할 여지가 없다.</p></div>
+      <div class="cdef pk rv"><h4>Showing <em>보여주기 · 암시</em></h4>
+        <p>비를 맞으며 혼자 걷는 뒷모습만 보여주는 것.<br>슬프다는 말은 한 번도 안 나오지만 <b>우리는 안다.</b></p></div>
+      <div class="cex rv">
+        <p class="q">그렇다고 직접 설명이 아예 없다는 뜻은 아니다</p>
+        <ul>
+          <li><i class="gd">주의</i>작가와 시대에 따라 <b>telling이 더 많은 작품</b>도 있다</li>
+          <li><i>결론</i>비율이 어떻든 <b>해석할 거리는 언제나 남는다</b></li>
+        </ul>
+      </div>
+      <div class="ctie rv">그래서 (C)의 <b>however</b>가 "암시만 한다"는 일반화에 단서를 달고,
+        <span class="np">(B)가 "비율이 어떻든"으로 정리</span>하는 것이다.</div>
+    </div>
+    <div class="cright rv">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- Telling 패널 -->
+        <rect x="12" y="14" width="176" height="150" rx="12" fill="#FFFFFF" stroke="#5B3FA8" stroke-width="3"/>
+        <text x="100" y="40" text-anchor="middle" class="sv-t" font-size="17" fill="#5B3FA8">TELLING</text>
+        <circle cx="72" cy="92" r="19" fill="none" stroke="#1A2035" stroke-width="3"/>
+        <path d="M53 132 q19 -22 38 0" fill="none" stroke="#1A2035" stroke-width="3"/>
+        <path d="M104 74 h68 a8 8 0 0 1 8 8 v24 a8 8 0 0 1 -8 8 h-52 l-12 12 v-12 a8 8 0 0 1 -4 -8 v-24 a8 8 0 0 1 0 -8z"
+              fill="#EDE7FF" stroke="#5B3FA8" stroke-width="2.5"/>
+        <text x="142" y="98" text-anchor="middle" class="sv-t" font-size="14" fill="#5B3FA8">"나 슬퍼"</text>
+        <text x="100" y="155" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">말로 다 알려준다</text>
+        <!-- Showing 패널 -->
+        <rect x="212" y="14" width="176" height="150" rx="12" fill="#FFFFFF" stroke="#C22870" stroke-width="3"/>
+        <text x="300" y="40" text-anchor="middle" class="sv-t" font-size="17" fill="#C22870">SHOWING</text>
+        <g stroke="#1B7099" stroke-width="2.5" stroke-linecap="round">
+          <line x1="240" y1="56" x2="234" y2="70"/><line x1="262" y1="52" x2="256" y2="66"/>
+          <line x1="286" y1="56" x2="280" y2="70"/><line x1="310" y1="52" x2="304" y2="66"/>
+          <line x1="334" y1="56" x2="328" y2="70"/><line x1="356" y1="60" x2="350" y2="74"/>
+          <line x1="248" y1="82" x2="242" y2="96"/><line x1="296" y1="80" x2="290" y2="94"/>
+          <line x1="344" y1="84" x2="338" y2="98"/>
+        </g>
+        <circle cx="300" cy="106" r="15" fill="none" stroke="#1A2035" stroke-width="3"/>
+        <path d="M285 140 q15 -20 30 0" fill="none" stroke="#1A2035" stroke-width="3"/>
+        <text x="300" y="155" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">보여주기만 한다</text>
+        <!-- 비율 바 -->
+        <text x="200" y="200" text-anchor="middle" class="sv-t" font-size="15" fill="#1A2035">작품마다 이 비율이 다르다</text>
+        <rect x="24" y="214" width="352" height="34" rx="17" fill="#FDEAF4" stroke="#C22870" stroke-width="2.5"/>
+        <path d="M41 214 h123 v34 h-123 a17 17 0 0 1 0 -34z" fill="#EDE7FF"/>
+        <line x1="164" y1="214" x2="164" y2="248" stroke="#5B3FA8" stroke-width="3"/>
+        <text x="100" y="237" text-anchor="middle" class="sv-t" font-size="14" fill="#5B3FA8">telling</text>
+        <text x="272" y="237" text-anchor="middle" class="sv-t" font-size="14" fill="#C22870">showing</text>
+        <text x="24" y="270" class="sv-t" font-size="12" fill="#565D74">설명이 많은 작품</text>
+        <text x="376" y="270" text-anchor="end" class="sv-t" font-size="12" fill="#565D74">암시가 많은 작품</text>
+        <!-- 결론 띠 -->
+        <rect x="24" y="286" width="352" height="42" rx="10" fill="#FFF4DD" stroke="#9C6200" stroke-width="2.5"/>
+        <text x="200" y="313" text-anchor="middle" class="sv-t" font-size="15" fill="#9C6200">어느 쪽이든, 읽는 사람이 해석할 몫은 남는다</text>
+      </svg>
+    </div>
+  </div>`],
+41: [`
+  <h2 class="ch">개념 먼저 — <span class="acc">19세기 말 건축 논쟁</span><small>41번이 비판하는 두 가지</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="cdef pu rv"><h4>① 산업 건축 <em>ugly &amp; inhuman</em></h4>
+        <p>공장에서 <b>대량 생산된 똑같은 벽돌</b>을 반듯하게 쌓아 올린 건물.<br>차가운 금속 골조 — 사람이 아니라 <b>기계를 위한 공간</b> 같다.</p></div>
+      <div class="cdef pk rv"><h4>② 과거 양식 <em>pretension</em></h4>
+        <p>신전 흉내를 낸 기둥, 장식을 위한 장식.<br>사는 사람의 필요가 아니라 <b>있어 보이려는 허세</b>다.</p></div>
+      <div class="cdef gd rv"><h4>대안 — 시골 장인 <em>craftsmanship</em></h4>
+        <p>대대로 이어온 손기술, <b>그 지역에서 난 재료</b>, 소박한 나무 바닥.<br>화려하지 않지만 <b>필요를 완벽하게 채운다.</b></p></div>
+      <div class="ctie rv">(A)의 <b>But they supplied people's needs perfectly</b> →
+        <span class="np">"소박해서 아름답다"</span>는 반전.</div>
+    </div>
+    <div class="cright rv">
+      <svg viewBox="0 0 400 330" xmlns="http://www.w3.org/2000/svg">
+        <!-- 좌: 산업 건축 -->
+        <text x="100" y="24" text-anchor="middle" class="sv-t" font-size="15" fill="#5B3FA8">산업 건축 · 획일</text>
+        <rect x="34" y="36" width="132" height="176" fill="#F1F3F8" stroke="#5B3FA8" stroke-width="3"/>
+        <g fill="#FFFFFF" stroke="#5B3FA8" stroke-width="2">
+          <rect x="48" y="52" width="30" height="30"/><rect x="86" y="52" width="30" height="30"/><rect x="124" y="52" width="30" height="30"/>
+          <rect x="48" y="92" width="30" height="30"/><rect x="86" y="92" width="30" height="30"/><rect x="124" y="92" width="30" height="30"/>
+          <rect x="48" y="132" width="30" height="30"/><rect x="86" y="132" width="30" height="30"/><rect x="124" y="132" width="30" height="30"/>
+          <rect x="48" y="172" width="30" height="26"/><rect x="86" y="172" width="30" height="26"/><rect x="124" y="172" width="30" height="26"/>
+        </g>
+        <text x="100" y="232" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">같은 창, 같은 벽돌</text>
+        <text x="100" y="250" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">기계가 찍어낸 반복</text>
+        <!-- 우: 장인의 집 -->
+        <text x="300" y="24" text-anchor="middle" class="sv-t" font-size="15" fill="#9C6200">시골 장인 · 소박</text>
+        <polygon points="300,44 372,96 228,96" fill="#FFF4DD" stroke="#9C6200" stroke-width="3"/>
+        <rect x="240" y="96" width="120" height="116" fill="#FFFFFF" stroke="#9C6200" stroke-width="3"/>
+        <rect x="256" y="118" width="34" height="34" fill="#FFF4DD" stroke="#9C6200" stroke-width="2"/>
+        <line x1="273" y1="118" x2="273" y2="152" stroke="#9C6200" stroke-width="2"/>
+        <line x1="256" y1="135" x2="290" y2="135" stroke="#9C6200" stroke-width="2"/>
+        <rect x="312" y="118" width="34" height="34" fill="#FFF4DD" stroke="#9C6200" stroke-width="2"/>
+        <line x1="329" y1="118" x2="329" y2="152" stroke="#9C6200" stroke-width="2"/>
+        <line x1="312" y1="135" x2="346" y2="135" stroke="#9C6200" stroke-width="2"/>
+        <rect x="284" y="168" width="32" height="44" fill="#F5A100" opacity=".45" stroke="#9C6200" stroke-width="2"/>
+        <g stroke="#9C6200" stroke-width="1.6" opacity=".7">
+          <line x1="240" y1="196" x2="360" y2="196"/><line x1="240" y1="204" x2="360" y2="204"/>
+        </g>
+        <text x="300" y="232" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">지역의 나무와 흙</text>
+        <text x="300" y="250" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">손으로 만든 흔적</text>
+        <!-- 하단 대비 띠 -->
+        <rect x="20" y="268" width="360" height="50" rx="10" fill="#FFFFFF" stroke="#D9DCE6" stroke-width="2"/>
+        <text x="112" y="290" text-anchor="middle" class="sv-t" font-size="14" fill="#5B3FA8">겉은 그럴듯</text>
+        <text x="112" y="309" text-anchor="middle" class="sv-t" font-size="13" fill="#565D74">사람의 필요와 무관</text>
+        <line x1="200" y1="276" x2="200" y2="310" stroke="#D9DCE6" stroke-width="2"/>
+        <text x="290" y="290" text-anchor="middle" class="sv-t" font-size="14" fill="#9C6200">겉은 소박</text>
+        <text x="290" y="309" text-anchor="middle" class="sv-t" font-size="13" fill="#565D74">필요를 완벽히 채움</text>
+      </svg>
+    </div>
+  </div>`],
+42: [`
+  <h2 class="ch">개념 먼저 — <span class="acc">"도덕의 법칙이 예술의 법칙이다"</span><small>42번 슈만의 말 풀이</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="cdef pu rv"><h4>문장 그대로</h4>
+        <p><b>The laws of morals are those of art.</b><br>→ 도덕의 법칙이 <b>곧</b> 예술의 법칙이다. (those = the laws)</p></div>
+      <div class="cdef pk rv"><h4>진짜 의미</h4>
+        <p>도덕에 <b>옳고 그름을 가르는 분명한 기준</b>이 있듯이,<br>음악에도 <b>좋은 음악과 나쁜 음악을 가르는 기준</b>이 똑같이 존재한다는 뜻.</p></div>
+      <div class="cex rv">
+        <p class="q">그래서 지문은 이렇게 나눈다</p>
+        <ul>
+          <li><i>좋은 음악</i>비극적이어도 우리를 <b>더 높은 곳으로 끌어올린다</b> (uplift)</li>
+          <li><i class="pk">나쁜 음악</i>우리를 <b>격하시킨다</b> (degrade)</li>
+        </ul>
+      </div>
+      <div class="ctie rv">"취향 차이일 뿐"이 아니라 <b>기준이 있다</b>는 주장 —
+        <span class="np">그래서 (A)에서 연주에도 같은 잣대</span>를 들이댄다.</div>
+    </div>
+    <div class="cright rv">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- 저울 -->
+        <text x="118" y="26" text-anchor="middle" class="sv-t" font-size="16" fill="#5B3FA8">도덕</text>
+        <text x="282" y="26" text-anchor="middle" class="sv-t" font-size="16" fill="#C22870">예술</text>
+        <text x="200" y="26" text-anchor="middle" class="sv-t" font-size="18" fill="#9C6200">=</text>
+        <rect x="30" y="40" width="176" height="52" rx="10" fill="#EDE7FF" stroke="#5B3FA8" stroke-width="2.5"/>
+        <text x="118" y="63" text-anchor="middle" class="sv-t" font-size="14" fill="#5B3FA8">선 &nbsp;|&nbsp; 악</text>
+        <text x="118" y="83" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">가르는 기준이 있다</text>
+        <rect x="230" y="40" width="140" height="52" rx="10" fill="#FDEAF4" stroke="#C22870" stroke-width="2.5"/>
+        <text x="300" y="63" text-anchor="middle" class="sv-t" font-size="14" fill="#C22870">좋은 음악 | 나쁜 음악</text>
+        <text x="300" y="83" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">기준이 똑같이 있다</text>
+        <!-- 위/아래 화살표 -->
+        <line x1="140" y1="112" x2="140" y2="176" stroke="#1B7099" stroke-width="5"/>
+        <polygon points="140,104 130,122 150,122" fill="#1B7099"/>
+        <text x="140" y="196" text-anchor="middle" class="sv-t" font-size="15" fill="#1B7099">좋은 음악</text>
+        <text x="140" y="215" text-anchor="middle" class="sv-t" font-size="13" fill="#565D74">uplift · 끌어올림</text>
+        <line x1="262" y1="112" x2="262" y2="176" stroke="#C22870" stroke-width="5"/>
+        <polygon points="262,184 252,166 272,166" fill="#C22870"/>
+        <text x="262" y="204" text-anchor="middle" class="sv-t" font-size="15" fill="#C22870">나쁜 음악</text>
+        <text x="262" y="223" text-anchor="middle" class="sv-t" font-size="13" fill="#565D74">degrade · 격하시킴</text>
+        <!-- 사람 기준선 -->
+        <line x1="40" y1="146" x2="360" y2="146" stroke="#D9DCE6" stroke-width="2.5" stroke-dasharray="7 6"/>
+        <text x="362" y="141" text-anchor="end" class="sv-t" font-size="11.5" fill="#8A93A6">우리가 선 자리</text>
+        <!-- 연주 확장 -->
+        <rect x="24" y="248" width="352" height="72" rx="11" fill="#FFF4DD" stroke="#9C6200" stroke-width="2.5"/>
+        <text x="200" y="274" text-anchor="middle" class="sv-t" font-size="15" fill="#9C6200">연주에도 같은 기준</text>
+        <text x="200" y="297" text-anchor="middle" class="sv-t" font-size="13.5" fill="#1A2035">음악보다 자기를 앞세우면 &nbsp;→&nbsp; 나쁜 연주</text>
+        <text x="200" y="314" text-anchor="middle" class="sv-t" font-size="13.5" fill="#1A2035">작곡가의 뜻을 정직하게 전하면 &nbsp;→&nbsp; 좋은 연주</text>
+      </svg>
+    </div>
+  </div>`]
+};
+
 /* ================= 문제/정답 슬라이드 생성 ================= */
 const anchor = document.getElementById('probAnchor');
 let html = "";
 P.forEach(q=>{
   const nn = String(q.no).padStart(2,'0');
   const ord = {}; q.chain.forEach((c,i)=>ord[c[0]]=i+1); // 단락별 정답 순서
+  (CPT[q.no]||[]).forEach((c,ci)=>{
+    html += `
+<section class="slide cpt">
+  <div class="top">
+    <span class="chip no">문항 ${nn}</span>
+    <span class="chip cx">개념 확장${(CPT[q.no].length>1)?" "+(ci+1)+"/"+CPT[q.no].length:""}</span>
+    <span class="sp"></span>
+  </div>${c}
+</section>`;
+  });
   html += `
 <section class="slide prob">
   <div class="top">
@@ -573,6 +875,14 @@ function fit(){
       f-=4;p.style.fontSize=(1.5*f/100)+'vw';guard++;
     }
   });
+  /* 개념 슬라이드 좌측 칼럼 넘침 방지 */
+  const cl=s.querySelector('.cpt .cleft')||(s.classList.contains('cpt')?s.querySelector('.cleft'):null);
+  if(cl){
+    cl.style.fontSize='';let g=100,gd=0;
+    while(cl.scrollHeight>cl.clientHeight+2&&g>72&&gd<20){
+      g-=4;cl.style.fontSize=g+'%';gd++;
+    }
+  }
 }
 const obs=new MutationObserver(()=>fit());
 slides.forEach(s=>obs.observe(s,{attributes:true,attributeFilter:['class']}));
