@@ -1,0 +1,316 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>44번 완성 세트 — 배경지식 · 문제 · 정답</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --navy:#1B2970; --gold:#9C6200; --goldbg:#F5A100;
+  --pu:#5B3FA8; --pk:#C22870; --sky:#1B7099;
+  --bg:#F7F8FA; --bg2:#FFFFFF; --card:#FFFFFF;
+  --tx:#1A2035; --tx2:#565D74; --line:#D9DCE6;
+  --pu-t:#EDE7FF; --pk-t:#FDEAF4; --gd-t:#FFF4DD; --sk-t:#DBF0FB;
+  --sh:0 .35vh 1.4vh rgba(27,32,53,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);
+  font-family:'Pretendard',-apple-system,sans-serif;color:var(--tx);
+  word-break:keep-all;user-select:none}
+.slide{position:absolute;inset:0;padding:2.6vh 3.4vw 3.2vh;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transition:opacity .5s ease;background:var(--bg);overflow:hidden}
+.slide.active{opacity:1;visibility:visible;z-index:2}
+.top{display:flex;align-items:center;gap:.9vw;margin-bottom:1.4vh;flex:none;position:relative;z-index:5}
+.chip{font-size:1.35vw;font-weight:700;padding:.55vh 1vw;border-radius:.6vw;
+  background:var(--bg2);color:var(--tx2);border:1px solid var(--line)}
+.chip.no{background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff;border:none;font-size:1.5vw}
+.chip.src{color:var(--sky)}
+.chip.cx{background:var(--sky);color:#fff;border:none;font-weight:800}
+.top .sp{flex:1}
+.nb{white-space:nowrap}
+
+/* 상단 테마 띠 */
+.band{position:absolute;left:0;right:0;top:0;height:8.5vh;overflow:hidden;z-index:1}
+.band svg{width:100%;height:100%}
+.slide.hasband{padding-top:10.6vh}
+
+/* 문제 */
+.givenbox{background:var(--card);border:1px solid var(--line);border-left:.5vw solid var(--pu);
+  border-radius:.9vw;box-shadow:var(--sh);padding:1.7vh 1.6vw;font-size:1.86vw;
+  line-height:1.5;font-weight:500;flex:none;position:relative;z-index:5}
+.cols{display:flex;gap:1.3vw;margin-top:1.5vh;flex:none;align-items:flex-start;position:relative;z-index:5}
+.pcol{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:1vw;
+  box-shadow:var(--sh);padding:1.5vh 1.2vw;overflow:hidden}
+.pcol .ph{display:inline-block;font-size:1.45vw;font-weight:900;color:#fff;
+  padding:.3vh 1vw;border-radius:.55vw;margin-bottom:1vh}
+.pcol:nth-child(1) .ph{background:#6250C9}
+.pcol:nth-child(2) .ph{background:#B93D79}
+.pcol:nth-child(3) .ph{background:#8A6503}
+.pcol .pt{font-size:1.44vw;line-height:1.45;font-weight:500;color:var(--tx)}
+.spacer{flex:1;min-height:0}
+.choices{display:flex;gap:.9vw;flex:none;position:relative;z-index:5}
+.ch{font-size:1.42vw;font-weight:700;background:var(--card);border:1px solid var(--line);
+  border-radius:5vw;padding:.9vh 1.3vw;color:var(--tx2)}
+b.s{font-weight:800;padding:0 .3vw;border-radius:.35vw}
+b.s.c{background:var(--pu-t);color:var(--pu)}
+b.s.d{background:var(--pk-t);color:var(--pk)}
+b.s.k{background:var(--sk-t);color:var(--sky)}
+/* 분위기 일러스트 (힌트 없음) */
+.mood{position:absolute;right:3.4vw;bottom:8.6vh;width:20vw;z-index:4;opacity:.95}
+.mood svg{width:100%;height:auto;display:block}
+
+/* 배경지식 */
+h2.ch2{font-size:3.1vw;font-weight:900;margin:.4vh 0 2vh;letter-spacing:-.01em}
+h2.ch2 .acc{color:var(--sky)}
+h2.ch2 small{font-size:1.6vw;font-weight:700;color:var(--tx2);margin-left:1vw}
+.cbody{display:flex;gap:1.8vw;flex:1;min-height:0;align-items:stretch}
+.cleft{flex:1.05;display:flex;flex-direction:column;gap:1.4vh;min-width:0}
+.cright{flex:1;display:flex;align-items:center;justify-content:center;min-width:0}
+.cright svg{width:100%;height:auto;max-height:56vh}
+.cdef{background:var(--card);border:1px solid var(--line);border-left:.45vw solid var(--sky);
+  border-radius:1vw;box-shadow:var(--sh);padding:1.6vh 1.4vw}
+.cdef.pk{border-left-color:var(--pk)}
+.cdef h4{font-size:2vw;font-weight:900;color:var(--sky);margin-bottom:.7vh}
+.cdef.pk h4{color:var(--pk)}
+.cdef p{font-size:1.66vw;font-weight:600;line-height:1.5;color:var(--tx2)}
+.cdef p b{color:var(--tx);font-weight:800}
+.ctie{background:var(--card);border:1px solid var(--line);border-left:.45vw solid var(--goldbg);
+  border-radius:.9vw;box-shadow:var(--sh);padding:1.5vh 1.4vw;
+  font-size:1.66vw;font-weight:700;line-height:1.5;color:var(--tx)}
+.ctie b{color:var(--pk)}
+
+/* 정답 */
+.chain{display:flex;flex-direction:column;gap:1.4vh;max-width:82vw;margin-top:.4vh}
+.crow{display:flex;align-items:center;gap:1.4vw;background:var(--card);border:1px solid var(--line);
+  border-radius:1.1vw;box-shadow:var(--sh);padding:1.4vh 1.6vw}
+.crow .lab{flex:none;font-size:1.4vw;font-weight:800;color:var(--tx2);width:9.5vw}
+.crow .pill{flex:none;width:4.4vw;height:4.4vw;border-radius:1vw;display:flex;
+  align-items:center;justify-content:center;font-size:2.3vw;font-weight:900;color:#fff}
+.crow .pill.A{background:#6250C9}.crow .pill.B{background:#B93D79}.crow .pill.C{background:#8A6503}
+.crow .why{font-size:1.7vw;font-weight:700;line-height:1.45}
+.crow .why em{font-style:normal;color:var(--sky);font-weight:800}
+.crow.st0{border-left:.5vw solid var(--pu)}
+.ansrow{display:flex;align-items:center;gap:2vw;margin-top:1.4vh}
+.ansbadge{display:flex;align-items:center;gap:1.4vw;background:linear-gradient(135deg,var(--pu),var(--pk));
+  border-radius:1.4vw;padding:2vh 2.2vw;box-shadow:0 .6vh 2vh rgba(91,63,168,.28)}
+.ansbadge .t{font-size:1.8vw;font-weight:900;color:rgba(255,255,255,.85)}
+.ansbadge .o{font-size:3.1vw;font-weight:900;color:#fff}
+.flowbar{margin-top:1.4vh;background:#fff;border:1px solid var(--line);border-radius:1vw;
+  box-shadow:var(--sh);padding:.9vh .9vw;height:14vh}
+.flowbar svg{width:100%;height:100%}
+
+#pbar{position:fixed;left:0;bottom:0;height:.55vh;background:linear-gradient(90deg,var(--pu),var(--pk));
+  width:0;z-index:70;transition:width .35s}
+#pnum{position:fixed;left:1vw;bottom:1.1vh;font-size:1.05vw;font-weight:700;color:var(--tx2);z-index:70}
+.zone{position:fixed;top:0;bottom:0;width:25vw;z-index:50}
+#zPrev{left:0}#zNext{right:0}
+.hint{position:fixed;right:1.2vw;top:1vh;font-size:1vw;font-weight:800;color:var(--tx2);
+  z-index:70;background:#fff;border:1px solid var(--line);border-radius:.5vw;padding:.4vh .9vw}
+</style></head><body>
+
+<section class="slide hasband">
+  <div class="band"><svg viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#EFEAF7"/><stop offset="1" stop-color="#F7EDF2"/></linearGradient></defs>
+  <rect width="1200" height="100" fill="url(#bg)"/>
+  <circle cx="1040" cy="34" r="18" fill="#F5A100" opacity=".5"/>
+  <g fill="#5B3FA8" opacity=".5">
+    <path d="M0,100 L0,66 L26,66 L26,52 L44,40 L62,52 L62,66 L96,66 L96,44 L116,30 L136,44 L136,66 L168,66 L168,100 Z"/>
+    <rect x="40" y="72" width="12" height="28" fill="#F7EDF2"/>
+    <rect x="110" y="70" width="14" height="30" fill="#F7EDF2"/>
+  </g>
+  <g fill="#1B2970" opacity=".38">
+    <path d="M320,42 q10,-12 20,-2 q10,-10 20,2 q-10,4 -20,14 q-10,-10 -20,-14 Z"/>
+    <path d="M470,26 q8,-9 16,-2 q8,-8 16,2 q-8,3 -16,11 q-8,-8 -16,-11 Z"/>
+    <path d="M620,50 q6,-7 12,-1 q6,-6 12,1 q-6,2 -12,8 q-6,-6 -12,-8 Z"/>
+  </g>
+  <text x="1170" y="80" text-anchor="end" font-family="Pretendard" font-weight="900"
+        font-size="23" fill="#5B3FA8" opacity=".26">A LEGEND, AND SOME MATH</text>
+</svg></div>
+  <div class="top">
+    <span class="chip no">문항 44</span><span class="chip cx">배경지식</span><span class="sp"></span>
+  </div>
+  <h2 class="ch2">먼저 감 잡기 — <span class="acc">두 배씩 늘면 얼마나 빨라지나</span><small>44번을 읽기 전에</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="cdef"><h4>두 배로 늘어난다는 말</h4>
+        <p>1 → 2 → 4 → 8 … 처음엔 <b>느릿느릿</b>해 보인다.<br>
+        그런데 몇 번만 더 가면 <b>손을 쓸 수 없을 만큼</b> 커진다.</p></div>
+      <div class="cdef pk"><h4>종이 접기로 확인</h4>
+        <p>0.1mm짜리 종이를 반으로 접기만 반복하면,<br>
+        <b>42번</b>째에 그 두께가 <b>달에 닿는다.</b><br>
+        믿기 어렵지만 계산은 정확하다.</p></div>
+      <div class="ctie">그래서 수학자들은 이 성질로 <b>"말이 되는지"를 검증</b>한다 —
+        오늘 지문의 연구자도 같은 방법을 쓴다.</div>
+    </div>
+    <div class="cright"><svg viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+  <text x="200" y="20" text-anchor="middle" font-family="Pretendard" font-weight="900"
+        font-size="14.5" fill="#1B7099">종이를 반씩 접으면 두께는?</text>
+  <g font-family="Pretendard">
+    <rect x="30" y="40" width="120" height="26" rx="6" fill="#DBF0FB" stroke="#1B7099" stroke-width="1.8"/>
+    <text x="90" y="58" text-anchor="middle" font-weight="800" font-size="13" fill="#1B7099">10번 접으면</text>
+    <text x="250" y="58" text-anchor="middle" font-weight="800" font-size="13" fill="#565D74">약 10cm</text>
+
+    <rect x="30" y="80" width="120" height="26" rx="6" fill="#DBF0FB" stroke="#1B7099" stroke-width="1.8"/>
+    <text x="90" y="98" text-anchor="middle" font-weight="800" font-size="13" fill="#1B7099">20번 접으면</text>
+    <text x="250" y="98" text-anchor="middle" font-weight="800" font-size="13" fill="#565D74">약 100m</text>
+
+    <rect x="30" y="120" width="120" height="26" rx="6" fill="#FDEAF4" stroke="#C22870" stroke-width="1.8"/>
+    <text x="90" y="138" text-anchor="middle" font-weight="800" font-size="13" fill="#C22870">30번 접으면</text>
+    <text x="250" y="138" text-anchor="middle" font-weight="800" font-size="13" fill="#C22870">약 100km</text>
+
+    <rect x="30" y="160" width="120" height="26" rx="6" fill="#FDEAF4" stroke="#C22870" stroke-width="1.8"/>
+    <text x="90" y="178" text-anchor="middle" font-weight="800" font-size="13" fill="#C22870">42번 접으면</text>
+    <text x="252" y="178" text-anchor="middle" font-weight="900" font-size="13" fill="#C22870">달까지 닿는다</text>
+  </g>
+  <line x1="30" y1="204" x2="370" y2="204" stroke="#E1E5EE" stroke-width="1.6"/>
+  <text x="200" y="228" text-anchor="middle" font-family="Pretendard" font-weight="900"
+        font-size="14" fill="#8A6503">처음엔 느리다가, 어느 순간 폭발한다</text>
+  <line x1="46" y1="316" x2="374" y2="316" stroke="#C9CEDA" stroke-width="1.8"/>
+  <line x1="46" y1="242" x2="46" y2="316" stroke="#C9CEDA" stroke-width="1.8"/>
+  <path d="M56,312 L120,310 L180,304 L232,290 L274,262 L306,220 L326,180"
+        fill="none" stroke="#C22870" stroke-width="3.6" stroke-linecap="round"/>
+  <text x="336" y="196" font-family="Pretendard" font-weight="900" font-size="12" fill="#C22870">폭발</text>
+  <text x="120" y="334" font-family="Pretendard" font-weight="700" font-size="11.5" fill="#565D74">여기까진 별것 아닌 것처럼 보인다</text>
+</svg></div>
+  </div>
+</section>
+<section class="slide hasband">
+  <div class="band"><svg viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#EFEAF7"/><stop offset="1" stop-color="#F7EDF2"/></linearGradient></defs>
+  <rect width="1200" height="100" fill="url(#bg)"/>
+  <circle cx="1040" cy="34" r="18" fill="#F5A100" opacity=".5"/>
+  <g fill="#5B3FA8" opacity=".5">
+    <path d="M0,100 L0,66 L26,66 L26,52 L44,40 L62,52 L62,66 L96,66 L96,44 L116,30 L136,44 L136,66 L168,66 L168,100 Z"/>
+    <rect x="40" y="72" width="12" height="28" fill="#F7EDF2"/>
+    <rect x="110" y="70" width="14" height="30" fill="#F7EDF2"/>
+  </g>
+  <g fill="#1B2970" opacity=".38">
+    <path d="M320,42 q10,-12 20,-2 q10,-10 20,2 q-10,4 -20,14 q-10,-10 -20,-14 Z"/>
+    <path d="M470,26 q8,-9 16,-2 q8,-8 16,2 q-8,3 -16,11 q-8,-8 -16,-11 Z"/>
+    <path d="M620,50 q6,-7 12,-1 q6,-6 12,1 q-6,2 -12,8 q-6,-6 -12,-8 Z"/>
+  </g>
+  <text x="1170" y="80" text-anchor="end" font-family="Pretendard" font-weight="900"
+        font-size="23" fill="#5B3FA8" opacity=".26">A LEGEND, AND SOME MATH</text>
+</svg></div>
+  <div class="top">
+    <span class="chip no">문항 44</span><span class="chip src">2022 고1 6월</span>
+    <span class="chip">글의 순서</span><span class="sp"></span>
+  </div>
+  <div class="givenbox">According to legend, once a vampire bites a person, that person turns into a vampire who seeks the blood of others. <b class="s k">A researcher came up with some simple math</b>, which proves that these highly popular creatures can't exist.</div>
+  <div class="cols">
+    <div class="pcol"><span class="ph">(A)</span><p class="pt">In just two-and-a-half years, <b class="s k">the original human population would all have become vampires</b> with no humans left. But look around you. Have vampires taken over the world? No, because there's no such thing.</p></div>
+    <div class="pcol"><span class="ph">(B)</span><p class="pt"><b class="s d">If the first vampire came into existence that day</b> and bit one person a month, there would have been two vampires by February 1st, 1600. A month later there would have been four, the next month eight, then sixteen, and so on.</p></div>
+    <div class="pcol"><span class="ph">(C)</span><p class="pt">University of Central Florida physics professor Costas Efthimiou's work breaks down the myth. <b class="s k">Suppose that on January 1st, 1600</b>, the human population was just over five hundred million.</p></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="choices"><span class="ch">① (A)-(C)-(B)</span><span class="ch">② (B)-(A)-(C)</span><span class="ch">③ (B)-(C)-(A)</span><span class="ch">④ (C)-(A)-(B)</span><span class="ch">⑤ (C)-(B)-(A)</span></div>
+  <div class="mood"><svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E9E4F6"/><stop offset="1" stop-color="#F6EEF3"/></linearGradient>
+  </defs>
+  <rect x="1" y="1" width="318" height="188" rx="14" fill="url(#sky)" stroke="#C9CEDA" stroke-width="1.6"/>
+  <circle cx="238" cy="52" r="24" fill="#F5A100" opacity=".55"/>
+  <circle cx="229" cy="46" r="21" fill="#F1ECF8" opacity=".85"/>
+  <g fill="#5B3FA8" opacity=".62">
+    <path d="M20,190 L20,132 L44,132 L44,116 L62,102 L80,116 L80,132 L116,132 L116,104
+             L140,86 L164,104 L164,132 L196,132 L196,190 Z"/>
+  </g>
+  <g fill="#F6EEF3" opacity=".9">
+    <rect x="56" y="140" width="12" height="24" rx="5"/>
+    <rect x="134" y="112" width="13" height="26" rx="6"/>
+    <rect x="100" y="146" width="11" height="22" rx="5"/>
+  </g>
+  <g fill="#1B2970" opacity=".5">
+    <path d="M96,44 q9,-11 18,-2 q9,-9 18,2 q-9,4 -18,13 q-9,-9 -18,-13 Z"/>
+    <path d="M158,26 q7,-8 14,-2 q7,-7 14,2 q-7,3 -14,10 q-7,-7 -14,-10 Z"/>
+    <path d="M60,68 q5,-6 10,-1 q5,-5 10,1 q-5,2 -10,7 q-5,-5 -10,-7 Z"/>
+  </g>
+  <g stroke="#5B3FA8" stroke-width="1.4" opacity=".3">
+    <line x1="0" y1="170" x2="320" y2="170"/>
+  </g>
+  <g fill="#5B3FA8" opacity=".28">
+    <path d="M214,190 q10,-26 22,-26 q12,0 22,26 Z"/>
+    <path d="M262,190 q8,-20 18,-20 q10,0 18,20 Z"/>
+  </g>
+</svg></div>
+</section>
+<section class="slide hasband">
+  <div class="band"><svg viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#EFEAF7"/><stop offset="1" stop-color="#F7EDF2"/></linearGradient></defs>
+  <rect width="1200" height="100" fill="url(#bg)"/>
+  <circle cx="1040" cy="34" r="18" fill="#F5A100" opacity=".5"/>
+  <g fill="#5B3FA8" opacity=".5">
+    <path d="M0,100 L0,66 L26,66 L26,52 L44,40 L62,52 L62,66 L96,66 L96,44 L116,30 L136,44 L136,66 L168,66 L168,100 Z"/>
+    <rect x="40" y="72" width="12" height="28" fill="#F7EDF2"/>
+    <rect x="110" y="70" width="14" height="30" fill="#F7EDF2"/>
+  </g>
+  <g fill="#1B2970" opacity=".38">
+    <path d="M320,42 q10,-12 20,-2 q10,-10 20,2 q-10,4 -20,14 q-10,-10 -20,-14 Z"/>
+    <path d="M470,26 q8,-9 16,-2 q8,-8 16,2 q-8,3 -16,11 q-8,-8 -16,-11 Z"/>
+    <path d="M620,50 q6,-7 12,-1 q6,-6 12,1 q-6,2 -12,8 q-6,-6 -12,-8 Z"/>
+  </g>
+  <text x="1170" y="80" text-anchor="end" font-family="Pretendard" font-weight="900"
+        font-size="23" fill="#5B3FA8" opacity=".26">A LEGEND, AND SOME MATH</text>
+</svg></div>
+  <div class="top">
+    <span class="chip no">문항 44</span><span class="chip src">2022 고1 6월</span>
+    <span class="chip" style="color:var(--pk)">정답 &amp; 근거 체인</span><span class="sp"></span>
+  </div>
+  <div class="chain">
+    <div class="crow st0"><span class="lab">주어진 글</span>
+      <p class="why">한 연구자가 간단한 계산으로 뱀파이어의 존재를 반박했다</p></div>
+    <div class="crow"><span class="lab">①번째 단락</span><span class="pill C">C</span>
+      <p class="why">주어진 글의 <em>A researcher</em>를 (C) <em>physics professor</em>가 구체화하고 계산의 전제를 세운다</p></div>
+    <div class="crow"><span class="lab">②번째 단락</span><span class="pill B">B</span>
+      <p class="why">(C)의 <em>on January 1st, 1600</em>을 (B) <em>that day</em>가 지시어로 받아 계산을 전개한다</p></div>
+    <div class="crow"><span class="lab">③번째 단락</span><span class="pill A">A</span>
+      <p class="why">(B)의 배가 계산 뒤 (A)가 <em>In just two-and-a-half years</em>로 결과를 내놓는다</p></div>
+  </div>
+  <div class="ansrow"><div class="ansbadge"><span class="t">정답</span><span class="o">⑤&ensp;C - B - A</span></div></div>
+  <div class="flowbar"><svg viewBox="0 0 1400 140" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="av" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#8A93A6"/></marker></defs>
+  <g font-family="Pretendard">
+    <rect x="8" y="12" width="300" height="112" rx="13" fill="#FFF4DD" stroke="#8A6503" stroke-width="2.2"/>
+    <text x="158" y="46" text-anchor="middle" font-weight="900" font-size="18" fill="#8A6503">(C) 전제</text>
+    <text x="158" y="76" text-anchor="middle" font-weight="700" font-size="15" fill="#1A2035">1600년 1월 1일</text>
+    <text x="158" y="100" text-anchor="middle" font-weight="700" font-size="15" fill="#565D74">인류 5억 명</text>
+    <path d="M318 68 L352 68" stroke="#8A93A6" stroke-width="4" marker-end="url(#av)"/>
+    <rect x="362" y="12" width="300" height="112" rx="13" fill="#FDEAF4" stroke="#C22870" stroke-width="2.2"/>
+    <text x="512" y="46" text-anchor="middle" font-weight="900" font-size="18" fill="#C22870">(B) 계산</text>
+    <text x="512" y="76" text-anchor="middle" font-weight="700" font-size="15" fill="#1A2035">한 달에 한 명씩</text>
+    <text x="512" y="100" text-anchor="middle" font-weight="700" font-size="15" fill="#565D74">1 → 2 → 4 → 8 …</text>
+    <path d="M672 68 L706 68" stroke="#8A93A6" stroke-width="4" marker-end="url(#av)"/>
+    <rect x="716" y="12" width="300" height="112" rx="13" fill="#EDE7FF" stroke="#5B3FA8" stroke-width="2.2"/>
+    <text x="866" y="46" text-anchor="middle" font-weight="900" font-size="18" fill="#5B3FA8">(A) 결과</text>
+    <text x="866" y="76" text-anchor="middle" font-weight="700" font-size="15" fill="#1A2035">2년 6개월 뒤</text>
+    <text x="866" y="100" text-anchor="middle" font-weight="700" font-size="15" fill="#565D74">인간이 남지 않는다</text>
+    <path d="M1026 68 L1060 68" stroke="#8A93A6" stroke-width="4" marker-end="url(#av)"/>
+    <rect x="1070" y="12" width="322" height="112" rx="13" fill="#DBF0FB" stroke="#1B7099" stroke-width="2.2"/>
+    <text x="1231" y="46" text-anchor="middle" font-weight="900" font-size="18" fill="#1B7099">반박</text>
+    <text x="1231" y="76" text-anchor="middle" font-weight="700" font-size="15" fill="#1A2035">주위를 둘러보라</text>
+    <text x="1231" y="100" text-anchor="middle" font-weight="700" font-size="15" fill="#565D74">그런 건 없다</text>
+  </g>
+</svg></div>
+</section>
+<div class="hint">→ 배경지식 → 문제 → 정답</div>
+<div class="zone" id="zPrev"></div><div class="zone" id="zNext"></div>
+<div id="pbar"></div><div id="pnum"></div>
+<script>
+const S=[...document.querySelectorAll('.slide')];let cur=0;
+const pbar=document.getElementById('pbar'),pnum=document.getElementById('pnum');
+function paint(){S.forEach((s,i)=>s.classList.toggle('active',i===cur));
+  pbar.style.width=((cur+1)/S.length*100)+'%';pnum.textContent=(cur+1)+' / '+S.length;}
+function go(d){cur=Math.max(0,Math.min(S.length-1,cur+d));paint();}
+document.getElementById('zNext').onclick=()=>go(1);
+document.getElementById('zPrev').onclick=()=>go(-1);
+addEventListener('keydown',e=>{
+ if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();go(1);}
+ if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(-1);}
+ if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+});
+paint();
+</script></body></html>
