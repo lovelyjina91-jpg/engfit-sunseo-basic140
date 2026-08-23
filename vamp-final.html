@@ -55,7 +55,13 @@ b.s.c{background:var(--pu-t);color:var(--pu)}
 b.s.d{background:var(--pk-t);color:var(--pk)}
 b.s.k{background:var(--sk-t);color:var(--sky)}
 /* 분위기 일러스트 (힌트 없음) */
-.mood{position:absolute;right:3.4vw;bottom:8.6vh;width:20vw;z-index:4;opacity:.95}
+.mood{position:absolute;right:3.4vw;bottom:8.4vh;width:22vw;z-index:4;
+  opacity:0;transform:translateY(2vh);transition:opacity .5s ease,transform .5s ease}
+.mood.on{opacity:1;transform:none}
+.moodhint{position:absolute;right:3.4vw;bottom:9.6vh;z-index:3;font-size:1.3vw;font-weight:800;
+  color:var(--tx2);background:#fff;border:1px dashed var(--line);border-radius:.7vw;
+  padding:1.2vh 1.6vw;transition:opacity .4s}
+.moodhint.off{opacity:0}
 .mood svg{width:100%;height:auto;display:block}
 
 /* 배경지식 */
@@ -205,35 +211,71 @@ h2.ch2 small{font-size:1.6vw;font-weight:700;color:var(--tx2);margin-left:1vw}
   </div>
   <div class="spacer"></div>
   <div class="choices"><span class="ch">① (A)-(C)-(B)</span><span class="ch">② (B)-(A)-(C)</span><span class="ch">③ (B)-(C)-(A)</span><span class="ch">④ (C)-(A)-(B)</span><span class="ch">⑤ (C)-(B)-(A)</span></div>
-  <div class="mood"><svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
+  <div class="moodhint" id="mh">🖼️ 탭하면 그림 보기</div>
+  <div class="mood" id="mood"><svg viewBox="0 0 380 250" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#E9E4F6"/><stop offset="1" stop-color="#F6EEF3"/></linearGradient>
+      <stop offset="0" stop-color="#EFEAF7"/><stop offset="1" stop-color="#FBF6F9"/></linearGradient>
+    <g id="vmp">
+      <circle cx="9" cy="6" r="5.4" fill="#5B3FA8"/>
+      <path d="M9 11.6 L2 29 L16 29 Z" fill="#5B3FA8"/>
+      <path d="M4.4 11.6 q4.6 4.4 9.2 0 l2.2 3.1 q-6.9 5.2 -13.6 0 Z" fill="#C22870"/>
+    </g>
+    <g id="hmn">
+      <circle cx="9" cy="6" r="5.4" fill="#B9BFCB"/>
+      <path d="M9 11.6 L3 29 L15 29 Z" fill="#B9BFCB"/>
+    </g>
   </defs>
-  <rect x="1" y="1" width="318" height="188" rx="14" fill="url(#sky)" stroke="#C9CEDA" stroke-width="1.6"/>
-  <circle cx="238" cy="52" r="24" fill="#F5A100" opacity=".55"/>
-  <circle cx="229" cy="46" r="21" fill="#F1ECF8" opacity=".85"/>
-  <g fill="#5B3FA8" opacity=".62">
-    <path d="M20,190 L20,132 L44,132 L44,116 L62,102 L80,116 L80,132 L116,132 L116,104
-             L140,86 L164,104 L164,132 L196,132 L196,190 Z"/>
+  <rect x="1" y="1" width="378" height="248" rx="14" fill="url(#sky)" stroke="#C9CEDA" stroke-width="1.6"/>
+
+  <g font-family="Pretendard" font-weight="800" font-size="10.5" fill="#565D74">
+    <text x="14" y="45">DAY 1</text>
+    <text x="14" y="98">1 MONTH</text>
+    <text x="14" y="151">2 MONTHS</text>
+    <text x="14" y="204">3 MONTHS</text>
   </g>
-  <g fill="#F6EEF3" opacity=".9">
-    <rect x="56" y="140" width="12" height="24" rx="5"/>
-    <rect x="134" y="112" width="13" height="26" rx="6"/>
-    <rect x="100" y="146" width="11" height="22" rx="5"/>
+
+  <g transform="translate(92,26)"><use href="#vmp"/></g>
+  <g transform="translate(118,26)"><use href="#hmn"/></g>
+  <g transform="translate(144,26)"><use href="#hmn"/></g>
+  <g transform="translate(170,26)"><use href="#hmn"/></g>
+  <g transform="translate(196,26)"><use href="#hmn"/></g>
+  <g transform="translate(222,26)"><use href="#hmn"/></g>
+  <g transform="translate(248,26)"><use href="#hmn"/></g>
+  <g transform="translate(274,26)"><use href="#hmn"/></g>
+  <g transform="translate(92,79)"><use href="#vmp"/></g>
+  <g transform="translate(118,79)"><use href="#vmp"/></g>
+  <g transform="translate(144,79)"><use href="#hmn"/></g>
+  <g transform="translate(170,79)"><use href="#hmn"/></g>
+  <g transform="translate(196,79)"><use href="#hmn"/></g>
+  <g transform="translate(222,79)"><use href="#hmn"/></g>
+  <g transform="translate(248,79)"><use href="#hmn"/></g>
+  <g transform="translate(274,79)"><use href="#hmn"/></g>
+  <g transform="translate(92,132)"><use href="#vmp"/></g>
+  <g transform="translate(118,132)"><use href="#vmp"/></g>
+  <g transform="translate(144,132)"><use href="#vmp"/></g>
+  <g transform="translate(170,132)"><use href="#vmp"/></g>
+  <g transform="translate(196,132)"><use href="#hmn"/></g>
+  <g transform="translate(222,132)"><use href="#hmn"/></g>
+  <g transform="translate(248,132)"><use href="#hmn"/></g>
+  <g transform="translate(274,132)"><use href="#hmn"/></g>
+  <g transform="translate(92,185)"><use href="#vmp"/></g>
+  <g transform="translate(118,185)"><use href="#vmp"/></g>
+  <g transform="translate(144,185)"><use href="#vmp"/></g>
+  <g transform="translate(170,185)"><use href="#vmp"/></g>
+  <g transform="translate(196,185)"><use href="#vmp"/></g>
+  <g transform="translate(222,185)"><use href="#vmp"/></g>
+  <g transform="translate(248,185)"><use href="#vmp"/></g>
+  <g transform="translate(274,185)"><use href="#vmp"/></g>
+
+  <g font-family="Pretendard" font-weight="900" font-size="12.5" fill="#C22870">
+    <text x="366" y="45" text-anchor="end">1</text>
+    <text x="366" y="98" text-anchor="end">2</text>
+    <text x="366" y="151" text-anchor="end">4</text>
+    <text x="366" y="204" text-anchor="end">8</text>
   </g>
-  <g fill="#1B2970" opacity=".5">
-    <path d="M96,44 q9,-11 18,-2 q9,-9 18,2 q-9,4 -18,13 q-9,-9 -18,-13 Z"/>
-    <path d="M158,26 q7,-8 14,-2 q7,-7 14,2 q-7,3 -14,10 q-7,-7 -14,-10 Z"/>
-    <path d="M60,68 q5,-6 10,-1 q5,-5 10,1 q-5,2 -10,7 q-5,-5 -10,-7 Z"/>
-  </g>
-  <g stroke="#5B3FA8" stroke-width="1.4" opacity=".3">
-    <line x1="0" y1="170" x2="320" y2="170"/>
-  </g>
-  <g fill="#5B3FA8" opacity=".28">
-    <path d="M214,190 q10,-26 22,-26 q12,0 22,26 Z"/>
-    <path d="M262,190 q8,-20 18,-20 q10,0 18,20 Z"/>
-  </g>
+  <text x="190" y="236" text-anchor="middle" font-family="Pretendard" font-weight="800"
+        font-size="11.5" fill="#5B3FA8">doubling every month</text>
 </svg></div>
 </section>
 <section class="slide hasband">
@@ -304,7 +346,13 @@ const S=[...document.querySelectorAll('.slide')];let cur=0;
 const pbar=document.getElementById('pbar'),pnum=document.getElementById('pnum');
 function paint(){S.forEach((s,i)=>s.classList.toggle('active',i===cur));
   pbar.style.width=((cur+1)/S.length*100)+'%';pnum.textContent=(cur+1)+' / '+S.length;}
-function go(d){cur=Math.max(0,Math.min(S.length-1,cur+d));paint();}
+const mood=document.getElementById('mood'),mh=document.getElementById('mh');
+function go(d){
+  if(d>0&&cur===1&&!mood.classList.contains('on')){
+    mood.classList.add('on');mh.classList.add('off');return;}
+  if(d<0&&cur===1&&mood.classList.contains('on')){
+    mood.classList.remove('on');mh.classList.remove('off');return;}
+  cur=Math.max(0,Math.min(S.length-1,cur+d));paint();}
 document.getElementById('zNext').onclick=()=>go(1);
 document.getElementById('zPrev').onclick=()=>go(-1);
 addEventListener('keydown',e=>{
