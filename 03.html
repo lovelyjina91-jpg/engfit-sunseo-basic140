@@ -211,6 +211,44 @@ b.s{font-weight:600;color:inherit;border-radius:.35vw;transition:all .4s}
 .ctie b{color:var(--gold)}
 .ctie .np{color:var(--pk)}
 /* SVG 공통 텍스트 */
+
+/* 어절 단위 줄바꿈 — (A)+조사, 숫자+단위가 갈라지지 않게 */
+.nb{white-space:nowrap}
+.np{white-space:normal}
+/* ===== 배경지식 확장 컴포넌트 ===== */
+.news{background:#FFFDF6;border:1.5px solid var(--goldbg);border-radius:1vw;
+  box-shadow:var(--sh);padding:1.8vh 1.6vw;position:relative;overflow:hidden}
+.news::before{content:"";position:absolute;left:0;top:0;bottom:0;width:.45vw;background:var(--goldbg)}
+.news .mast{display:flex;align-items:center;gap:.8vw;border-bottom:1.5px solid #E2D6B4;
+  padding-bottom:.9vh;margin-bottom:1.2vh}
+.news .mast b{font-size:1.35vw;font-weight:900;color:var(--gold);letter-spacing:.06em}
+.news .mast span{font-size:1.15vw;font-weight:700;color:var(--tx2)}
+.news .mast i{flex:1}
+.news h5{font-size:2.05vw;font-weight:900;line-height:1.34;color:var(--tx);margin-bottom:1vh}
+.news p{font-size:1.5vw;font-weight:600;line-height:1.55;color:var(--tx2)}
+.news p b{color:var(--tx);font-weight:800}
+.news .stamp{display:inline-block;margin-top:1.1vh;font-size:1.2vw;font-weight:900;
+  color:var(--pk);border:1.5px dashed var(--pk);border-radius:.5vw;padding:.4vh .9vw}
+.vs2{display:flex;gap:1.2vw}
+.vs2 .vcard{flex:1;background:var(--card);border:1px solid var(--line);border-radius:.9vw;
+  box-shadow:var(--sh);padding:1.5vh 1.3vw;border-top:.4vh solid var(--pu)}
+.vs2 .vcard.pk{border-top-color:var(--pk)}
+.vs2 .vcard h6{font-size:1.5vw;font-weight:900;color:var(--pu);margin-bottom:.9vh;letter-spacing:.02em}
+.vs2 .vcard.pk h6{color:var(--pk)}
+.vs2 .vcard q{display:block;font-size:1.48vw;font-weight:600;line-height:1.55;color:var(--tx);quotes:none}
+.vs2 .vcard em{display:block;font-style:normal;margin-top:1vh;font-size:1.25vw;
+  font-weight:800;color:var(--tx2)}
+.pcard{display:flex;gap:1.4vw;align-items:center;background:var(--card);border:1px solid var(--line);
+  border-radius:1vw;box-shadow:var(--sh);padding:1.6vh 1.5vw;border-left:.45vw solid var(--sky)}
+.pcard .pf{flex:none}
+.pcard .pi h5{font-size:1.95vw;font-weight:900;color:var(--tx)}
+.pcard .pi .yr{font-size:1.25vw;font-weight:800;color:var(--sky);margin:.3vh 0 .7vh}
+.pcard .pi p{font-size:1.45vw;font-weight:600;line-height:1.5;color:var(--tx2)}
+.pcard .pi p b{color:var(--tx);font-weight:800}
+.ctie{background:var(--card);border:1px solid var(--line);border-left:.45vw solid var(--goldbg);
+  border-radius:.9vw;box-shadow:var(--sh);padding:1.5vh 1.4vw;
+  font-size:1.62em;font-weight:700;line-height:1.5;color:var(--tx)}
+.ctie b{color:var(--pk)}
 .sv-t{font-family:'Pretendard',sans-serif;font-weight:800}
 
 /* ---------- 내비게이션/진행 ---------- */
@@ -354,8 +392,8 @@ B:`<b class="s d">This perceived truth</b> impacted behavior. <b class="s d">Dur
 C:`New ideas, like mathematics, were <b class="s k">shared between societies</b> which allowed for all kinds of innovations and advancements. The correction of a simple false assumption moved the human race forward.`,
 note:"",start:"한때 사람들은 지구가 평평하다고 믿었다",
 chain:[["B",`주어진 글의 평평한 지구 믿음을 (B) <em>This perceived truth</em>가 받아 그 결과(탐험이 없었음)를 말한다 — 문제 상황`],
-["A",`(B)의 탐험 없던 시대를 (A) <em>the world is round</em>가 뒤집는다 — 문제의 해결`],
-["C",`(A)의 <em>societies began to travel</em>을 (C) <em>shared between societies</em>가 이어받아 결과를 확장한다`]]},
+["A",`<span class="nb">(B)의</span> 탐험 없던 시대를 (A) <em>the world is round</em>가 뒤집는다 — 문제의 해결`],
+["C",`<span class="nb">(A)의</span> <em>societies began to travel</em>을 (C) <em>shared between societies</em>가 이어받아 결과를 확장한다`]]},
 {no:30,src:"2020 고1 9월",ans:5,order:"C - B - A",
 given:`Mirrors and other smooth, shiny surfaces reflect light. We see reflections from such surfaces because the rays of light form <b class="s k">an image</b> on the retina of our eyes.`,
 A:`<b class="s k">Keep your eyes on the reflected image while you are writing</b> and not on your paper. After a little practice, it will be easier to write "backwards." When your friend receives such a message he will be able to read it by holding the paper up to a mirror.`,
@@ -363,7 +401,7 @@ B:`<b class="s k">Stand a mirror upright</b> on the table, so that a piece of pa
 C:`<b class="s d">Such images</b> are always reversed. Look at yourself in a mirror, wink your right eye and your left eye seems to wink back at you. You can use a mirror to send <b class="s k">a coded message</b> to a friend.`,
 note:"* retina: (눈의) 망막",start:"거울은 빛을 반사해 망막에 상(an image)을 만든다",
 chain:[["C",`주어진 글의 <em>an image</em>를 (C) <em>Such images</em>가 지시어로 받고, 암호 편지라는 소재를 던진다`],
-["B",`(C)의 <em>a coded message</em>를 만드는 <b>첫 단계</b>가 (B) <em>Stand a mirror upright</em> — 절차의 시작`],
+["B",`<span class="nb">(C)의</span> <em>a coded message</em>를 만드는 <b>첫 단계</b>가 (B) <em>Stand a mirror upright</em> — 절차의 시작`],
 ["A",`(B) <em>Now write a message</em>에 이어 (A) <em>Keep your eyes ~ while you are writing</em> — 쓰는 동안의 요령`]]},
 {no:31,src:"2020 고1 11월",ans:2,order:"B - A - C",
 given:`Imagine yourself at a party. <b class="s k">It is dark</b> and a group of friends ask you to take a picture of them. You grab your camera, point, and shoot your friends.`,
@@ -372,8 +410,8 @@ B:`The camera automatically turns on the flash as <b class="s k">there is not en
 C:`<b class="s d">This blood</b> is the reason why the eyes look red in the photograph. This effect is more noticeable when there is not much light in the environment. This is because pupils dilate when it is dark, allowing more light to get inside the eye and producing a larger red-eye effect.`,
 note:"* penetrate: 통과하다 ** pupil: 동공 *** dilate: 확장하다",start:"어두운 파티에서 친구들 사진을 찍는다",
 chain:[["B",`주어진 글의 <em>It is dark</em>를 (B) <em>there is not enough light</em>가 받아 플래시가 켜지고 빨간 눈이 생긴다`],
-["A",`(B)의 빨간 원 현상을 (A) <em>This is a common problem called the red-eye effect</em>가 이름 붙이고 원인을 설명한다`],
-["C",`(A)의 <em>a large amount of blood</em>를 (C) <em>This blood</em>가 지시어로 받아 마무리한다`]]},
+["A",`<span class="nb">(B)의</span> 빨간 원 현상을 (A) <em>This is a common problem called the red-eye effect</em>가 이름 붙이고 원인을 설명한다`],
+["C",`<span class="nb">(A)의</span> <em>a large amount of blood</em>를 (C) <em>This blood</em>가 지시어로 받아 마무리한다`]]},
 {no:32,src:"2020 고1 11월",ans:4,order:"C - A - B",
 given:`Even though <b class="s k">two variables</b> seem to be related, there may not be a causal relationship.`,
 A:`<b class="s d">Does this mean</b> that the size of one's feet (independent variable) causes an improvement in reading skills (dependent variable)? Certainly not. <b class="s k">This false relationship</b> is caused by a third factor, age, that is related to shoe size as well as reading ability.`,
@@ -381,7 +419,7 @@ B:`<b class="s c">Hence</b>, when researchers attempt to make causal claims abou
 C:`<b class="s c">In fact</b>, <b class="s k">the two variables</b> may merely seem to be associated with each other due to the effect of some third variable. Sociologists call such misleading relationships spurious. <b class="s k">A classic example</b> is the apparent association between children's shoe size and reading ability. It seems that as shoe size increases, reading ability improves.`,
 note:"* variable: 변인 ** spurious: 허위의",start:"두 변인이 관련돼 보여도 인과관계는 아닐 수 있다",
 chain:[["C",`주어진 글의 <em>two variables</em>를 (C) <em>the two variables</em>가 관사로 받고, 사례(신발 크기와 독해력)를 든다 — G→S`],
-["A",`(C)의 사례를 (A) <em>Does this mean ~?</em>가 질문으로 받아 "제3의 요인(나이)"이라 답한다`],
+["A",`<span class="nb">(C)의</span> 사례를 (A) <em>Does this mean ~?</em>가 질문으로 받아 "제3의 요인(나이)"이라 답한다`],
 ["B",`(B) <em>Hence</em> — 사례에서 얻은 교훈을 연구자의 원칙으로 결론짓는다`]]},
 {no:33,src:"2021 고1 3월",ans:2,order:"B - A - C",
 given:`Almost all major sporting activities are played with <b class="s k">a ball</b>.`,
@@ -389,8 +427,8 @@ A:`A ball might have the correct <b class="s k">size and weight</b> but if it is
 B:`The rules of the game always include <b class="s k">rules about the type of ball</b> that is allowed, starting with the <b class="s k">size and weight</b> of the ball. The ball must also have a certain <b class="s k">stiffness</b>.`,
 C:`<b class="s c">Similarly</b>, <b class="s k">along with stiffness</b>, a ball needs to bounce properly. A solid rubber ball would be too bouncy for most sports, and a solid ball made of clay would not bounce at all.`,
 note:"* stiffness: 단단함",start:"거의 모든 주요 스포츠는 공으로 한다",
-chain:[["B",`주어진 글의 공을 (B)가 <em>rules about the type of ball</em>로 좁힌다 — 크기·무게, 그리고 단단함 예고`],
-["A",`(B)의 <em>size and weight ~ also stiffness</em>를 (A)가 이어받아 단단함이 왜 중요한지 예시로 보여준다`],
+chain:[["B",`주어진 글의 공을 <span class="nb">(B)가</span> <em>rules about the type of ball</em>로 좁힌다 — 크기·무게, 그리고 단단함 예고`],
+["A",`<span class="nb">(B)의</span> <em>size and weight ~ also stiffness</em>를 <span class="nb">(A)가</span> 이어받아 단단함이 왜 중요한지 예시로 보여준다`],
 ["C",`(C) <em>Similarly, along with stiffness</em> — 단단함에 이어 탄성이라는 새 조건을 같은 방식으로 추가한다`]]},
 {no:34,src:"2021 고1 3월",ans:3,order:"B - C - A",
 given:`If you had to write a math equation, you probably wouldn't write, <b class="s k">"Twenty-eight plus fourteen equals forty-two."</b> It would take too long to write and it would be hard to read quickly.`,
@@ -399,8 +437,8 @@ B:`You would write, <b class="s k">"28 + 14 = 42."</b> <b class="s k">Chemistry 
 C:`<b class="s c">So</b> <b class="s k">chemists use symbols</b>, just like we do in math. A chemical formula lists all the elements that form each molecule and uses a small number to the bottom right of an element's symbol to stand for the number of atoms of that element.`,
 note:"* chemical formula: 화학식 ** molecule: 분자",start:"수식을 글자로 다 쓰면 너무 길다",
 chain:[["B",`주어진 글의 말로 쓴 수식을 (B) <em>"28 + 14 = 42."</em>가 곧바로 받고, <em>Chemistry is the same way</em>로 소재를 전환한다`],
-["C",`(B)의 화학 전환을 (C) <em>So chemists use symbols</em>가 이어받아 화학식 표기법을 설명한다`],
-["A",`(C)의 표기법을 (A) <em>For example, ~ H2O</em>가 구체적 예로 보여준다`]]},
+["C",`<span class="nb">(B)의</span> 화학 전환을 (C) <em>So chemists use symbols</em>가 이어받아 화학식 표기법을 설명한다`],
+["A",`<span class="nb">(C)의</span> 표기법을 (A) <em>For example, ~ H2O</em>가 구체적 예로 보여준다`]]},
 {no:35,src:"2021 고1 6월",ans:5,order:"C - B - A",
 given:`Starting from birth, babies are immediately attracted to faces. Scientists were able to show this by <b class="s k">having babies look at two simple images</b>, one that looks more like a face than the other.`,
 A:`<b class="s d">These changes</b> help the organisms to survive, making them alert to enemies. By being able to recognize faces from afar or in the dark, humans were able to know someone was coming and protect themselves from possible danger.`,
@@ -408,17 +446,17 @@ B:`<b class="s k">One reason</b> babies might like faces is because of something
 C:`<b class="s k">By measuring where the babies looked</b>, scientists found that the babies looked at the face-like image more than they looked at the non-face image. Even though babies have poor eyesight, they prefer to look at faces. <b class="s k">But why?</b>`,
 note:"",start:"아기는 태어날 때부터 얼굴에 끌린다 — 실험 소개",
 chain:[["C",`주어진 글의 실험을 (C) <em>By measuring where the babies looked</em>가 이어받아 결과를 말하고 <em>But why?</em>로 질문을 던진다`],
-["B",`(C)의 질문에 (B) <em>One reason ~ evolution</em>이 답한다 — 질문 → 답 패턴`],
-["A",`(B)의 <em>changes</em>를 (A) <em>These changes</em>가 지시어로 받아 생존 이점을 설명한다`]]},
+["B",`<span class="nb">(C)의</span> 질문에 (B) <em>One reason ~ evolution</em>이 답한다 — 질문 → 답 패턴`],
+["A",`<span class="nb">(B)의</span> <em>changes</em>를 (A) <em>These changes</em>가 지시어로 받아 생존 이점을 설명한다`]]},
 {no:36,src:"2021 고1 6월",ans:2,order:"B - A - C",
 given:`People spend much of their time interacting with media, but that does not mean that people <b class="s k">have the critical skills</b> to analyze and understand it.`,
 A:`Research from New York University found that <b class="s k">people over 65</b> shared seven times as much misinformation as their younger counterparts. All of this raises a question: <b class="s k">What's the solution to the misinformation problem?</b>`,
 B:`One well-known study from Stanford University in 2016 demonstrated that <b class="s k">youth are easily fooled</b> by misinformation, especially when it comes through social media channels. <b class="s k">This weakness is not found only in youth</b>, <b class="s c">however</b>.`,
 C:`Governments and tech platforms certainly have a role to play in blocking misinformation. <b class="s c">However</b>, <b class="s k">every individual needs to take responsibility</b> for combating this threat by becoming more information literate.`,
 note:"* counterpart: 상대방",start:"미디어를 많이 쓴다고 비판적으로 분석할 줄 아는 건 아니다",
-chain:[["B",`주어진 글의 주장을 (B)가 스탠퍼드 연구(청년들이 쉽게 속는다)로 뒷받침한다`],
-["A",`(B)의 <em>not found only in youth</em>를 (A) <em>people over 65</em>가 이어받고, 끝에서 해결책을 묻는다`],
-["C",`(A)의 질문 <em>What's the solution?</em>에 (C)가 답한다 — 질문 → 답 패턴`]]},
+chain:[["B",`주어진 글의 주장을 <span class="nb">(B)가</span> 스탠퍼드 연구(청년들이 쉽게 속는다)로 뒷받침한다`],
+["A",`<span class="nb">(B)의</span> <em>not found only in youth</em>를 (A) <em>people over 65</em>가 이어받고, 끝에서 해결책을 묻는다`],
+["C",`<span class="nb">(A)의</span> 질문 <em>What's the solution?</em>에 <span class="nb">(C)가</span> 답한다 — 질문 → 답 패턴`]]},
 {no:37,src:"2021 고1 9월",ans:5,order:"C - B - A",
 given:`Understanding how to develop respect for and a knowledge of other cultures begins with reexamining <b class="s k">the golden rule</b>: "I treat others in the way I want to be treated."`,
 A:`It <b class="s c">can also</b> create <b class="s k">a frustrating situation</b> where we believe we are doing what is right, but what we are doing is not being interpreted in the way in which it was meant. This miscommunication can lead to problems.`,
@@ -426,8 +464,8 @@ B:`In a <b class="s k">multicultural setting</b>, <b class="s c">however</b>, wh
 C:`<b class="s d">This rule</b> makes sense on some level; if we treat others as well as we want to be treated, we will be treated well in return. This rule works well in a <b class="s k">monocultural setting</b>, where everyone is working within the same cultural framework.`,
 note:"",start:"황금률 — '내가 대접받고 싶은 대로 남을 대하라'",
 chain:[["C",`주어진 글의 <em>the golden rule</em>을 (C) <em>This rule</em>이 지시어로 받고, 단일 문화에서는 잘 통한다고 말한다`],
-["B",`(C)의 <em>monocultural</em>에 (B) <em>multicultural, however</em>가 대조로 맞선다 — 의도치 않은 결과`],
-["A",`(B)의 첫 번째 부작용에 (A) <em>It can also create</em>가 두 번째 부작용을 추가한다`]]},
+["B",`<span class="nb">(C)의</span> <em>monocultural</em>에 (B) <em>multicultural, however</em>가 대조로 맞선다 — 의도치 않은 결과`],
+["A",`<span class="nb">(B)의</span> 첫 번째 부작용에 (A) <em>It can also create</em>가 두 번째 부작용을 추가한다`]]},
 {no:38,src:"2021 고1 9월",ans:4,order:"C - A - B",
 given:`In a study, a researcher pretending to be a volunteer surveyed a California neighborhood, asking residents if they would allow <b class="s k">a large sign</b> reading "Drive Carefully" to be displayed on their front lawns.`,
 A:`<b class="s k">The reason that they agreed</b> was this: two weeks earlier, these residents had been asked by another volunteer to make a small commitment to display <b class="s k">a tiny sign</b> that read "Be a Safe Driver" in their windows.`,
@@ -435,17 +473,17 @@ B:`Since it was <b class="s d">such a small and simple request</b>, nearly all o
 C:`To help them understand what it would look like, the volunteer showed his participants a picture of <b class="s k">the large sign</b> blocking the view of a beautiful house. Naturally, most people refused, but in one particular group, <b class="s k">an incredible 76 percent actually approved</b>.`,
 note:"",start:"큰 표지판(a large sign)을 마당에 세워달라는 요청",
 chain:[["C",`주어진 글의 <em>a large sign</em>을 (C) <em>the large sign</em>이 관사로 받고, 76%가 수락했다는 놀라운 결과를 던진다`],
-["A",`(C)의 결과를 (A) <em>The reason that they agreed</em>가 설명한다 — 2주 전의 작은 표지판`],
-["B",`(A)의 <em>a tiny sign</em>을 (B) <em>such a small and simple request</em>가 지시어로 받아 결론을 맺는다`]]},
+["A",`<span class="nb">(C)의</span> 결과를 (A) <em>The reason that they agreed</em>가 설명한다 — 2주 전의 작은 표지판`],
+["B",`<span class="nb">(A)의</span> <em>a tiny sign</em>을 (B) <em>such a small and simple request</em>가 지시어로 받아 결론을 맺는다`]]},
 {no:39,src:"2021 고1 11월",ans:3,order:"B - C - A",
 given:`Roughly twenty years ago, brick-and-mortar stores began to give way to electronic commerce. For good or bad, <b class="s k">the shift</b> fundamentally changed consumers' perception of the shopping experience.`,
 A:`<b class="s c">Before long</b>, the e-commerce book market naturally <b class="s k">expanded to include additional categories</b>, like CDs and DVDs. E-commerce soon snowballed into the enormous industry it is today, where you can buy everything from toilet paper to cars online.`,
 B:`Nowhere was <b class="s k">the shift</b> more obvious than with <b class="s k">book sales</b>, which is how online bookstores got their start. Physical bookstores simply <b class="s k">could not stock as many titles</b> as a virtual bookstore could. There is only so much space available on a shelf.`,
 C:`<b class="s c">In addition to</b> <b class="s k">greater variety</b>, online bookstores were also able to offer aggressive discounts thanks to their lower operating costs. The combination of lower prices and greater selection led to the <b class="s k">slow, steady rise of online bookstores</b>.`,
 note:"* brick-and-mortar: 오프라인 거래의",start:"20년 전, 오프라인 매장이 전자상거래에 자리를 내주기 시작했다",
-chain:[["B",`주어진 글의 <em>the shift</em>를 (B)가 그대로 받아 책 판매라는 구체적 소재로 좁힌다 (G→S)`],
-["C",`(B)의 <em>더 많은 종류를 갖출 수 있다</em>를 (C) <em>In addition to greater variety</em>가 이어받아 가격 이점을 추가한다`],
-["A",`(C)의 온라인 서점 성장 뒤 (A) <em>Before long</em> — 시간이 흘러 다른 품목으로 확장된다`]]},
+chain:[["B",`주어진 글의 <em>the shift</em>를 <span class="nb">(B)가</span> 그대로 받아 책 판매라는 구체적 소재로 좁힌다 (G→S)`],
+["C",`<span class="nb">(B)의</span> <em>더 많은 종류를 갖출 수 있다</em>를 (C) <em>In addition to greater variety</em>가 이어받아 가격 이점을 추가한다`],
+["A",`<span class="nb">(C)의</span> 온라인 서점 성장 뒤 (A) <em>Before long</em> — 시간이 흘러 다른 품목으로 확장된다`]]},
 {no:40,src:"2021 고1 11월",ans:5,order:"C - B - A",
 given:`Literary works, by their nature, suggest rather than explain; they <b class="s k">imply rather than state their claims boldly and directly</b>.`,
 A:`<b class="s k">What a text implies</b> is often of great interest to us. And our work of figuring out a text's implications tests our analytical powers. In considering what a text suggests, we gain practice in making sense of texts.`,
@@ -453,8 +491,8 @@ B:`<b class="s c">But</b> whatever <b class="s k">the proportion</b> of a work's
 C:`<b class="s d">This broad generalization</b>, <b class="s c">however</b>, does not mean that works of literature do not include direct statements. Depending on when they were written and by whom, literary works may contain <b class="s k">large amounts of direct telling and lesser amounts of suggestion</b>.`,
 note:"",start:"문학 작품은 설명보다 암시한다 — 일반적 주장",
 chain:[["C",`주어진 글의 주장을 (C) <em>This broad generalization, however</em>가 지시어로 받아 예외가 있다고 단서를 단다`],
-["B",`(C)의 <em>직접 서술과 암시의 비율</em>을 (B) <em>But whatever the proportion</em>이 받아 결국 해석할 거리는 늘 있다고 정리한다`],
-["A",`(B)의 <em>a text's implications</em>를 (A) <em>What a text implies</em>가 이어받아 그 가치를 설명한다`]]},
+["B",`<span class="nb">(C)의</span> <em>직접 서술과 암시의 비율</em>을 (B) <em>But whatever the proportion</em>이 받아 결국 해석할 거리는 늘 있다고 정리한다`],
+["A",`<span class="nb">(B)의</span> <em>a text's implications</em>를 (A) <em>What a text implies</em>가 이어받아 그 가치를 설명한다`]]},
 {no:41,src:"2022 고1 3월",ans:3,order:"B - C - A",
 given:`Toward the end of the 19th century, a new architectural attitude emerged. Industrial architecture, the argument went, was ugly and inhuman; <b class="s k">past styles had more to do with pretension</b> than what people needed in their homes.`,
 A:`<b class="s c">But</b> <b class="s p">they</b> supplied people's needs perfectly and, at their best, had a beauty that came from the craftsman's skill and the rootedness of the house in its locality.`,
@@ -462,17 +500,17 @@ B:`<b class="s d">Instead of these approaches</b>, why not look at the way <b cl
 C:`<b class="s d">Those materials</b> were local, and used with simplicity — <b class="s k">houses built this way had plain wooden floors and whitewashed walls</b> inside.`,
 note:"* pretension: 허세, 가식",start:"19세기 말, 산업 건축과 과거 양식 모두를 비판하는 새 태도",
 chain:[["B",`주어진 글이 비판한 두 방식을 (B) <em>Instead of these approaches</em>가 지시어로 받고 시골 장인을 대안으로 제시한다`],
-["C",`(B)의 <em>mastery of both tools and materials</em>를 (C) <em>Those materials</em>가 지시어로 받는다`],
-["A",`(C)의 소박한 집을 (A) <em>But they supplied people's needs perfectly</em>가 대명사로 받아 그 가치를 평가한다`]]},
+["C",`<span class="nb">(B)의</span> <em>mastery of both tools and materials</em>를 (C) <em>Those materials</em>가 지시어로 받는다`],
+["A",`<span class="nb">(C)의</span> 소박한 집을 (A) <em>But they supplied people's needs perfectly</em>가 대명사로 받아 그 가치를 평가한다`]]},
 {no:42,src:"2022 고1 3월",ans:2,order:"B - A - C",
 given:`Robert Schumann once said, "The laws of morals are those of art." What the great man is saying here is that there is <b class="s k">good music and bad music</b>.`,
 A:`<b class="s k">It's the same with performances</b>: a bad performance isn't necessarily the result of incompetence. Some of the worst performances occur when <b class="s k">the performers</b>, no matter how accomplished, are thinking more of themselves than of the music they're playing.`,
 B:`<b class="s k">The greatest music</b>, even if it's tragic in nature, takes us to a world higher than ours; somehow the beauty uplifts us. <b class="s k">Bad music</b>, <b class="s c">on the other hand</b>, degrades us.`,
 C:`<b class="s d">These doubtful characters</b> aren't really listening to what the composer is saying — they're just showing off, hoping that they'll have a great 'success' with the public. The performer's basic task is to try to understand the meaning of the music, and then to communicate it honestly to others.`,
 note:"* incompetence: 무능 ** degrade: 격하시키다",start:"좋은 음악과 나쁜 음악이 있다 — 슈만의 말",
-chain:[["B",`주어진 글의 <em>good music and bad music</em>을 (B)가 그대로 나누어 부연한다`],
-["A",`(B)의 음악 이야기를 (A) <em>It's the same with performances</em>가 연주로 전환한다 (B 뒤에 C는 올 수 없다!)`],
-["C",`(A)의 <em>the performers</em>(자기 자랑에 빠진 연주자)를 (C) <em>These doubtful characters</em>가 지시어로 받는다`]]}
+chain:[["B",`주어진 글의 <em>good music and bad music</em>을 <span class="nb">(B)가</span> 그대로 나누어 부연한다`],
+["A",`<span class="nb">(B)의</span> 음악 이야기를 (A) <em>It's the same with performances</em>가 연주로 전환한다 (B 뒤에 C는 올 수 없다!)`],
+["C",`<span class="nb">(A)의</span> <em>the performers</em>(자기 자랑에 빠진 연주자)를 (C) <em>These doubtful characters</em>가 지시어로 받는다`]]}
 ];
 const CHO = ["(A) - (C) - (B)","(B) - (A) - (C)","(B) - (C) - (A)","(C) - (A) - (B)","(C) - (B) - (A)"];
 const CIRC = ["①","②","③","④","⑤"];
@@ -537,7 +575,7 @@ const CPT = {
       <div class="cdef gd rv"><h4>진짜 원인 — 제3의 변수</h4>
         <p><b>나이</b>가 신발 크기도 키우고 독해력도 키운다.<br>둘은 <b>같은 원인의 두 결과</b>일 뿐 — 이것이 <b>허위 관계</b>다.</p></div>
       <div class="ctie rv">그래서 연구자는 <b>다른 변수를 통제(rule out)</b>해야만 인과를 주장할 수 있다 —
-        <span class="np">이 결론이 (B)의 Hence 문장</span>이다.</div>
+        <span class="np">이 결론이 <span class="nb">(B)의</span> Hence 문장</span>이다.</div>
     </div>
     <div class="cright rv">
       <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
@@ -571,6 +609,52 @@ const CPT = {
         <text x="200" y="309" text-anchor="middle" class="sv-t" font-size="15" fill="#9C6200">같은 원인이 만든 두 개의 결과</text>
       </svg>
     </div>
+  </div>`,
+`
+  <h2 class="ch">현실에서 — <span class="acc">기사 한 줄에 속는 법</span><small>32번이 경고하는 바로 그 상황</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="news rv">
+        <div class="mast"><b>DAILY GRAPH</b><span>사회 · 통계</span><i></i><span>재구성</span></div>
+        <h5>"아이스크림이 많이 팔린 날,<br>물놀이 사고도 함께 늘었다"</h5>
+        <p>지난 5년간의 자료를 분석한 결과, 아이스크림 판매량이 늘어난 날일수록
+        물놀이 사고 건수도 함께 증가한 것으로 나타났다. <b>두 수치는 거의 나란히 움직였다.</b></p>
+        <span class="stamp">그럼 아이스크림을 금지해야 할까?</span>
+      </div>
+      <div class="cdef pk rv"><h4>속임수의 정체</h4>
+        <p>숨은 <b>제3의 변수는 '기온'</b>이다.<br>더우면 아이스크림도 더 팔리고, 물에도 더 많이 들어간다.
+        두 수치는 <b>서로의 원인이 아니라 같은 원인의 두 결과</b>다.</p></div>
+      <div class="ctie rv">32번의 <span class="nb">신발 크기 ↔ 독해력</span>도 똑같은 구조 —
+        숨은 변수만 <b>나이</b>로 바뀌었을 뿐이다.</div>
+    </div>
+    <div class="cright rv">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <text x="200" y="18" text-anchor="middle" class="sv-t" font-size="14" fill="#1B7099">두 그래프가 나란히 오른다</text>
+        <line x1="46" y1="150" x2="370" y2="150" stroke="#C9CEDA" stroke-width="1.5"/>
+        <line x1="46" y1="40" x2="46" y2="150" stroke="#C9CEDA" stroke-width="1.5"/>
+        <polyline points="60,138 110,124 160,104 210,86 260,64 320,44" fill="none" stroke="#C22870" stroke-width="3.4" stroke-linecap="round"/>
+        <polyline points="60,142 110,131 160,115 210,96 260,76 320,56" fill="none" stroke="#1B7099" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="7 5"/>
+        <text x="330" y="42" class="sv-t" font-size="12" fill="#C22870">아이스크림</text>
+        <text x="330" y="60" class="sv-t" font-size="12" fill="#1B7099">사고 건수</text>
+        <text x="200" y="168" text-anchor="middle" class="sv-t" font-size="11.5" fill="#565D74">→ 시간</text>
+
+        <rect x="96" y="196" width="96" height="42" rx="9" fill="#FDEAF4" stroke="#C22870" stroke-width="2"/>
+        <text x="144" y="222" text-anchor="middle" class="sv-t" font-size="13" fill="#C22870">아이스크림</text>
+        <rect x="212" y="196" width="96" height="42" rx="9" fill="#DBF0FB" stroke="#1B7099" stroke-width="2"/>
+        <text x="260" y="222" text-anchor="middle" class="sv-t" font-size="13" fill="#1B7099">물놀이 사고</text>
+        <line x1="196" y1="217" x2="208" y2="217" stroke="#8A93A6" stroke-width="2.4"/>
+        <path d="M195 210 L209 224 M209 210 L195 224" stroke="#C22870" stroke-width="3" stroke-linecap="round"/>
+
+        <ellipse cx="202" cy="290" rx="86" ry="26" fill="#FFF4DD" stroke="#8A6503" stroke-width="2.2"/>
+        <text x="202" y="288" text-anchor="middle" class="sv-t" font-size="15" fill="#8A6503">기 온</text>
+        <text x="202" y="304" text-anchor="middle" class="sv-t" font-size="11" fill="#8A6503">숨은 진짜 원인</text>
+        <path d="M170 266 L146 242" stroke="#8A6503" stroke-width="2.4" marker-end="url(#a32)"/>
+        <path d="M234 266 L258 242" stroke="#8A6503" stroke-width="2.4" marker-end="url(#a32)"/>
+        <defs><marker id="a32" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="#8A6503"/></marker></defs>
+        <text x="200" y="330" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">기온이 둘 다를 동시에 끌어올린다</text>
+      </svg>
+    </div>
   </div>`],
 40: [`
   <h2 class="ch">개념 먼저 — <span class="acc">Telling vs Showing</span><small>40번 문학 지문의 전제</small></h2>
@@ -587,8 +671,8 @@ const CPT = {
           <li><i>결론</i>비율이 어떻든 <b>해석할 거리는 언제나 남는다</b></li>
         </ul>
       </div>
-      <div class="ctie rv">그래서 (C)의 <b>however</b>가 "암시만 한다"는 일반화에 단서를 달고,
-        <span class="np">(B)가 "비율이 어떻든"으로 정리</span>하는 것이다.</div>
+      <div class="ctie rv">그래서 <span class="nb">(C)의</span> <b>however</b>가 "암시만 한다"는 일반화에 단서를 달고,
+        <span class="np"><span class="nb">(B)가</span> "비율이 어떻든"으로 정리</span>하는 것이다.</div>
     </div>
     <div class="cright rv">
       <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
@@ -628,6 +712,49 @@ const CPT = {
         <text x="200" y="313" text-anchor="middle" class="sv-t" font-size="15" fill="#9C6200">어느 쪽이든, 읽는 사람이 해석할 몫은 남는다</text>
       </svg>
     </div>
+  </div>`,
+`
+  <h2 class="ch">직접 봐야 안다 — <span class="acc">같은 장면, 두 가지 쓰기</span><small>40번을 읽기 전에</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="vs2 rv">
+        <div class="vcard"><h6>TELLING · 말해 버리기</h6>
+          <q>그는 몹시 외로웠다. 아무도 그를 찾아오지 않아서 슬펐다.</q>
+          <em>→ 읽는 사람이 할 일이 없다</em></div>
+        <div class="vcard pk"><h6>SHOWING · 보여주기</h6>
+          <q>그는 두 개의 컵에 차를 따랐다. 그리고 식어 가는 한 잔을 오래 바라보았다.</q>
+          <em>→ '외롭다'는 말은 한 번도 없다</em></div>
+      </div>
+      <div class="cdef rv"><h4>왜 작가는 굳이 돌려 말할까</h4>
+        <p>독자가 <b>스스로 알아차린 감정</b>은 남이 알려 준 감정보다 훨씬 오래 남는다.
+        그래서 문학은 답을 주는 대신 <b>단서를 놓아둔다.</b></p></div>
+      <div class="ctie rv">40번은 여기서 한 걸음 더 간다 —
+        <b>"그렇다고 직접 서술이 아예 없는 건 아니다"</b>라는 단서를 붙인다.</div>
+    </div>
+    <div class="cright rv">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <text x="200" y="20" text-anchor="middle" class="sv-t" font-size="14" fill="#5B3FA8">읽는 사람이 채우는 공간</text>
+        <rect x="34" y="44" width="150" height="120" rx="12" fill="#EDE7FF" stroke="#5B3FA8" stroke-width="2.2"/>
+        <text x="109" y="70" text-anchor="middle" class="sv-t" font-size="13.5" fill="#5B3FA8">TELLING</text>
+        <rect x="52" y="84" width="114" height="62" rx="7" fill="#5B3FA8" opacity=".82"/>
+        <text x="109" y="120" text-anchor="middle" class="sv-t" font-size="12" fill="#fff">작가가 다 채움</text>
+        <text x="109" y="180" text-anchor="middle" class="sv-t" font-size="11.5" fill="#565D74">독자의 몫 = 거의 없음</text>
+
+        <rect x="216" y="44" width="150" height="120" rx="12" fill="#FDEAF4" stroke="#C22870" stroke-width="2.2"/>
+        <text x="291" y="70" text-anchor="middle" class="sv-t" font-size="13.5" fill="#C22870">SHOWING</text>
+        <rect x="234" y="84" width="114" height="62" rx="7" fill="none" stroke="#C22870" stroke-width="2" stroke-dasharray="6 5"/>
+        <rect x="234" y="84" width="38" height="62" rx="7" fill="#C22870" opacity=".8"/>
+        <text x="316" y="120" text-anchor="middle" class="sv-t" font-size="12" fill="#C22870">독자가 채움</text>
+        <text x="291" y="180" text-anchor="middle" class="sv-t" font-size="11.5" fill="#565D74">해석할 거리 = 많음</text>
+
+        <rect x="34" y="212" width="332" height="46" rx="10" fill="#FFF4DD" stroke="#8A6503" stroke-width="2"/>
+        <text x="200" y="232" text-anchor="middle" class="sv-t" font-size="13" fill="#8A6503">작품마다 이 비율은 다르다</text>
+        <text x="200" y="250" text-anchor="middle" class="sv-t" font-size="12.5" fill="#8A6503">시대 · 작가에 따라 직접 서술이 많기도 하다</text>
+        <rect x="34" y="278" width="332" height="44" rx="10" fill="#DBF0FB" stroke="#1B7099" stroke-width="2"/>
+        <text x="200" y="298" text-anchor="middle" class="sv-t" font-size="13.5" fill="#1B7099">그래도 해석할 거리는 언제나 남는다</text>
+        <text x="200" y="315" text-anchor="middle" class="sv-t" font-size="12" fill="#1B7099">— 이것이 40번의 결론</text>
+      </svg>
+    </div>
   </div>`],
 41: [`
   <h2 class="ch">개념 먼저 — <span class="acc">19세기 말 건축 논쟁</span><small>41번이 비판하는 두 가지</small></h2>
@@ -639,7 +766,7 @@ const CPT = {
         <p>신전 흉내를 낸 기둥, 장식을 위한 장식.<br>사는 사람의 필요가 아니라 <b>있어 보이려는 허세</b>다.</p></div>
       <div class="cdef gd rv"><h4>대안 — 시골 장인 <em>craftsmanship</em></h4>
         <p>대대로 이어온 손기술, <b>그 지역에서 난 재료</b>, 소박한 나무 바닥.<br>화려하지 않지만 <b>필요를 완벽하게 채운다.</b></p></div>
-      <div class="ctie rv">(A)의 <b>But they supplied people's needs perfectly</b> →
+      <div class="ctie rv"><span class="nb">(A)의</span> <b>But they supplied people's needs perfectly</b> →
         <span class="np">"소박해서 아름답다"</span>는 반전.</div>
     </div>
     <div class="cright rv">
@@ -680,6 +807,47 @@ const CPT = {
         <text x="290" y="309" text-anchor="middle" class="sv-t" font-size="13" fill="#565D74">필요를 완벽히 채움</text>
       </svg>
     </div>
+  </div>`,
+`
+  <h2 class="ch">시대 배경 — <span class="acc">기계가 집을 찍어내던 시절</span><small>41번의 무대</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="news rv">
+        <div class="mast"><b>THE LONDON REVIEW</b><span>건축</span><i></i><span>재구성</span></div>
+        <h5>"공장은 하루에 벽돌 수만 장을 찍어낸다.<br>그런데 우리는 어떤 집에 살고 있는가"</h5>
+        <p>증기 기관과 대량 생산은 도시의 풍경을 바꿔 놓았다. 똑같은 창, 똑같은 벽돌이
+        끝없이 반복되는 건물이 늘어섰고, 다른 한편에서는 <b>신전을 흉내 낸 기둥</b>을 붙인 저택이
+        부의 상징으로 세워졌다.</p>
+        <span class="stamp">둘 다 '사는 사람'은 빠져 있었다</span>
+      </div>
+      <div class="ctie rv">그래서 41번은 묻는다 —
+        <b>"차라리 옛 시골 목수들이 일하던 방식을 보면 어떨까?"</b></div>
+    </div>
+    <div class="cright rv">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <text x="200" y="18" text-anchor="middle" class="sv-t" font-size="14" fill="#8A6503">19세기 건축의 흐름</text>
+        <line x1="58" y1="46" x2="58" y2="300" stroke="#C9CEDA" stroke-width="2.4"/>
+
+        <circle cx="58" cy="72" r="8" fill="#5B3FA8"/>
+        <text x="80" y="68" class="sv-t" font-size="13.5" fill="#5B3FA8">산업 혁명 · 대량 생산</text>
+        <text x="80" y="86" class="sv-t" font-size="12" fill="#565D74">공장이 벽돌과 창틀을 찍어낸다</text>
+
+        <circle cx="58" cy="140" r="8" fill="#C22870"/>
+        <text x="80" y="136" class="sv-t" font-size="13.5" fill="#C22870">과거 양식의 유행</text>
+        <text x="80" y="154" class="sv-t" font-size="12" fill="#565D74">신전 기둥 · 장식을 위한 장식</text>
+
+        <circle cx="58" cy="208" r="8" fill="#8A6503"/>
+        <text x="80" y="204" class="sv-t" font-size="13.5" fill="#8A6503">반발 — 새로운 태도</text>
+        <text x="80" y="222" class="sv-t" font-size="12" fill="#565D74">"둘 다 사람을 위한 집이 아니다"</text>
+
+        <circle cx="58" cy="276" r="8" fill="#1B7099"/>
+        <text x="80" y="272" class="sv-t" font-size="13.5" fill="#1B7099">시골 장인의 방식으로</text>
+        <text x="80" y="290" class="sv-t" font-size="12" fill="#565D74">지역 재료 · 대대로 이어온 손기술</text>
+
+        <rect x="24" y="312" width="352" height="24" rx="8" fill="#FFF4DD" stroke="#8A6503" stroke-width="1.8"/>
+        <text x="200" y="329" text-anchor="middle" class="sv-t" font-size="12.5" fill="#8A6503">화려함이 아니라 '필요를 채우는가'가 기준이 된다</text>
+      </svg>
+    </div>
   </div>`],
 42: [`
   <h2 class="ch">개념 먼저 — <span class="acc">"도덕의 법칙이 예술의 법칙이다"</span><small>42번 슈만의 말 풀이</small></h2>
@@ -697,7 +865,7 @@ const CPT = {
         </ul>
       </div>
       <div class="ctie rv">"취향 차이일 뿐"이 아니라 <b>기준이 있다</b>는 주장 —
-        <span class="np">그래서 (A)에서 연주에도 같은 잣대</span>를 들이댄다.</div>
+        <span class="np">그래서 <span class="nb">(A)에서</span> 연주에도 같은 잣대</span>를 들이댄다.</div>
     </div>
     <div class="cright rv">
       <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
@@ -728,6 +896,60 @@ const CPT = {
         <text x="200" y="274" text-anchor="middle" class="sv-t" font-size="15" fill="#9C6200">연주에도 같은 기준</text>
         <text x="200" y="297" text-anchor="middle" class="sv-t" font-size="13.5" fill="#1A2035">음악보다 자기를 앞세우면 &nbsp;→&nbsp; 나쁜 연주</text>
         <text x="200" y="314" text-anchor="middle" class="sv-t" font-size="13.5" fill="#1A2035">작곡가의 뜻을 정직하게 전하면 &nbsp;→&nbsp; 좋은 연주</text>
+      </svg>
+    </div>
+  </div>`,
+`
+  <h2 class="ch">말한 사람 — <span class="acc">슈만은 왜 '기준'을 말했나</span><small>42번 첫 문장의 배경</small></h2>
+  <div class="cbody">
+    <div class="cleft">
+      <div class="pcard rv">
+        <div class="pf">
+          <svg width="86" height="86" viewBox="0 0 86 86" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="43" cy="43" r="41" fill="#DBF0FB" stroke="#1B7099" stroke-width="2.5"/>
+            <circle cx="43" cy="33" r="13" fill="none" stroke="#1B7099" stroke-width="2.5"/>
+            <path d="M22 68 C22 52 64 52 64 68" fill="none" stroke="#1B7099" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M56 26 q7 -6 4 -13" fill="none" stroke="#1B7099" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="pi">
+          <h5>로베르트 슈만 <span style="font-size:1.3vw;color:var(--tx2)">Robert Schumann</span></h5>
+          <p class="yr">1810 – 1856 · 독일</p>
+          <p>낭만주의 작곡가이자, 음악 잡지를 만든 <b>평론가</b>였다.
+          평생 남의 음악을 <b>좋다 / 나쁘다로 판정하는 일</b>을 했다.</p>
+        </div>
+      </div>
+      <div class="cdef pk rv"><h4>그래서 이 말이 무겁다</h4>
+        <p>연주자도 작곡가도 아닌 <b>심사하는 사람</b>이
+        "예술에도 도덕처럼 법칙이 있다"고 말한 것이다.<br>
+        곧 <b>"취향이니까 다 괜찮다"는 말은 통하지 않는다</b>는 선언이다.</p></div>
+      <div class="ctie rv">42번은 이 선언을 두 번 적용한다 —
+        먼저 <b>음악</b>에, 그다음 <span class="nb">(A)에서</span> <b>연주</b>에.</div>
+    </div>
+    <div class="cright rv">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <text x="200" y="20" text-anchor="middle" class="sv-t" font-size="14" fill="#5B3FA8">같은 잣대가 두 번 쓰인다</text>
+        <rect x="40" y="42" width="320" height="60" rx="12" fill="#EDE7FF" stroke="#5B3FA8" stroke-width="2.2"/>
+        <text x="200" y="66" text-anchor="middle" class="sv-t" font-size="14.5" fill="#5B3FA8">1단계 · 음악에 기준이 있다</text>
+        <text x="200" y="88" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">끌어올리면 좋은 음악 / 격하시키면 나쁜 음악</text>
+        <path d="M200 108 L200 132" stroke="#8A93A6" stroke-width="3" marker-end="url(#a42)"/>
+        <defs><marker id="a42" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#8A93A6"/></marker></defs>
+        <rect x="40" y="138" width="320" height="60" rx="12" fill="#FDEAF4" stroke="#C22870" stroke-width="2.2"/>
+        <text x="200" y="162" text-anchor="middle" class="sv-t" font-size="14.5" fill="#C22870">2단계 · 연주에도 기준이 있다</text>
+        <text x="200" y="184" text-anchor="middle" class="sv-t" font-size="12.5" fill="#565D74">음악을 전하면 좋은 연주 / 자기를 앞세우면 나쁜 연주</text>
+
+        <rect x="40" y="226" width="152" height="94" rx="11" fill="#fff" stroke="#C22870" stroke-width="2"/>
+        <text x="116" y="250" text-anchor="middle" class="sv-t" font-size="13" fill="#C22870">나쁜 연주</text>
+        <text x="116" y="272" text-anchor="middle" class="sv-t" font-size="11.5" fill="#565D74">"내 실력을 봐 주세요"</text>
+        <text x="116" y="292" text-anchor="middle" class="sv-t" font-size="11.5" fill="#565D74">청중에게 자랑하기</text>
+        <text x="116" y="311" text-anchor="middle" class="sv-t" font-size="11.5" fill="#C22870">실력 부족이 아니어도 나쁘다</text>
+
+        <rect x="208" y="226" width="152" height="94" rx="11" fill="#fff" stroke="#1B7099" stroke-width="2"/>
+        <text x="284" y="250" text-anchor="middle" class="sv-t" font-size="13" fill="#1B7099">좋은 연주</text>
+        <text x="284" y="272" text-anchor="middle" class="sv-t" font-size="11.5" fill="#565D74">"작곡가는 뭘 말했나"</text>
+        <text x="284" y="292" text-anchor="middle" class="sv-t" font-size="11.5" fill="#565D74">그 뜻을 정직하게 전달</text>
+        <text x="284" y="311" text-anchor="middle" class="sv-t" font-size="11.5" fill="#1B7099">연주자의 기본 임무</text>
       </svg>
     </div>
   </div>`]
