@@ -61,7 +61,23 @@ b.s.k{background:var(--sk-t);color:var(--sky)}
 .moodhint{position:absolute;right:3.4vw;bottom:9.6vh;z-index:3;font-size:1.3vw;font-weight:800;
   color:var(--tx2);background:#fff;border:1px dashed var(--line);border-radius:.7vw;
   padding:1.2vh 1.6vw;transition:opacity .4s}
-.moodhint.off{opacity:0}
+.moodhint.off{opacity:0;pointer-events:none}
+/* 타이머 칩 */
+.tm{font-family:inherit;font-size:1.35vw;font-weight:800;border:1px solid var(--goldbg);
+  color:var(--gold);background:var(--bg2);border-radius:.6vw;padding:.55vh 1.1vw;
+  min-width:7.6vw;cursor:pointer;transition:all .3s}
+.tm.run{background:var(--goldbg);border-color:var(--goldbg);color:#1A2035}
+.tm.done{background:var(--pk);border-color:var(--pk);color:#fff}
+/* 그림 위 남은 시간 */
+.tmbig{position:absolute;right:3.4vw;bottom:32.6vh;z-index:6;font-size:1.5vw;font-weight:900;
+  color:#fff;background:var(--pk);border-radius:5vw;padding:.5vh 1.3vw;
+  opacity:0;transition:opacity .35s;box-shadow:var(--sh)}
+.tmbig.on{opacity:1}
+/* 종료 안내 */
+.donetip{position:absolute;right:3.4vw;bottom:9.6vh;z-index:5;font-size:1.35vw;font-weight:900;
+  color:var(--sky);background:var(--sk-t);border:1px solid var(--sky);border-radius:.7vw;
+  padding:1.2vh 1.6vw;opacity:0;transition:opacity .45s;pointer-events:none}
+.donetip.on{opacity:1}
 .mood svg{width:100%;height:auto;display:block}
 
 /* 배경지식 */
@@ -201,7 +217,8 @@ h2.ch2 small{font-size:1.6vw;font-weight:700;color:var(--tx2);margin-left:1vw}
 </svg></div>
   <div class="top">
     <span class="chip no">문항 44</span><span class="chip src">2022 고1 6월</span>
-    <span class="chip">글의 순서</span><span class="sp"></span>
+    <span class="chip">글의 순서</span>
+    <button class="tm" id="tm">⏱ 60초</button><span class="sp"></span>
   </div>
   <div class="givenbox">According to legend, once a vampire bites a person, that person turns into a vampire who seeks the blood of others. <b class="s k">A researcher came up with some simple math</b>, which proves that these highly popular creatures can't exist.</div>
   <div class="cols">
@@ -211,7 +228,9 @@ h2.ch2 small{font-size:1.6vw;font-weight:700;color:var(--tx2);margin-left:1vw}
   </div>
   <div class="spacer"></div>
   <div class="choices"><span class="ch">① (A)-(C)-(B)</span><span class="ch">② (B)-(A)-(C)</span><span class="ch">③ (B)-(C)-(A)</span><span class="ch">④ (C)-(A)-(B)</span><span class="ch">⑤ (C)-(B)-(A)</span></div>
-  <div class="moodhint" id="mh">🖼️ 탭하면 그림 보기</div>
+  <div class="moodhint" id="mh">🖼️ 탭하면 그림 · 60초</div>
+  <div class="tmbig" id="tb">60</div>
+  <div class="donetip" id="dt">⏱ 시간 종료 — 이제 지문으로</div>
   <div class="mood" id="mood"><svg viewBox="0 0 380 250" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
@@ -346,13 +365,53 @@ const S=[...document.querySelectorAll('.slide')];let cur=0;
 const pbar=document.getElementById('pbar'),pnum=document.getElementById('pnum');
 function paint(){S.forEach((s,i)=>s.classList.toggle('active',i===cur));
   pbar.style.width=((cur+1)/S.length*100)+'%';pnum.textContent=(cur+1)+' / '+S.length;}
-const mood=document.getElementById('mood'),mh=document.getElementById('mh');
+const mood=document.getElementById('mood'),mh=document.getElementById('mh'),
+      tm=document.getElementById('tm'),tb=document.getElementById('tb'),dt=document.getElementById('dt');
+const QSLIDE=1, SEC=60;
+let st=0, left=SEC, iv=null;
+
+function fmt(n){return n+'초';}
+function stopTimer(){if(iv){clearInterval(iv);iv=null;}}
+function render(){
+  if(st===0){                       // 대기 — 그림 숨김
+    mood.classList.remove('on'); mh.classList.remove('off');
+    tb.classList.remove('on'); dt.classList.remove('on');
+    tm.className='tm'; tm.textContent='⏱ '+fmt(SEC);
+  }else if(st===1){                 // 그림 + 카운트다운
+    mood.classList.add('on'); mh.classList.add('off');
+    tb.classList.add('on'); dt.classList.remove('on');
+    tm.className='tm run'; tm.textContent='⏱ '+fmt(left); tb.textContent=left;
+  }else{                            // 종료 — 그림 사라지고 지문으로
+    mood.classList.remove('on'); mh.classList.add('off');
+    tb.classList.remove('on'); dt.classList.add('on');
+    tm.className='tm done'; tm.textContent='지문 설명';
+  }
+}
+function startTimer(){
+  stopTimer(); left=SEC; st=1; render();
+  iv=setInterval(()=>{
+    left--;
+    if(left<=0){stopTimer(); st=2; render(); return;}
+    tm.textContent='⏱ '+fmt(left); tb.textContent=left;
+  },1000);
+}
+function resetQ(){stopTimer(); st=0; render();}
+tm.onclick=e=>{e.stopPropagation(); st===1?(stopTimer(),st=2,render()):startTimer();};
+
 function go(d){
-  if(d>0&&cur===1&&!mood.classList.contains('on')){
-    mood.classList.add('on');mh.classList.add('off');return;}
-  if(d<0&&cur===1&&mood.classList.contains('on')){
-    mood.classList.remove('on');mh.classList.remove('off');return;}
-  cur=Math.max(0,Math.min(S.length-1,cur+d));paint();}
+  if(cur===QSLIDE){
+    if(d>0){
+      if(st===0){startTimer();return;}
+      if(st===1){stopTimer(); st=2; render(); return;}
+    }else{
+      if(st===2){startTimer();return;}
+      if(st===1){resetQ();return;}
+    }
+  }
+  stopTimer();
+  cur=Math.max(0,Math.min(S.length-1,cur+d));
+  if(cur===QSLIDE&&d<0){st=2;render();}else if(cur===QSLIDE){resetQ();}
+  paint();}
 document.getElementById('zNext').onclick=()=>go(1);
 document.getElementById('zPrev').onclick=()=>go(-1);
 addEventListener('keydown',e=>{
