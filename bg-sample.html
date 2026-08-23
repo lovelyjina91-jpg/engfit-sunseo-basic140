@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>배경 처리 비교 샘플 — 54번</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --navy:#1B2970; --gold:#9C6200; --goldbg:#F5A100;
+  --pu:#5B3FA8; --pk:#C22870; --sky:#1B7099;
+  --bg:#F7F8FA; --bg2:#FFFFFF; --card:#FFFFFF;
+  --tx:#1A2035; --tx2:#565D74; --line:#D9DCE6;
+  --pu-t:#EDE7FF; --pk-t:#FDEAF4; --gd-t:#FFF4DD; --sk-t:#DBF0FB;
+  --sh:0 .35vh 1.4vh rgba(27,32,53,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);
+  font-family:'Pretendard',-apple-system,sans-serif;color:var(--tx);
+  word-break:keep-all;user-select:none}
+.slide{position:absolute;inset:0;padding:3.2vh 3.4vw;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transition:opacity .5s ease;background:var(--bg);overflow:hidden}
+.slide.active{opacity:1;visibility:visible;z-index:2}
+.top{display:flex;align-items:center;gap:.9vw;margin-bottom:1.6vh;flex:none;position:relative;z-index:5}
+.chip{font-size:1.35vw;font-weight:700;padding:.55vh 1vw;border-radius:.6vw;
+  background:var(--bg2);color:var(--tx2);border:1px solid var(--line)}
+.chip.no{background:linear-gradient(135deg,var(--pu),var(--pk));color:#fff;border:none;font-size:1.5vw}
+.chip.src{color:var(--sky)}
+.chip.way{background:var(--goldbg);color:#1A2035;border:none;font-weight:900}
+.top .sp{flex:1}
+.givenbox{background:var(--card);border:1px solid var(--line);border-left:.5vw solid var(--pu);
+  border-radius:.9vw;box-shadow:var(--sh);padding:1.9vh 1.7vw;font-size:1.92vw;
+  line-height:1.5;font-weight:500;flex:none;position:relative;z-index:5}
+.cols{display:flex;gap:1.3vw;margin-top:1.7vh;flex:1;min-height:0;position:relative;z-index:5}
+.pcol{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:1vw;
+  box-shadow:var(--sh);padding:1.6vh 1.3vw;height:100%;overflow:hidden}
+.pcol .ph{display:inline-block;font-size:1.5vw;font-weight:900;color:#fff;
+  padding:.3vh 1vw;border-radius:.55vw;margin-bottom:1.2vh}
+.pcol:nth-child(1) .ph{background:#6250C9}
+.pcol:nth-child(2) .ph{background:#B93D79}
+.pcol:nth-child(3) .ph{background:#8A6503}
+.pcol .pt{font-size:1.5vw;line-height:1.45;font-weight:500;color:var(--tx)}
+.vnote{font-size:1.25vw;color:var(--tx2);margin-top:1vh;position:relative;z-index:5}
+.choices{display:flex;gap:1vw;margin-top:1.6vh;flex:none;padding-right:14vw;position:relative;z-index:5}
+.ch{font-size:1.5vw;font-weight:700;background:var(--card);border:1px solid var(--line);
+  border-radius:5vw;padding:1vh 1.5vw;color:var(--tx2)}
+b.s{font-weight:800;padding:0 .3vw;border-radius:.35vw}
+b.s.c{background:var(--pu-t);color:var(--pu)}
+b.s.d{background:var(--pk-t);color:var(--pk)}
+b.s.k{background:var(--sk-t);color:var(--sky)}
+
+/* ══════ 방식 A · 상단 테마 띠 ══════ */
+.band{position:absolute;left:0;right:0;top:0;height:9vh;overflow:hidden;z-index:1}
+.band svg{width:100%;height:100%}
+.wayA{padding-top:11.5vh}
+
+/* ══════ 방식 B · 우측 하단 워터마크 ══════ */
+.wmark{position:absolute;right:1.5vw;bottom:1vh;width:26vw;opacity:.13;z-index:1;pointer-events:none}
+
+/* ══════ 방식 C · 풀 배경 ══════ */
+.fullbg{position:absolute;inset:0;z-index:0}
+.fullbg svg{width:100%;height:100%}
+/* 풀 배경일 때 카드 불투명도 보정 */
+.wayC .givenbox,.wayC .pcol,.wayC .ch{background:rgba(255,255,255,.82);backdrop-filter:blur(2px)}
+
+#pbar{position:fixed;left:0;bottom:0;height:.55vh;background:linear-gradient(90deg,var(--pu),var(--pk));
+  width:0;z-index:70;transition:width .35s}
+#pnum{position:fixed;left:1vw;bottom:1.1vh;font-size:1.05vw;font-weight:700;color:var(--tx2);z-index:70}
+.zone{position:fixed;top:0;bottom:0;width:25vw;z-index:50}
+#zPrev{left:0}#zNext{right:0}
+.note{position:fixed;right:1.5vw;top:1.2vh;font-size:1.05vw;font-weight:800;
+  color:var(--tx2);z-index:70;background:#fff;border:1px solid var(--line);
+  border-radius:.5vw;padding:.5vh 1vw}
+</style></head><body>
+
+<section class="slide ">
+  
+  <div class="top">
+    <span class="chip no">문항 54</span><span class="chip src">2023 고1 9월</span>
+    <span class="chip">글의 순서</span>
+    <span class="chip way">기준 · 배경 없음 (현재 방식)</span><span class="sp"></span>
+  </div>
+  <div class="givenbox">When you pluck a guitar string <b class="s k">it moves back and forth</b> hundreds of times every second.</div>
+  <div class="cols">
+    <div class="pcol"><span class="ph">(A)</span><p class="pt"><b class="s k">The vibration of the wood</b> creates more powerful waves in the air pressure, which travel away from the guitar. When the waves reach your eardrums they flex in and out the same number of times a second as the original string.</p></div>
+    <div class="pcol"><span class="ph">(B)</span><p class="pt">Naturally, <b class="s d">this movement</b> is so fast that you cannot see it—you just see the blurred outline of the moving string. Strings vibrating in this way on their own <b class="s k">make hardly any noise</b> because strings are very thin and don't push much air about.</p></div>
+    <div class="pcol"><span class="ph">(C)</span><p class="pt"><b class="s c">But</b> if you attach a string to a big hollow box (like a guitar body), then the vibration is amplified and <b class="s k">the note is heard loud and clear</b>. The vibration of the string is passed on to <b class="s k">the wooden panels of the guitar body</b>, which vibrate back and forth at the same rate as the string.</p></div>
+  </div>
+  <p class="vnote">* pluck: 현악기를 뜯다 ** amplify: 증폭시키다</p>
+  <div class="choices"><span class="ch">① (A)-(C)-(B)</span><span class="ch">② (B)-(A)-(C)</span><span class="ch">③ (B)-(C)-(A)</span><span class="ch">④ (C)-(A)-(B)</span><span class="ch">⑤ (C)-(B)-(A)</span></div>
+</section>
+<section class="slide wayA">
+  <div class="band"><svg viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="100" fill="#F0F4F8"/>
+  <path d="M0,62 Q40,30 80,62 T160,62 T240,62 T320,62 T400,62 T480,62 T560,62 T640,62 T720,62 T800,62 T880,62 T960,62 T1040,62 T1120,62 T1200,62"
+        fill="none" stroke="#1B7099" stroke-width="3" opacity=".55"/>
+  <path d="M0,74 Q60,52 120,74 T240,74 T360,74 T480,74 T600,74 T720,74 T840,74 T960,74 T1080,74 T1200,74"
+        fill="none" stroke="#C22870" stroke-width="2.6" opacity=".42"/>
+  <path d="M0,50 Q30,20 60,50 T120,50 T180,50 T240,50 T300,50"
+        fill="none" stroke="#F5A100" stroke-width="2.6" opacity=".5"/>
+  <g opacity=".9" transform="translate(46,30) scale(.72)">
+    <ellipse cx="26" cy="40" rx="25" ry="30" fill="none" stroke="#1B2970" stroke-width="3"/>
+    <ellipse cx="26" cy="18" rx="17" ry="17" fill="none" stroke="#1B2970" stroke-width="3"/>
+    <circle cx="26" cy="34" r="9" fill="#1B2970" opacity=".18"/>
+    <rect x="23" y="-14" width="6" height="18" rx="2" fill="#1B2970"/>
+    <line x1="26" y1="-12" x2="26" y2="64" stroke="#8A6503" stroke-width="1.4" opacity=".8"/>
+  </g>
+  <text x="1140" y="60" text-anchor="end" font-family="Pretendard" font-weight="900"
+        font-size="26" fill="#1B2970" opacity=".22">SOUND &amp; VIBRATION</text>
+</svg></div>
+  <div class="top">
+    <span class="chip no">문항 54</span><span class="chip src">2023 고1 9월</span>
+    <span class="chip">글의 순서</span>
+    <span class="chip way">방식 A · 상단 테마 띠</span><span class="sp"></span>
+  </div>
+  <div class="givenbox">When you pluck a guitar string <b class="s k">it moves back and forth</b> hundreds of times every second.</div>
+  <div class="cols">
+    <div class="pcol"><span class="ph">(A)</span><p class="pt"><b class="s k">The vibration of the wood</b> creates more powerful waves in the air pressure, which travel away from the guitar. When the waves reach your eardrums they flex in and out the same number of times a second as the original string.</p></div>
+    <div class="pcol"><span class="ph">(B)</span><p class="pt">Naturally, <b class="s d">this movement</b> is so fast that you cannot see it—you just see the blurred outline of the moving string. Strings vibrating in this way on their own <b class="s k">make hardly any noise</b> because strings are very thin and don't push much air about.</p></div>
+    <div class="pcol"><span class="ph">(C)</span><p class="pt"><b class="s c">But</b> if you attach a string to a big hollow box (like a guitar body), then the vibration is amplified and <b class="s k">the note is heard loud and clear</b>. The vibration of the string is passed on to <b class="s k">the wooden panels of the guitar body</b>, which vibrate back and forth at the same rate as the string.</p></div>
+  </div>
+  <p class="vnote">* pluck: 현악기를 뜯다 ** amplify: 증폭시키다</p>
+  <div class="choices"><span class="ch">① (A)-(C)-(B)</span><span class="ch">② (B)-(A)-(C)</span><span class="ch">③ (B)-(C)-(A)</span><span class="ch">④ (C)-(A)-(B)</span><span class="ch">⑤ (C)-(B)-(A)</span></div>
+</section>
+<section class="slide ">
+  <div class="wmark"><svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="150" cy="190" rx="95" ry="108" fill="none" stroke="#1B2970" stroke-width="9"/>
+  <ellipse cx="150" cy="112" rx="66" ry="64" fill="none" stroke="#1B2970" stroke-width="9"/>
+  <circle cx="150" cy="170" r="34" fill="#1B2970"/>
+  <rect x="138" y="-40" width="24" height="80" rx="6" fill="#1B2970"/>
+  <g stroke="#1B2970" stroke-width="3">
+    <line x1="136" y1="-30" x2="136" y2="270"/><line x1="150" y1="-30" x2="150" y2="270"/>
+    <line x1="164" y1="-30" x2="164" y2="270"/>
+  </g>
+</svg></div>
+  <div class="top">
+    <span class="chip no">문항 54</span><span class="chip src">2023 고1 9월</span>
+    <span class="chip">글의 순서</span>
+    <span class="chip way">방식 B · 우측 워터마크</span><span class="sp"></span>
+  </div>
+  <div class="givenbox">When you pluck a guitar string <b class="s k">it moves back and forth</b> hundreds of times every second.</div>
+  <div class="cols">
+    <div class="pcol"><span class="ph">(A)</span><p class="pt"><b class="s k">The vibration of the wood</b> creates more powerful waves in the air pressure, which travel away from the guitar. When the waves reach your eardrums they flex in and out the same number of times a second as the original string.</p></div>
+    <div class="pcol"><span class="ph">(B)</span><p class="pt">Naturally, <b class="s d">this movement</b> is so fast that you cannot see it—you just see the blurred outline of the moving string. Strings vibrating in this way on their own <b class="s k">make hardly any noise</b> because strings are very thin and don't push much air about.</p></div>
+    <div class="pcol"><span class="ph">(C)</span><p class="pt"><b class="s c">But</b> if you attach a string to a big hollow box (like a guitar body), then the vibration is amplified and <b class="s k">the note is heard loud and clear</b>. The vibration of the string is passed on to <b class="s k">the wooden panels of the guitar body</b>, which vibrate back and forth at the same rate as the string.</p></div>
+  </div>
+  <p class="vnote">* pluck: 현악기를 뜯다 ** amplify: 증폭시키다</p>
+  <div class="choices"><span class="ch">① (A)-(C)-(B)</span><span class="ch">② (B)-(A)-(C)</span><span class="ch">③ (B)-(C)-(A)</span><span class="ch">④ (C)-(A)-(B)</span><span class="ch">⑤ (C)-(B)-(A)</span></div>
+</section>
+<section class="slide wayC">
+  <div class="fullbg"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E4EDF6"/><stop offset=".55" stop-color="#D9E6F2"/>
+      <stop offset="1" stop-color="#EDDCE8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#g1)"/>
+  <g opacity=".42" stroke="#1B7099" fill="none">
+    <path d="M0,300 Q100,180 200,300 T400,300 T600,300 T800,300 T1000,300 T1200,300 T1400,300 T1600,300" stroke-width="6"/>
+    <path d="M0,470 Q130,340 260,470 T520,470 T780,470 T1040,470 T1300,470 T1600,470" stroke-width="5"/>
+    <path d="M0,640 Q160,520 320,640 T640,640 T960,640 T1280,640 T1600,640" stroke-width="4"/>
+  </g>
+  <g opacity=".34" transform="translate(1080,240) scale(2.1)">
+    <ellipse cx="150" cy="190" rx="95" ry="108" fill="none" stroke="#1B2970" stroke-width="9"/>
+    <ellipse cx="150" cy="112" rx="66" ry="64" fill="none" stroke="#1B2970" stroke-width="9"/>
+    <circle cx="150" cy="170" r="34" fill="#1B2970"/>
+  </g>
+  <g opacity=".26" fill="#C22870">
+    <circle cx="180" cy="760" r="46"/><circle cx="300" cy="800" r="30"/><circle cx="90" cy="820" r="22"/>
+  </g>
+</svg></div>
+  <div class="top">
+    <span class="chip no">문항 54</span><span class="chip src">2023 고1 9월</span>
+    <span class="chip">글의 순서</span>
+    <span class="chip way">방식 C · 풀 배경</span><span class="sp"></span>
+  </div>
+  <div class="givenbox">When you pluck a guitar string <b class="s k">it moves back and forth</b> hundreds of times every second.</div>
+  <div class="cols">
+    <div class="pcol"><span class="ph">(A)</span><p class="pt"><b class="s k">The vibration of the wood</b> creates more powerful waves in the air pressure, which travel away from the guitar. When the waves reach your eardrums they flex in and out the same number of times a second as the original string.</p></div>
+    <div class="pcol"><span class="ph">(B)</span><p class="pt">Naturally, <b class="s d">this movement</b> is so fast that you cannot see it—you just see the blurred outline of the moving string. Strings vibrating in this way on their own <b class="s k">make hardly any noise</b> because strings are very thin and don't push much air about.</p></div>
+    <div class="pcol"><span class="ph">(C)</span><p class="pt"><b class="s c">But</b> if you attach a string to a big hollow box (like a guitar body), then the vibration is amplified and <b class="s k">the note is heard loud and clear</b>. The vibration of the string is passed on to <b class="s k">the wooden panels of the guitar body</b>, which vibrate back and forth at the same rate as the string.</p></div>
+  </div>
+  <p class="vnote">* pluck: 현악기를 뜯다 ** amplify: 증폭시키다</p>
+  <div class="choices"><span class="ch">① (A)-(C)-(B)</span><span class="ch">② (B)-(A)-(C)</span><span class="ch">③ (B)-(C)-(A)</span><span class="ch">④ (C)-(A)-(B)</span><span class="ch">⑤ (C)-(B)-(A)</span></div>
+</section>
+<div class="note">→ 로 4가지 비교</div>
+<div class="zone" id="zPrev"></div><div class="zone" id="zNext"></div>
+<div id="pbar"></div><div id="pnum"></div>
+<script>
+const S=[...document.querySelectorAll('.slide')];let cur=0;
+const pbar=document.getElementById('pbar'),pnum=document.getElementById('pnum');
+function paint(){S.forEach((s,i)=>s.classList.toggle('active',i===cur));
+  pbar.style.width=((cur+1)/S.length*100)+'%';pnum.textContent=(cur+1)+' / '+S.length;}
+function go(d){cur=Math.max(0,Math.min(S.length-1,cur+d));paint();}
+document.getElementById('zNext').onclick=()=>go(1);
+document.getElementById('zPrev').onclick=()=>go(-1);
+addEventListener('keydown',e=>{
+  if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();go(1);}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(-1);}
+  if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+});
+paint();
+</script></body></html>
